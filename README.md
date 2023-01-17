@@ -15,9 +15,10 @@ Lozzby is a online shopping app where customer can purchase products from differ
 - Manage Product (Seller)
 - Search Products
 - Cart Management
-- Filter and Sort Products
+- Sort Products
 - View Orders (Accept,Decline or Delivered)
 - Add Products to Wishlist
+- View Wishlist
 - Dark mode
 
 # User Roles 
