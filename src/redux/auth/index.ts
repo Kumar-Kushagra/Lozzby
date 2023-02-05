@@ -1,9 +1,11 @@
 import {createSlice} from '@reduxjs/toolkit';
+import {Alert} from 'react-native';
 import {API, Auth, Storage} from 'aws-amplify';
 import * as queries from '../../graphql/queries';
 import * as mutations from '../../graphql/mutations';
 
 import {
+  loginSchema,
   otpSchema,
   showToast,
   signupSchema,
@@ -48,7 +50,34 @@ export const logoutManager = () => {
   };
 };
 
-
+export const loginManager = (data: any) => {
+  return async (dispatch: any) => {
+    dispatch(setLoading(true));
+    let result = loginSchema(data);
+    if (result) {
+      try {
+        const res = await Auth.signIn(
+          result.email.toLocaleLowerCase(),
+          result.password,
+        );
+        if (res) {
+          dispatch(setRefetch(true));
+        }
+      } catch (error: any) {
+        const {code, message} = error;
+        if (code === 'UserNotFoundException') {
+          showToast('User does not exist, Please register');
+        } else if (code === 'UserNotConfirmedException') {
+          dispatch(userConfirmationManager(result.email));
+        } else {
+          showToast(message);
+        }
+      } finally {
+        dispatch(setLoading(false));
+      }
+    }
+  };
+};
 
 export const retrieveCurrentSessionManager = () => {
   return async (dispatch: any) => {
@@ -77,7 +106,7 @@ export const retrieveCurrentSessionManager = () => {
       }
     } catch (error) {
       console.log(error);
-      //showToast('Something went wrong please try again later!');
+      showToast('Something went wrong please try again later!');
     } finally {
       dispatch(setMainLoading(false));
     }
@@ -94,7 +123,7 @@ export const verifyOtpManager = (data: any) => {
         const res = await Auth.confirmSignUp(data.email, data.otp);
         if (res) {
           navigate('Login');
-          showToast('Verify successfull, please login to continue!');
+          showToast('Verify successfully, please login!');
         }
       } catch (error: any) {
         showToast(error.message);
@@ -104,6 +133,8 @@ export const verifyOtpManager = (data: any) => {
     }
   };
 };
+
+
 
 export const resendConfirmationCodeManager = (data: any) => {
   return async (dispatch: any) => {
@@ -121,6 +152,25 @@ export const resendConfirmationCodeManager = (data: any) => {
   };
 };
 
+
+
+export const userConfirmationManager = (email: any) => {
+  return async (dispatch: any) => {
+    dispatch(setLoading(true));
+    try {
+      const res = await Auth.resendSignUp(email);
+      if (res) {
+        showToast('Please verify yourself first');
+        navigate('VerifyOtp', {data: email, path: 'login'});
+      }
+    } catch (error: any) {
+      const {message} = error;
+      showToast(message);
+    } finally {
+      dispatch(setLoading(false));
+    }
+  };
+};
 
 export const uploadImage = (data: any) => {
   return async (dispatch: any) => {

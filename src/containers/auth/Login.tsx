@@ -3,8 +3,10 @@ import {View, StyleSheet, Keyboard, Text, TouchableOpacity} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {useDispatch, useSelector} from 'react-redux';
+
 import {CustomButton, CustomHeader, CustomInput} from '../../components';
 import {getScreenHeight, getScreenWidth} from '../../utils/domUtils';
+import {loginManager} from '../../redux/auth';
 import {navigate} from '../../services/Routerservices';
 
 const Login = () => {
@@ -17,11 +19,16 @@ const Login = () => {
   const passwordRef: any = useRef(null);
   const passwordValueRef: any = useRef(null);
 
-  const loginActionHandler = useCallback(() => {}, []);
+  const loginActionHandler = useCallback(() => {
+    
+    let email = emailValueRef.current.getValue();
+    let password = passwordValueRef.current.getValue();
+    dispatch<any>(loginManager({email, password}));
+  }, [dispatch]);
 
   return (
     <SafeAreaView edges={['top']} style={styles.safe}>
-      <CustomHeader title="Login" hide />
+       <CustomHeader title = "Login" hide/>
       <View style={styles.screen}>
         <KeyboardAwareScrollView
           enableOnAndroid={true}
