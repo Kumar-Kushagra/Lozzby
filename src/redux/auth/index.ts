@@ -46,7 +46,12 @@ const authSlice = createSlice({
 
 export const logoutManager = () => {
   return async (dispatch: any) => {
-    dispatch(logout());
+    try {
+      await Auth.signOut();
+      dispatch(logout());
+    } catch (error: any) {
+      showToast(error.message);
+    }
   };
 };
 
@@ -106,7 +111,7 @@ export const retrieveCurrentSessionManager = () => {
       }
     } catch (error) {
       console.log(error);
-      showToast('Something went wrong please try again later!');
+      //showToast('Something went wrong please try again later!');
     } finally {
       dispatch(setMainLoading(false));
     }
@@ -133,8 +138,6 @@ export const verifyOtpManager = (data: any) => {
     }
   };
 };
-
-
 
 export const resendConfirmationCodeManager = (data: any) => {
   return async (dispatch: any) => {

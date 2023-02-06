@@ -7,17 +7,24 @@ import {useSelector} from 'react-redux';
 import Home from '../containers/Home';
 import UserOrders from '../containers/orders/UserOrders';
 import UserProfile from '../containers/profile/UserProfile';
+import FastImage from 'react-native-fast-image';
 
 const Tab = createBottomTabNavigator();
 
 const TabButton = (props: any) => {
-  const {item, onPress, accessibilityState, styles} = props;
-
+  const {item, onPress, accessibilityState, styles,theme } = props;
+  const focused = accessibilityState.selected;
   return (
     <TouchableOpacity
       activeOpacity={1}
       onPress={onPress}
       style={styles.contanier}>
+        <FastImage
+        tintColor={focused ? theme.primary : theme.black}
+        resizeMode="contain"
+        style={styles.icon}
+        source={item.icon}
+      />
       <Text style={styles.title}>{item.name}</Text>
     </TouchableOpacity>
   );
@@ -32,22 +39,25 @@ const BottomBar = () => {
       route: 'Home',
       component: Home,
       name: 'Home',
+      icon: require('../assets/images/home.png'),
     },
     {
       route: 'Orders',
       component: UserOrders,
       name: 'Orders',
+      icon: require('../assets/images/order.png'),
     },
     {
       route: 'Profile',
       component: UserProfile,
       name: 'Profile',
+      icon: require('../assets/images/profile.png'),
     },
   ];
 
   return (
     <Tab.Navigator
-      initialRouteName="YokohamaHome"
+      initialRouteName="Home"
       screenOptions={{
         headerShown: false,
         tabBarStyle: styles.tabbar,
@@ -59,7 +69,7 @@ const BottomBar = () => {
             options={{
               tabBarShowLabel: false,
               tabBarButton: props => (
-                <TabButton {...props} item={item} styles={styles} />
+                <TabButton {...props} item={item} theme={theme} styles={styles} />
               ),
             }}
             name={item.route}
@@ -82,12 +92,12 @@ const createStyles = (theme: any) =>
     },
     title: {
       fontSize: getScreenHeight(1.5),
-      color: 'white',
+      color: 'black',
       marginTop: getScreenHeight(0.5),
     },
     tabbar: {
       height: Platform.OS === 'ios' ? getScreenHeight(8) : getScreenHeight(8),
-      backgroundColor: 'black',
+      backgroundColor: 'white',
     },
     icon: {
       width: getScreenHeight(3),

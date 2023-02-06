@@ -10,9 +10,8 @@ const UserOrders = () => {
 
   return (
     <SafeAreaView edges={['top']} style={styles.safe}>
-      <CustomStatusBar light color={theme.primary} />
       <View style={styles.screen}>
-        <CustomHeader hide title="Home" />
+        <CustomHeader hide title="Order" />
       </View>
     </SafeAreaView>
   );
@@ -25,7 +24,7 @@ const createStyles = (theme: any) =>
       flex: 1,
     },
     safe: {
-      backgroundColor: theme.primary,
+      backgroundColor: theme.black,
       flex: 1,
     },
   });
