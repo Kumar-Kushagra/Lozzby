@@ -25,8 +25,6 @@ const UserProfile = () => {
   const profileRef: any = useRef();
   const phoneNumberRef: any = useRef();
 
-console.log("===>",userData)
-
   useFocusEffect(
     React.useCallback(() => {
       emailRef.current.setValue(userData.email);
