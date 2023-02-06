@@ -11,8 +11,8 @@ import {
   TextInput,
   TouchableOpacity,
 } from 'react-native';
-import {useSelector} from 'react-redux';
-import {getScreenHeight} from '../utils/domUtils';
+import { useSelector } from 'react-redux';
+import { getScreenHeight } from '../utils/domUtils';
 
 const CustomInput = forwardRef((props: any, ref: any) => {
   const theme = useSelector((state: any) => state.theme.theme);
@@ -25,7 +25,9 @@ const CustomInput = forwardRef((props: any, ref: any) => {
       return text;
     },
     setValue(value: any) {
-      setText(value);
+      if (value) {
+        setText(value);
+      }
     },
   }));
 
@@ -36,7 +38,7 @@ const CustomInput = forwardRef((props: any, ref: any) => {
         <View
           style={[
             styles.textinputcontanier,
-            {borderBottomWidth: props.border ? getScreenHeight(0.1) : 0},
+            { borderBottomWidth: props.border ? getScreenHeight(0.1) : 0 },
           ]}>
           {props.frontIcon ? (
             <View style={styles.iconcontanier}>{props.frontIcon}</View>
@@ -54,7 +56,7 @@ const CustomInput = forwardRef((props: any, ref: any) => {
                 color: theme.black,
               },
             ]}
-            keyboardType = {props.keyboardType}
+            keyboardType={props.keyboardType}
             placeholder={props.placeholder}
             placeholderTextColor={theme.black}
             secureTextEntry={props.secure}
@@ -81,8 +83,8 @@ const createStyles = (theme: any) =>
     screen: {
       borderWidth: getScreenHeight(0.1),
       borderBottomColor: theme.black,
-      marginTop:10,
-      borderRadius:10
+      marginTop: 10,
+      borderRadius: 10
     },
 
     textinputcontanier: {

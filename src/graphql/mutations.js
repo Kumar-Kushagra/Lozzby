@@ -1,6 +1,171 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const createCart = /* GraphQL */ `
+  mutation CreateCart(
+    $input: CreateCartInput!
+    $condition: ModelCartConditionInput
+  ) {
+    createCart(input: $input, condition: $condition) {
+      id
+      CartItems {
+        nextToken
+        startedAt
+      }
+      userID
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const updateCart = /* GraphQL */ `
+  mutation UpdateCart(
+    $input: UpdateCartInput!
+    $condition: ModelCartConditionInput
+  ) {
+    updateCart(input: $input, condition: $condition) {
+      id
+      CartItems {
+        nextToken
+        startedAt
+      }
+      userID
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const deleteCart = /* GraphQL */ `
+  mutation DeleteCart(
+    $input: DeleteCartInput!
+    $condition: ModelCartConditionInput
+  ) {
+    deleteCart(input: $input, condition: $condition) {
+      id
+      CartItems {
+        nextToken
+        startedAt
+      }
+      userID
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const createCartItem = /* GraphQL */ `
+  mutation CreateCartItem(
+    $input: CreateCartItemInput!
+    $condition: ModelCartItemConditionInput
+  ) {
+    createCartItem(input: $input, condition: $condition) {
+      id
+      quantity
+      Product {
+        id
+        name
+        description
+        rating
+        price
+        image
+        userID
+        quantity
+        color
+        category
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      cartID
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      cartItemProductId
+    }
+  }
+`;
+export const updateCartItem = /* GraphQL */ `
+  mutation UpdateCartItem(
+    $input: UpdateCartItemInput!
+    $condition: ModelCartItemConditionInput
+  ) {
+    updateCartItem(input: $input, condition: $condition) {
+      id
+      quantity
+      Product {
+        id
+        name
+        description
+        rating
+        price
+        image
+        userID
+        quantity
+        color
+        category
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      cartID
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      cartItemProductId
+    }
+  }
+`;
+export const deleteCartItem = /* GraphQL */ `
+  mutation DeleteCartItem(
+    $input: DeleteCartItemInput!
+    $condition: ModelCartItemConditionInput
+  ) {
+    deleteCartItem(input: $input, condition: $condition) {
+      id
+      quantity
+      Product {
+        id
+        name
+        description
+        rating
+        price
+        image
+        userID
+        quantity
+        color
+        category
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      cartID
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      cartItemProductId
+    }
+  }
+`;
 export const createAddress = /* GraphQL */ `
   mutation CreateAddress(
     $input: CreateAddressInput!
@@ -8,8 +173,11 @@ export const createAddress = /* GraphQL */ `
   ) {
     createAddress(input: $input, condition: $condition) {
       id
-      title
+      province
       userID
+      pincode
+      country
+      phoneNumber
       createdAt
       updatedAt
       _version
@@ -25,8 +193,11 @@ export const updateAddress = /* GraphQL */ `
   ) {
     updateAddress(input: $input, condition: $condition) {
       id
-      title
+      province
       userID
+      pincode
+      country
+      phoneNumber
       createdAt
       updatedAt
       _version
@@ -42,8 +213,11 @@ export const deleteAddress = /* GraphQL */ `
   ) {
     deleteAddress(input: $input, condition: $condition) {
       id
-      title
+      province
       userID
+      pincode
+      country
+      phoneNumber
       createdAt
       updatedAt
       _version
@@ -143,6 +317,9 @@ export const createOrderItem = /* GraphQL */ `
         price
         image
         userID
+        quantity
+        color
+        category
         createdAt
         updatedAt
         _version
@@ -175,6 +352,9 @@ export const updateOrderItem = /* GraphQL */ `
         price
         image
         userID
+        quantity
+        color
+        category
         createdAt
         updatedAt
         _version
@@ -207,6 +387,9 @@ export const deleteOrderItem = /* GraphQL */ `
         price
         image
         userID
+        quantity
+        color
+        category
         createdAt
         updatedAt
         _version
@@ -303,6 +486,9 @@ export const createProduct = /* GraphQL */ `
         nextToken
         startedAt
       }
+      quantity
+      color
+      category
       createdAt
       updatedAt
       _version
@@ -328,6 +514,9 @@ export const updateProduct = /* GraphQL */ `
         nextToken
         startedAt
       }
+      quantity
+      color
+      category
       createdAt
       updatedAt
       _version
@@ -353,6 +542,9 @@ export const deleteProduct = /* GraphQL */ `
         nextToken
         startedAt
       }
+      quantity
+      color
+      category
       createdAt
       updatedAt
       _version
@@ -385,6 +577,11 @@ export const createUser = /* GraphQL */ `
         startedAt
       }
       Orders {
+        nextToken
+        startedAt
+      }
+      phoneNumber
+      Carts {
         nextToken
         startedAt
       }
@@ -423,6 +620,11 @@ export const updateUser = /* GraphQL */ `
         nextToken
         startedAt
       }
+      phoneNumber
+      Carts {
+        nextToken
+        startedAt
+      }
       createdAt
       updatedAt
       _version
@@ -455,6 +657,11 @@ export const deleteUser = /* GraphQL */ `
         startedAt
       }
       Orders {
+        nextToken
+        startedAt
+      }
+      phoneNumber
+      Carts {
         nextToken
         startedAt
       }
@@ -491,6 +698,7 @@ export const createUserOrder = /* GraphQL */ `
         type
         profile
         email
+        phoneNumber
         createdAt
         updatedAt
         _version
@@ -530,6 +738,7 @@ export const updateUserOrder = /* GraphQL */ `
         type
         profile
         email
+        phoneNumber
         createdAt
         updatedAt
         _version
@@ -569,6 +778,7 @@ export const deleteUserOrder = /* GraphQL */ `
         type
         profile
         email
+        phoneNumber
         createdAt
         updatedAt
         _version

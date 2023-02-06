@@ -1,6 +1,6 @@
 import {useFocusEffect} from '@react-navigation/native';
-import React, {useMemo, useRef} from 'react';
-import {View, StyleSheet, ScrollView} from 'react-native';
+import React, {useEffect, useMemo, useRef} from 'react';
+import {View, StyleSheet, ScrollView, Alert} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {useDispatch, useSelector} from 'react-redux';
 import {
@@ -10,78 +10,59 @@ import {
   CustomAvatar,
   CustomButton,
 } from '../../components';
-import {logoutManager} from '../../redux/auth';
-import {navigate} from '../../services/Routerservices';
+import {updateProfileManager} from '../../redux/auth';
 import {getScreenHeight} from '../../utils/domUtils';
 
-const UserProfile = () => {
+const EditUserProfile = () => {
   const theme = useSelector((state: any) => state.theme.theme);
   const userData = useSelector((state: any) => state.auth.userData);
   const styles = useMemo(() => createStyles(theme), [theme]);
   const dispatch = useDispatch();
-
-  const emailRef: any = useRef();
   const nameRef: any = useRef();
   const profileRef: any = useRef();
   const phoneNumberRef: any = useRef();
 
-console.log("===>",userData)
-
   useFocusEffect(
     React.useCallback(() => {
-      emailRef.current.setValue(userData.email);
       nameRef.current.setValue(userData.name);
       profileRef.current.setValue(userData.profile);
-      phoneNumberRef.current.setValue(userData?.phoneNumber);
-    }, [
-      userData.email,
-      userData.name,
-      userData?.phoneNumber,
-      userData.profile,
-    ]),
+      phoneNumberRef.current.setValue(userData.phoneNumber);
+    }, [userData.name, userData.phoneNumber, userData.profile]),
   );
+
+  const validate = () => {
+    let data = {
+      name: nameRef.current.getValue(),
+      image: profileRef.current.getValue(),
+      phoneNumber: phoneNumberRef.current.getValue(),
+    };
+    dispatch<any>(updateProfileManager(data));
+  };
 
   return (
     <SafeAreaView edges={['top']} style={styles.safe}>
       <CustomStatusBar light color={theme.primary} />
       <View style={styles.screen}>
-        <CustomHeader hide title="Profile" />
+        <CustomHeader title="Edit Profile" />
 
         <ScrollView contentContainerStyle={styles.contanier}>
           <View style={styles.item}>
-            <CustomAvatar disabled={true} ref={profileRef} />
+            <CustomAvatar ref={profileRef} />
           </View>
 
           <View style={styles.item}>
-            <CustomInput editable={false} ref={emailRef} label={'Email'} />
-          </View>
-          <View style={styles.item}>
-            <CustomInput editable={false} ref={nameRef} label={'Name'} />
+            <CustomInput ref={nameRef} label={'Name'} />
           </View>
 
           <View style={styles.item}>
             <CustomInput
-              editable={false}
+              maxLength={12}
               ref={phoneNumberRef}
               label={'Phone Number'}
             />
           </View>
           <View style={styles.item}>
-            <CustomButton
-              action={() => {
-                navigate('EditUserProfile', {});
-              }}
-              title="Edit Profile"
-            />
-          </View>
-
-          <View style={styles.item}>
-            <CustomButton
-              action={() => {
-                dispatch<any>(logoutManager());
-              }}
-              title="Logout"
-            />
+            <CustomButton action={validate} title="Save Profile" />
           </View>
         </ScrollView>
       </View>
@@ -107,4 +88,4 @@ const createStyles = (theme: any) =>
     },
   });
 
-export default UserProfile;
+export default EditUserProfile;

@@ -61,28 +61,7 @@ export const otpSchema = (obj: any) => {
   }
 };
 
-export const editProfileSchema = (obj: any) => {
-  try {
-    const FormData = z.object({
-      name: z.string().trim().nonempty({
-        message: 'Name is required!',
-      }),
-      phone: z
-        .string()
-        .trim()
-        .nonempty({
-          message: 'Phone number is required!',
-        })
-        .length(10, {message: 'Please enter a valid phone number!'}),
-    });
-    const res = FormData.parse(obj);
-    return res;
-  } catch (err) {
-    if (err instanceof z.ZodError) {
-      showToast(err.issues[0].message);
-    }
-  }
-};
+
 
 export const changeForgotSchema = (obj: any) => {
   try {
@@ -133,13 +112,6 @@ export const signupSchema = (obj: any) => {
       name: z.string().trim().nonempty({
         message: 'Name is required!',
       }),
-      phone: z
-        .string()
-        .trim()
-        .nonempty({
-          message: 'Phone number is required!',
-        })
-        .length(10, {message: 'Please enter a valid phone number!'}),
       email: z
         .string()
         .trim()
@@ -212,6 +184,23 @@ export const verifyEmail = (text: any) => {
     }
   } else {
     // return toast.info({message: 'Email is required'});
+  }
+};
+
+export const editProfileSchema = (obj: any) => {
+  try {
+    const FormData = z.object({
+      name: z.string().trim().nonempty({
+        message: 'Name is required!',
+      }),
+    });
+    const res = FormData.parse(obj);
+    showToast("Profile Updated Successfully")
+    return res;
+  } catch (err) {
+    if (err instanceof z.ZodError) {
+      showToast(err.issues[0].message);
+    }
   }
 };
 

@@ -5,259 +5,436 @@ import * as queries from '../../graphql/queries';
 import * as mutations from '../../graphql/mutations';
 
 import {
-  loginSchema,
-  otpSchema,
-  showToast,
-  signupSchema,
+  changeForgotSchema,
+  editProfileSchema,
+  forgotSchema,
+  loginSchema,
+  otpSchema,
+  showToast,
+  signupSchema,
 } from '../../utils/domUtils';
 import {setLoading} from '../common';
 import {goBack, navigate} from '../../services/Routerservices';
+import {resetHomeSlice} from '../home';
 
 const authSlice = createSlice({
-  name: 'auth',
-  initialState: {
-    userData: null,
-    token: null,
-    resendConfimation: false,
-    refetch: false,
-    mainLoading: true,
-  },
-  reducers: {
-    setRefetch(state, action) {
-      state.refetch = action.payload;
-    },
-    setMainLoading(state, action) {
-      state.mainLoading = action.payload;
-    },
-    setUserData(state, action) {
-      state.userData = action.payload;
-    },
-    setToken(state, action) {
-      state.token = action.payload;
-    },
-    setResendConfimation(state, action) {
-      state.resendConfimation = action.payload;
-    },
-    logout(state) {
-      (state.userData = null), (state.token = null);
-    },
-  },
+  name: 'auth',
+  initialState: {
+    userData: null,
+    token: null,
+    resendConfimation: false,
+    refetch: false,
+    mainLoading: true,
+  },
+  reducers: {
+    setRefetch(state, action) {
+      state.refetch = action.payload;
+    },
+    setMainLoading(state, action) {
+      state.mainLoading = action.payload;
+    },
+    setUserData(state, action) {
+      state.userData = action.payload;
+    },
+    setToken(state, action) {
+      state.token = action.payload;
+    },
+    setResendConfimation(state, action) {
+      state.resendConfimation = action.payload;
+    },
+    logout(state) {
+      state.userData = null;
+      state.token = null;
+    },
+  },
 });
 
 export const logoutManager = () => {
-  return async (dispatch: any) => {
-    try {
-      await Auth.signOut();
-      dispatch(logout());
-    } catch (error: any) {
-      showToast(error.message);
-    }
-  };
+  return async (dispatch: any) => {
+    try {
+      await Auth.signOut();
+      dispatch(logout());
+      dispatch(resetHomeSlice());
+    } catch (error: any) {
+      showToast(error.message);
+    }
+  };
 };
 
 export const loginManager = (data: any) => {
-  return async (dispatch: any) => {
-    dispatch(setLoading(true));
-    let result = loginSchema(data);
-    if (result) {
-      try {
-        const res = await Auth.signIn(
-          result.email.toLocaleLowerCase(),
-          result.password,
-        );
-        if (res) {
-          dispatch(setRefetch(true));
-        }
-      } catch (error: any) {
-        const {code, message} = error;
-        if (code === 'UserNotFoundException') {
-          showToast('User does not exist, Please register');
-        } else if (code === 'UserNotConfirmedException') {
-          dispatch(userConfirmationManager(result.email));
-        } else {
-          showToast(message);
-        }
-      } finally {
-        dispatch(setLoading(false));
-      }
-    }
-  };
+  return async (dispatch: any, getState: any) => {
+    const refetch = getState().auth.refetch;
+
+    dispatch(setLoading(true));
+    let result = loginSchema(data);
+    if (result) {
+      try {
+        const res = await Auth.signIn(
+          result.email.toLocaleLowerCase(),
+          result.password,
+        );
+        if (res) {
+          dispatch(setRefetch(!refetch));
+        }
+      } catch (error: any) {
+        const {code, message} = error;
+        if (code === 'UserNotFoundException') {
+          showToast('User does not exist, Please register');
+        } else if (code === 'UserNotConfirmedException') {
+          dispatch(userConfirmationManager(result.email));
+        } else {
+          showToast(message);
+        }
+      } finally {
+        dispatch(setLoading(false));
+      }
+    }
+  };
 };
 
 export const retrieveCurrentSessionManager = () => {
-  return async (dispatch: any) => {
-    dispatch(setMainLoading(true));
-    try {
-      const res = await Auth.currentAuthenticatedUser({bypassCache: true});
-      dispatch(setUserData(res));
-      if (res) {
-        const user: any = await API.graphql({
-          query: queries.getUser,
-          variables: {id: res.attributes.sub},
-        });
-        if (!user.data.getUser) {
-          const mainUser = {
-            name: res.attributes.name,
-            id: res.attributes.sub,
-            type: '',
-            profile: res.attributes.profile,
-            email: res.attributes.email,
-          };
-          await API.graphql({
-            query: mutations.createUser,
-            variables: {input: mainUser},
-          });
-        }
-      }
-    } catch (error) {
-      console.log(error);
-      //showToast('Something went wrong please try again later!');
-    } finally {
-      dispatch(setMainLoading(false));
-    }
-  };
+  return async (dispatch: any) => {
+    dispatch(setMainLoading(true));
+    try {
+      const res = await Auth.currentAuthenticatedUser({bypassCache: true});
+      if (res) {
+        const user: any = await API.graphql({
+          query: queries.getUser,
+          variables: {id: res.attributes.sub},
+        });
+        if (!user.data.getUser) {
+          const mainUser = {
+            name: res.attributes.name,
+            id: res.attributes.sub,
+            type: '',
+            profile: res.attributes.profile,
+            email: res.attributes.email,
+          };
+          const fetchedUSER: any = await API.graphql({
+            query: mutations.createUser,
+            variables: {input: mainUser},
+          });
+
+          dispatch(setUserData(fetchedUSER.data.createUser));
+        } else {
+          const fetchedUSER: any = await API.graphql({
+            query: queries.getUser,
+            variables: {id: res.attributes.sub},
+          });
+          dispatch(setUserData(fetchedUSER.data.getUser));
+        }
+      }
+    } catch (error) {
+      console.log('S>S>S>', error);
+      if (error !== 'The user is not authenticated') {
+        showToast('Something went wrong please try again later!');
+      }
+    } finally {
+      dispatch(setMainLoading(false));
+    }
+  };
 };
 
+export const becomeSellerManager = () => {
+  return async (dispatch: any, getState: any) => {
+    dispatch(setLoading(true));
+    const userData = getState().auth.userData;
+    try {
+      let mainData: any = {
+        type: 'seller',
+        _version: userData._version,
+        id: userData.id,
+      };
+      const updatedProfile: any = await API.graphql({
+        query: mutations.updateUser,
+        variables: {input: mainData},
+      });
+      dispatch(setUserData(updatedProfile.data.updateUser));
+      showToast('You can add products now');
+    } catch (error) {
+      console.log(error);
+      showToast('Something went wrong please try again later!');
+    } finally {
+      dispatch(setLoading(false));
+    }
+  };
+};
+
+export const updateProfileManager = (data: any) => {
+  return async (dispatch: any, getState: any) => {
+    dispatch(setLoading(true));
+
+    let profile = '';
+    let result = editProfileSchema(data);
+    if (result) {
+      if (data?.image?.fileName) {
+        const image = await dispatch(uploadImage(data.image));
+        if (!image.status) {
+          dispatch(setLoading(false));
+          return ('Image Upload failed!');
+        } else {
+          profile = image.key;
+        }
+      }
+      const userData = getState().auth.userData;
+      try {
+        let mainData: any = {
+          name: result.name,
+          _version: userData._version,
+          id: userData.id,
+          phoneNumber: data.phoneNumber,
+        };
+        if (profile.length) {
+          mainData.profile = profile;
+        }
+        console.log(mainData);
+        const updatedProfile: any = await API.graphql({
+          query: mutations.updateUser,
+          variables: {input: mainData},
+        });
+        dispatch(setUserData(updatedProfile.data.updateUser));
+        goBack();
+      } catch (error) {
+        console.log(error);
+        showToast('Something went wrong please try again later!');
+      } finally {
+        dispatch(setLoading(false));
+      }
+    }
+  };
+};
+
+export const updateProductManager = (data: any) => {
+  return async (dispatch: any) => {
+    let profile = '';
+    if (data?.image?.fileName) {
+      const image = await dispatch(uploadImage(data.image));
+      if (!image.status) {
+        dispatch(setLoading(false));
+        return showToast('Image Upload failed!');
+      } else {
+        profile = image.key;
+      }
+    }
+    try {
+      if (profile.length) {
+        data.image = profile;
+      } else {
+        delete data.image;
+      }
+      await API.graphql({
+        query: mutations.updateProduct,
+        variables: {input: data},
+      });
+      showToast('Product has been Updated');
+      goBack();
+    } catch (error) {
+      console.log(error);
+      showToast('Something went wrong please try again later!');
+    } finally {
+      dispatch(setLoading(false));
+    }
+  };
+};
 
 export const verifyOtpManager = (data: any) => {
-  return async (dispatch: any) => {
-    let result = otpSchema(data);
-    if (result) {
-      dispatch(setLoading(true));
-      try {
-        const res = await Auth.confirmSignUp(data.email, data.otp);
-        if (res) {
-          navigate('Login');
-          showToast('Verify successfully, please login!');
-        }
-      } catch (error: any) {
-        showToast(error.message);
-      } finally {
-        dispatch(setLoading(false));
-      }
-    }
-  };
+  return async (dispatch: any) => {
+    let result = otpSchema(data);
+    if (result) {
+      dispatch(setLoading(true));
+      try {
+        const res = await Auth.confirmSignUp(data.email, data.otp);
+        if (res) {
+          navigate('Login');
+          showToast('Verify successfully, please login!');
+        }
+      } catch (error: any) {
+        showToast(error.message);
+      } finally {
+        dispatch(setLoading(false));
+      }
+    }
+  };
+};
+
+export const verifyFrogotOtpManager = (data: any) => {
+  return async (dispatch: any) => {
+    let result = changeForgotSchema(data);
+    if (result) {
+      dispatch(setLoading(true));
+      try {
+        const res = await Auth.forgotPasswordSubmit(
+          data.email,
+          result.otp,
+          result.password,
+        );
+        if (res) {
+          navigate('Login');
+          showToast('Password change');
+        }
+      } catch (error: any) {
+        showToast(error.message);
+      } finally {
+        dispatch(setLoading(false));
+      }
+    }
+  };
+};
+
+export const forgotPasswordManager = (data: any) => {
+  return async (dispatch: any) => {
+    let result = forgotSchema(data);
+    if (result) {
+      dispatch(setLoading(true));
+      try {
+        const res = await Auth.forgotPassword(result.email);
+        if (res) {
+          showToast(`Code has been sent to ${result.email}`);
+          navigate('ChangeForgotPassword', {
+            data: result.email,
+          });
+        }
+      } catch (error: any) {
+        showToast(error.message);
+      } finally {
+        dispatch(setLoading(false));
+      }
+    }
+  };
 };
 
 export const resendConfirmationCodeManager = (data: any) => {
-  return async (dispatch: any) => {
-    dispatch(setResendConfimation(true));
-    try {
-      const res = await Auth.resendSignUp(data.email);
-      if (res) {
-        showToast('code resent successfully');
-      }
-    } catch (error: any) {
-      showToast(error.message);
-    } finally {
-      dispatch(setResendConfimation(false));
-    }
-  };
+  return async (dispatch: any) => {
+    dispatch(setResendConfimation(true));
+    try {
+      const res = await Auth.resendSignUp(data.email);
+      if (res) {
+        showToast('code resent successfully');
+      }
+    } catch (error: any) {
+      showToast(error.message);
+    } finally {
+      dispatch(setResendConfimation(false));
+    }
+  };
 };
 
-
+export const resendForgotConfirmationManager = (data: any) => {
+  return async (dispatch: any) => {
+    dispatch(setResendConfimation(true));
+    try {
+      const res = await Auth.forgotPassword(data.email);
+      if (res) {
+        showToast('code resent successfully');
+      }
+    } catch (error: any) {
+      showToast(error.message);
+    } finally {
+      dispatch(setResendConfimation(false));
+    }
+  };
+};
 
 export const userConfirmationManager = (email: any) => {
-  return async (dispatch: any) => {
-    dispatch(setLoading(true));
-    try {
-      const res = await Auth.resendSignUp(email);
-      if (res) {
-        showToast('Please verify yourself first');
-        navigate('VerifyOtp', {data: email, path: 'login'});
-      }
-    } catch (error: any) {
-      const {message} = error;
-      showToast(message);
-    } finally {
-      dispatch(setLoading(false));
-    }
-  };
+  return async (dispatch: any) => {
+    dispatch(setLoading(true));
+    try {
+      const res = await Auth.resendSignUp(email);
+      if (res) {
+        showToast('Please verify yourself first');
+        navigate('VerifyOtp', {data: email, path: 'login'});
+      }
+    } catch (error: any) {
+      const {message} = error;
+      showToast(message);
+    } finally {
+      dispatch(setLoading(false));
+    }
+  };
 };
 
 export const uploadImage = (data: any) => {
-  return async (dispatch: any) => {
-    dispatch(setLoading(true));
-    const photoResponse = await fetch(data.uri);
-    const blob = await photoResponse.blob();
-    try {
-      const res = await Storage.put(data.fileName, blob, {
-        contentType: data.type,
-        completeCallback: event => {
-          return event.key;
-        },
-        progressCallback: progress => {
-          console.log(`Uploaded: ${progress.loaded}/${progress.total}`);
-        },
-        errorCallback: err => {
-          console.error('Unexpected error while uploading', err);
-        },
-      });
-      if (res?.key) {
-        return {status: true, key: res.key};
-      } else {
-        return {status: false, key: null};
-      }
-    } catch (error) {
-      return {status: false, key: null};
-    } finally {
-      dispatch(setLoading(false));
-    }
-  };
+  return async (dispatch: any) => {
+    dispatch(setLoading(true));
+    const photoResponse = await fetch(data.uri);
+    const blob = await photoResponse.blob();
+    try {
+      const res = await Storage.put(data.fileName, blob, {
+        contentType: data.type,
+        completeCallback: event => {
+          return event.key;
+        },
+        progressCallback: progress => {
+          console.log(`Uploaded: ${progress.loaded}/${progress.total}`);
+        },
+        errorCallback: err => {
+          console.error('Unexpected error while uploading', err);
+        },
+      });
+      if (res?.key) {
+        return {status: true, key: res.key};
+      } else {
+        return {status: false, key: null};
+      }
+    } catch (error) {
+      return {status: false, key: null};
+    } finally {
+      dispatch(setLoading(false));
+    }
+  };
 };
 
 export const signupManager = (data: any) => {
-  return async (dispatch: any) => {
-    let profile = '';
-    let result = signupSchema(data);
-    if (result) {
-      dispatch(setLoading(true));
-      if (data?.image?.uri) {
-        const image = await dispatch(uploadImage(data.image));
-        if (!image.status) {
-          dispatch(setLoading(false));
-          return showToast('Image Upload failed!');
-        } else {
-          profile = image.key;
-        }
-      }
-      try {
-        const res: any = await Auth.signUp({
-          username: result.email.toLocaleLowerCase(),
-          password: result.password,
-          attributes: {
-            email: result.email.toLocaleLowerCase(),
-            phone_number: `+1${result.phone}`,
-            name: result.name,
-            profile: profile,
-          },
-        });
-        if (res) {
-          navigate('VerifyOtp', {data: result.email, path: 'signup'});
-        }
-      } catch (error: any) {
-        const {code, message} = error;
-        if (code === 'InvalidPasswordException') {
-          showToast('Password must of be atleast 8 characters');
-        } else if (code === 'UsernameExistsException') {
-          showToast('User already exists');
-        } else {
-          showToast(message);
-        }
-      } finally {
-        dispatch(setLoading(false));
-      }
-    }
-  };
+  return async (dispatch: any) => {
+    let profile = '';
+    let result = signupSchema(data);
+    if (result) {
+      dispatch(setLoading(true));
+      if (data?.image?.uri) {
+        const image = await dispatch(uploadImage(data.image));
+        if (!image.status) {
+          dispatch(setLoading(false));
+          return showToast('Image Upload failed!');
+        } else {
+          profile = image.key;
+        }
+      }
+      try {
+        const res: any = await Auth.signUp({
+          username: result.email.toLocaleLowerCase(),
+          password: result.password,
+          attributes: {
+            email: result.email.toLocaleLowerCase(),
+            name: result.name,
+            profile: profile,
+          },
+        });
+        if (res) {
+          navigate('VerifyOtp', {data: result.email, path: 'signup'});
+        }
+      } catch (error: any) {
+        const {code, message} = error;
+        if (code === 'InvalidPasswordException') {
+          showToast('Password must of be atleast 8 characters');
+        } else if (code === 'UsernameExistsException') {
+          showToast('User already exists');
+        } else {
+          showToast(message);
+        }
+      } finally {
+        dispatch(setLoading(false));
+      }
+    }
+  };
 };
 
 export const {
-  setUserData,
-  setMainLoading,
-  setToken,
-  logout,
-  setResendConfimation,
-  setRefetch,
+  setUserData,
+  setMainLoading,
+  setToken,
+  logout,
+  setResendConfimation,
+  setRefetch,
 } = authSlice.actions;
 
 export default authSlice.reducer;

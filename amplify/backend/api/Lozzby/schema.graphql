@@ -1,0 +1,97 @@
+type Cart @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  CartItems: [CartItem] @hasMany(indexName: "byCart", fields: ["id"])
+  userID: ID! @index(name: "byUser")
+}
+
+type CartItem @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  quantity: Int
+  Product: Product @hasOne
+  cartID: ID! @index(name: "byCart")
+}
+
+enum PRODUCTCATEGORIES {
+  SHIRT
+  JEANS
+  SHOE
+}
+
+enum COLORS {
+  RED
+  BLUE
+  BLACK
+  YELLOW
+}
+
+type Address @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  province: String
+  userID: ID! @index(name: "byUser")
+  pincode: String
+  country: String
+  phoneNumber: String
+}
+
+enum OrderStatus {
+  PENDING
+  ACCEPTED
+  REJECTED
+  COMPLETED
+  CANCELLED
+  NEW
+}
+
+type Order @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  OrderItems: [OrderItem] @hasMany(indexName: "byOrder", fields: ["id"])
+  total: Float
+  status: OrderStatus
+  users: [User] @manyToMany(relationName: "UserOrder")
+}
+
+type OrderItem @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  total: Float
+  Product: Product @hasOne
+  orderID: ID! @index(name: "byOrder")
+}
+
+type Review @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  message: String
+  rating: Float
+  name: String
+  userPhoto: String
+  userID: ID! @index(name: "byUser")
+  productID: ID! @index(name: "byProduct")
+}
+
+type Product @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  name: String
+  description: String
+  rating: Float
+  price: Float
+  image: String
+  userID: ID! @index(name: "byUser")
+  Reviews: [Review] @hasMany(indexName: "byProduct", fields: ["id"])
+  quantity: String
+  color: COLORS
+  category: PRODUCTCATEGORIES
+}
+
+type User @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  name: String
+  type: String
+  profile: String
+  email: String
+  Products: [Product] @hasMany(indexName: "byUser", fields: ["id"])
+  Reviews: [Review] @hasMany(indexName: "byUser", fields: ["id"])
+  Addresses: [Address] @hasMany(indexName: "byUser", fields: ["id"])
+  Orders: [Order] @manyToMany(relationName: "UserOrder")
+  phoneNumber: String
+  Carts: [Cart] @hasMany(indexName: "byUser", fields: ["id"])
+}
+ 

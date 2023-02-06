@@ -1,12 +1,224 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const getCart = /* GraphQL */ `
+  query GetCart($id: ID!) {
+    getCart(id: $id) {
+      id
+      CartItems {
+        nextToken
+        startedAt
+      }
+      userID
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const listCarts = /* GraphQL */ `
+  query ListCarts(
+    $filter: ModelCartFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listCarts(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        userID
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const syncCarts = /* GraphQL */ `
+  query SyncCarts(
+    $filter: ModelCartFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncCarts(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
+      items {
+        id
+        userID
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const cartsByUserID = /* GraphQL */ `
+  query CartsByUserID(
+    $userID: ID!
+    $sortDirection: ModelSortDirection
+    $filter: ModelCartFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    cartsByUserID(
+      userID: $userID
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        userID
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const getCartItem = /* GraphQL */ `
+  query GetCartItem($id: ID!) {
+    getCartItem(id: $id) {
+      id
+      quantity
+      Product {
+        id
+        name
+        description
+        rating
+        price
+        image
+        userID
+        quantity
+        color
+        category
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      cartID
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      cartItemProductId
+    }
+  }
+`;
+export const listCartItems = /* GraphQL */ `
+  query ListCartItems(
+    $filter: ModelCartItemFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listCartItems(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        quantity
+        cartID
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        cartItemProductId
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const syncCartItems = /* GraphQL */ `
+  query SyncCartItems(
+    $filter: ModelCartItemFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncCartItems(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
+      items {
+        id
+        quantity
+        cartID
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        cartItemProductId
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const cartItemsByCartID = /* GraphQL */ `
+  query CartItemsByCartID(
+    $cartID: ID!
+    $sortDirection: ModelSortDirection
+    $filter: ModelCartItemFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    cartItemsByCartID(
+      cartID: $cartID
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        quantity
+        cartID
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        cartItemProductId
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
 export const getAddress = /* GraphQL */ `
   query GetAddress($id: ID!) {
     getAddress(id: $id) {
       id
-      title
+      province
       userID
+      pincode
+      country
+      phoneNumber
       createdAt
       updatedAt
       _version
@@ -24,8 +236,11 @@ export const listAddresses = /* GraphQL */ `
     listAddresses(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
-        title
+        province
         userID
+        pincode
+        country
+        phoneNumber
         createdAt
         updatedAt
         _version
@@ -52,8 +267,11 @@ export const syncAddresses = /* GraphQL */ `
     ) {
       items {
         id
-        title
+        province
         userID
+        pincode
+        country
+        phoneNumber
         createdAt
         updatedAt
         _version
@@ -82,8 +300,11 @@ export const addressesByUserID = /* GraphQL */ `
     ) {
       items {
         id
-        title
+        province
         userID
+        pincode
+        country
+        phoneNumber
         createdAt
         updatedAt
         _version
@@ -180,6 +401,9 @@ export const getOrderItem = /* GraphQL */ `
         price
         image
         userID
+        quantity
+        color
+        category
         createdAt
         updatedAt
         _version
@@ -437,6 +661,9 @@ export const getProduct = /* GraphQL */ `
         nextToken
         startedAt
       }
+      quantity
+      color
+      category
       createdAt
       updatedAt
       _version
@@ -460,6 +687,9 @@ export const listProducts = /* GraphQL */ `
         price
         image
         userID
+        quantity
+        color
+        category
         createdAt
         updatedAt
         _version
@@ -492,6 +722,9 @@ export const syncProducts = /* GraphQL */ `
         price
         image
         userID
+        quantity
+        color
+        category
         createdAt
         updatedAt
         _version
@@ -526,6 +759,9 @@ export const productsByUserID = /* GraphQL */ `
         price
         image
         userID
+        quantity
+        color
+        category
         createdAt
         updatedAt
         _version
@@ -561,6 +797,11 @@ export const getUser = /* GraphQL */ `
         nextToken
         startedAt
       }
+      phoneNumber
+      Carts {
+        nextToken
+        startedAt
+      }
       createdAt
       updatedAt
       _version
@@ -582,6 +823,7 @@ export const listUsers = /* GraphQL */ `
         type
         profile
         email
+        phoneNumber
         createdAt
         updatedAt
         _version
@@ -612,6 +854,7 @@ export const syncUsers = /* GraphQL */ `
         type
         profile
         email
+        phoneNumber
         createdAt
         updatedAt
         _version
@@ -645,6 +888,7 @@ export const getUserOrder = /* GraphQL */ `
         type
         profile
         email
+        phoneNumber
         createdAt
         updatedAt
         _version

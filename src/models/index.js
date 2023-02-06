@@ -2,6 +2,19 @@
 import { initSchema } from '@aws-amplify/datastore';
 import { schema } from './schema';
 
+const Colors = {
+  "RED": "RED",
+  "BLUE": "BLUE",
+  "BLACK": "BLACK",
+  "YELLOW": "YELLOW"
+};
+
+const Productcategories = {
+  "SHIRT": "SHIRT",
+  "JEANS": "JEANS",
+  "SHOE": "SHOE"
+};
+
 const OrderStatus = {
   "PENDING": "PENDING",
   "ACCEPTED": "ACCEPTED",
@@ -11,15 +24,19 @@ const OrderStatus = {
   "NEW": "NEW"
 };
 
-const { Address, Order, OrderItem, Product, Review, User, UserOrder } = initSchema(schema);
+const { Cart, CartItem, Product, Review, Address, Order, OrderItem, User, UserOrder } = initSchema(schema);
 
 export {
+  Cart,
+  CartItem,
+  Product,
+  Review,
   Address,
   Order,
   OrderItem,
-  Product,
-  Review,
   User,
   UserOrder,
+  Colors,
+  Productcategories,
   OrderStatus
 };

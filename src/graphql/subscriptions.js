@@ -1,12 +1,162 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const onCreateCart = /* GraphQL */ `
+  subscription OnCreateCart($filter: ModelSubscriptionCartFilterInput) {
+    onCreateCart(filter: $filter) {
+      id
+      CartItems {
+        nextToken
+        startedAt
+      }
+      userID
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const onUpdateCart = /* GraphQL */ `
+  subscription OnUpdateCart($filter: ModelSubscriptionCartFilterInput) {
+    onUpdateCart(filter: $filter) {
+      id
+      CartItems {
+        nextToken
+        startedAt
+      }
+      userID
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const onDeleteCart = /* GraphQL */ `
+  subscription OnDeleteCart($filter: ModelSubscriptionCartFilterInput) {
+    onDeleteCart(filter: $filter) {
+      id
+      CartItems {
+        nextToken
+        startedAt
+      }
+      userID
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const onCreateCartItem = /* GraphQL */ `
+  subscription OnCreateCartItem($filter: ModelSubscriptionCartItemFilterInput) {
+    onCreateCartItem(filter: $filter) {
+      id
+      quantity
+      Product {
+        id
+        name
+        description
+        rating
+        price
+        image
+        userID
+        quantity
+        color
+        category
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      cartID
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      cartItemProductId
+    }
+  }
+`;
+export const onUpdateCartItem = /* GraphQL */ `
+  subscription OnUpdateCartItem($filter: ModelSubscriptionCartItemFilterInput) {
+    onUpdateCartItem(filter: $filter) {
+      id
+      quantity
+      Product {
+        id
+        name
+        description
+        rating
+        price
+        image
+        userID
+        quantity
+        color
+        category
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      cartID
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      cartItemProductId
+    }
+  }
+`;
+export const onDeleteCartItem = /* GraphQL */ `
+  subscription OnDeleteCartItem($filter: ModelSubscriptionCartItemFilterInput) {
+    onDeleteCartItem(filter: $filter) {
+      id
+      quantity
+      Product {
+        id
+        name
+        description
+        rating
+        price
+        image
+        userID
+        quantity
+        color
+        category
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      cartID
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      cartItemProductId
+    }
+  }
+`;
 export const onCreateAddress = /* GraphQL */ `
   subscription OnCreateAddress($filter: ModelSubscriptionAddressFilterInput) {
     onCreateAddress(filter: $filter) {
       id
-      title
+      province
       userID
+      pincode
+      country
+      phoneNumber
       createdAt
       updatedAt
       _version
@@ -19,8 +169,11 @@ export const onUpdateAddress = /* GraphQL */ `
   subscription OnUpdateAddress($filter: ModelSubscriptionAddressFilterInput) {
     onUpdateAddress(filter: $filter) {
       id
-      title
+      province
       userID
+      pincode
+      country
+      phoneNumber
       createdAt
       updatedAt
       _version
@@ -33,8 +186,11 @@ export const onDeleteAddress = /* GraphQL */ `
   subscription OnDeleteAddress($filter: ModelSubscriptionAddressFilterInput) {
     onDeleteAddress(filter: $filter) {
       id
-      title
+      province
       userID
+      pincode
+      country
+      phoneNumber
       createdAt
       updatedAt
       _version
@@ -124,6 +280,9 @@ export const onCreateOrderItem = /* GraphQL */ `
         price
         image
         userID
+        quantity
+        color
+        category
         createdAt
         updatedAt
         _version
@@ -155,6 +314,9 @@ export const onUpdateOrderItem = /* GraphQL */ `
         price
         image
         userID
+        quantity
+        color
+        category
         createdAt
         updatedAt
         _version
@@ -186,6 +348,9 @@ export const onDeleteOrderItem = /* GraphQL */ `
         price
         image
         userID
+        quantity
+        color
+        category
         createdAt
         updatedAt
         _version
@@ -270,6 +435,9 @@ export const onCreateProduct = /* GraphQL */ `
         nextToken
         startedAt
       }
+      quantity
+      color
+      category
       createdAt
       updatedAt
       _version
@@ -292,6 +460,9 @@ export const onUpdateProduct = /* GraphQL */ `
         nextToken
         startedAt
       }
+      quantity
+      color
+      category
       createdAt
       updatedAt
       _version
@@ -314,6 +485,9 @@ export const onDeleteProduct = /* GraphQL */ `
         nextToken
         startedAt
       }
+      quantity
+      color
+      category
       createdAt
       updatedAt
       _version
@@ -343,6 +517,11 @@ export const onCreateUser = /* GraphQL */ `
         startedAt
       }
       Orders {
+        nextToken
+        startedAt
+      }
+      phoneNumber
+      Carts {
         nextToken
         startedAt
       }
@@ -378,6 +557,11 @@ export const onUpdateUser = /* GraphQL */ `
         nextToken
         startedAt
       }
+      phoneNumber
+      Carts {
+        nextToken
+        startedAt
+      }
       createdAt
       updatedAt
       _version
@@ -407,6 +591,11 @@ export const onDeleteUser = /* GraphQL */ `
         startedAt
       }
       Orders {
+        nextToken
+        startedAt
+      }
+      phoneNumber
+      Carts {
         nextToken
         startedAt
       }
@@ -442,6 +631,7 @@ export const onCreateUserOrder = /* GraphQL */ `
         type
         profile
         email
+        phoneNumber
         createdAt
         updatedAt
         _version
@@ -480,6 +670,7 @@ export const onUpdateUserOrder = /* GraphQL */ `
         type
         profile
         email
+        phoneNumber
         createdAt
         updatedAt
         _version
@@ -518,6 +709,7 @@ export const onDeleteUserOrder = /* GraphQL */ `
         type
         profile
         email
+        phoneNumber
         createdAt
         updatedAt
         _version

@@ -26,16 +26,14 @@ const Signup = () => {
   const nameRef: any = useRef(null);
   const nameValueRef: any = useRef(null);
   const phoneRef: any = useRef(null);
-  const phoneValueRef: any = useRef(null);
   const imageValueRef: any = useRef(null);
 
   const signupActionHandler = () => {
     let email = emailValueRef.current.getValue();
     let password = passwordValueRef.current.getValue();
     let name = nameValueRef.current.getValue();
-    let phone = phoneValueRef.current.getValue();
     let image = imageValueRef.current.getValue();
-    dispatch<any>(signupManager({email, password, name, phone, image}));
+    dispatch<any>(signupManager({email, password, name, image}));
   };
 
   return (
@@ -65,18 +63,6 @@ const Signup = () => {
               type="next"
               onSubmit={() => {
                 phoneRef.current.focus();
-              }}
-            />
-
-            <CustomInput
-              ref={phoneValueRef}
-              placeholder={'Phone Number'}
-              maxLength={10}
-              keyboardType = "numeric"
-              inputRef={phoneRef}
-              type="next"
-              onSubmit={() => {
-                emailRef.current.focus();
               }}
             />
 
