@@ -20,11 +20,10 @@ const OrderStatus = {
   "ACCEPTED": "ACCEPTED",
   "REJECTED": "REJECTED",
   "COMPLETED": "COMPLETED",
-  "CANCELLED": "CANCELLED",
-  "NEW": "NEW"
+  "CANCELLED": "CANCELLED"
 };
 
-const { Cart, CartItem, Product, Review, Address, Order, OrderItem, User, UserOrder } = initSchema(schema);
+const { Cart, CartItem, Product, Review, Address, Order, OrderItem, User } = initSchema(schema);
 
 export {
   Cart,
@@ -35,7 +34,6 @@ export {
   Order,
   OrderItem,
   User,
-  UserOrder,
   Colors,
   Productcategories,
   OrderStatus

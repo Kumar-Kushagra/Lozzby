@@ -326,15 +326,27 @@ export const getOrder = /* GraphQL */ `
       }
       total
       status
-      users {
-        nextToken
-        startedAt
+      sellerID
+      userID
+      Address {
+        id
+        province
+        userID
+        pincode
+        country
+        phoneNumber
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
       }
       createdAt
       updatedAt
       _version
       _deleted
       _lastChangedAt
+      orderAddressId
     }
   }
 `;
@@ -349,11 +361,14 @@ export const listOrders = /* GraphQL */ `
         id
         total
         status
+        sellerID
+        userID
         createdAt
         updatedAt
         _version
         _deleted
         _lastChangedAt
+        orderAddressId
       }
       nextToken
       startedAt
@@ -377,11 +392,47 @@ export const syncOrders = /* GraphQL */ `
         id
         total
         status
+        sellerID
+        userID
         createdAt
         updatedAt
         _version
         _deleted
         _lastChangedAt
+        orderAddressId
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const ordersByUserID = /* GraphQL */ `
+  query OrdersByUserID(
+    $userID: ID!
+    $sortDirection: ModelSortDirection
+    $filter: ModelOrderFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    ordersByUserID(
+      userID: $userID
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        total
+        status
+        sellerID
+        userID
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        orderAddressId
       }
       nextToken
       startedAt
@@ -392,7 +443,6 @@ export const getOrderItem = /* GraphQL */ `
   query GetOrderItem($id: ID!) {
     getOrderItem(id: $id) {
       id
-      total
       Product {
         id
         name
@@ -411,6 +461,7 @@ export const getOrderItem = /* GraphQL */ `
         _lastChangedAt
       }
       orderID
+      quantity
       createdAt
       updatedAt
       _version
@@ -429,8 +480,8 @@ export const listOrderItems = /* GraphQL */ `
     listOrderItems(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
-        total
         orderID
+        quantity
         createdAt
         updatedAt
         _version
@@ -458,8 +509,8 @@ export const syncOrderItems = /* GraphQL */ `
     ) {
       items {
         id
-        total
         orderID
+        quantity
         createdAt
         updatedAt
         _version
@@ -489,8 +540,8 @@ export const orderItemsByOrderID = /* GraphQL */ `
     ) {
       items {
         id
-        total
         orderID
+        quantity
         createdAt
         updatedAt
         _version
@@ -793,12 +844,12 @@ export const getUser = /* GraphQL */ `
         nextToken
         startedAt
       }
-      Orders {
+      phoneNumber
+      Carts {
         nextToken
         startedAt
       }
-      phoneNumber
-      Carts {
+      Orders {
         nextToken
         startedAt
       }
@@ -855,153 +906,6 @@ export const syncUsers = /* GraphQL */ `
         profile
         email
         phoneNumber
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
-      nextToken
-      startedAt
-    }
-  }
-`;
-export const getUserOrder = /* GraphQL */ `
-  query GetUserOrder($id: ID!) {
-    getUserOrder(id: $id) {
-      id
-      orderId
-      userId
-      order {
-        id
-        total
-        status
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
-      user {
-        id
-        name
-        type
-        profile
-        email
-        phoneNumber
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-    }
-  }
-`;
-export const listUserOrders = /* GraphQL */ `
-  query ListUserOrders(
-    $filter: ModelUserOrderFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listUserOrders(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        orderId
-        userId
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
-      nextToken
-      startedAt
-    }
-  }
-`;
-export const syncUserOrders = /* GraphQL */ `
-  query SyncUserOrders(
-    $filter: ModelUserOrderFilterInput
-    $limit: Int
-    $nextToken: String
-    $lastSync: AWSTimestamp
-  ) {
-    syncUserOrders(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      lastSync: $lastSync
-    ) {
-      items {
-        id
-        orderId
-        userId
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
-      nextToken
-      startedAt
-    }
-  }
-`;
-export const userOrdersByOrderId = /* GraphQL */ `
-  query UserOrdersByOrderId(
-    $orderId: ID!
-    $sortDirection: ModelSortDirection
-    $filter: ModelUserOrderFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    userOrdersByOrderId(
-      orderId: $orderId
-      sortDirection: $sortDirection
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-    ) {
-      items {
-        id
-        orderId
-        userId
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
-      nextToken
-      startedAt
-    }
-  }
-`;
-export const userOrdersByUserId = /* GraphQL */ `
-  query UserOrdersByUserId(
-    $userId: ID!
-    $sortDirection: ModelSortDirection
-    $filter: ModelUserOrderFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    userOrdersByUserId(
-      userId: $userId
-      sortDirection: $sortDirection
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-    ) {
-      items {
-        id
-        orderId
-        userId
         createdAt
         updatedAt
         _version

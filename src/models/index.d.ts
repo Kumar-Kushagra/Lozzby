@@ -20,8 +20,7 @@ export enum OrderStatus {
   ACCEPTED = "ACCEPTED",
   REJECTED = "REJECTED",
   COMPLETED = "COMPLETED",
-  CANCELLED = "CANCELLED",
-  NEW = "NEW"
+  CANCELLED = "CANCELLED"
 }
 
 
@@ -219,9 +218,12 @@ type EagerOrder = {
   readonly OrderItems?: (OrderItem | null)[] | null;
   readonly total?: number | null;
   readonly status?: OrderStatus | keyof typeof OrderStatus | null;
-  readonly users?: (UserOrder | null)[] | null;
+  readonly sellerID?: string | null;
+  readonly userID: string;
+  readonly Address?: Address | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
+  readonly orderAddressId?: string | null;
 }
 
 type LazyOrder = {
@@ -233,9 +235,12 @@ type LazyOrder = {
   readonly OrderItems: AsyncCollection<OrderItem>;
   readonly total?: number | null;
   readonly status?: OrderStatus | keyof typeof OrderStatus | null;
-  readonly users: AsyncCollection<UserOrder>;
+  readonly sellerID?: string | null;
+  readonly userID: string;
+  readonly Address: AsyncItem<Address | undefined>;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
+  readonly orderAddressId?: string | null;
 }
 
 export declare type Order = LazyLoading extends LazyLoadingDisabled ? EagerOrder : LazyOrder
@@ -250,9 +255,9 @@ type EagerOrderItem = {
     readOnlyFields: 'createdAt' | 'updatedAt';
   };
   readonly id: string;
-  readonly total?: number | null;
   readonly Product?: Product | null;
   readonly orderID: string;
+  readonly quantity?: number | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
   readonly orderItemProductId?: string | null;
@@ -264,9 +269,9 @@ type LazyOrderItem = {
     readOnlyFields: 'createdAt' | 'updatedAt';
   };
   readonly id: string;
-  readonly total?: number | null;
   readonly Product: AsyncItem<Product | undefined>;
   readonly orderID: string;
+  readonly quantity?: number | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
   readonly orderItemProductId?: string | null;
@@ -291,9 +296,9 @@ type EagerUser = {
   readonly Products?: (Product | null)[] | null;
   readonly Reviews?: (Review | null)[] | null;
   readonly Addresses?: (Address | null)[] | null;
-  readonly Orders?: (UserOrder | null)[] | null;
   readonly phoneNumber?: string | null;
   readonly Carts?: (Cart | null)[] | null;
+  readonly Orders?: (Order | null)[] | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -311,9 +316,9 @@ type LazyUser = {
   readonly Products: AsyncCollection<Product>;
   readonly Reviews: AsyncCollection<Review>;
   readonly Addresses: AsyncCollection<Address>;
-  readonly Orders: AsyncCollection<UserOrder>;
   readonly phoneNumber?: string | null;
   readonly Carts: AsyncCollection<Cart>;
+  readonly Orders: AsyncCollection<Order>;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -322,38 +327,4 @@ export declare type User = LazyLoading extends LazyLoadingDisabled ? EagerUser :
 
 export declare const User: (new (init: ModelInit<User>) => User) & {
   copyOf(source: User, mutator: (draft: MutableModel<User>) => MutableModel<User> | void): User;
-}
-
-type EagerUserOrder = {
-  readonly [__modelMeta__]: {
-    identifier: ManagedIdentifier<UserOrder, 'id'>;
-    readOnlyFields: 'createdAt' | 'updatedAt';
-  };
-  readonly id: string;
-  readonly orderId?: string | null;
-  readonly userId?: string | null;
-  readonly order: Order;
-  readonly user: User;
-  readonly createdAt?: string | null;
-  readonly updatedAt?: string | null;
-}
-
-type LazyUserOrder = {
-  readonly [__modelMeta__]: {
-    identifier: ManagedIdentifier<UserOrder, 'id'>;
-    readOnlyFields: 'createdAt' | 'updatedAt';
-  };
-  readonly id: string;
-  readonly orderId?: string | null;
-  readonly userId?: string | null;
-  readonly order: AsyncItem<Order>;
-  readonly user: AsyncItem<User>;
-  readonly createdAt?: string | null;
-  readonly updatedAt?: string | null;
-}
-
-export declare type UserOrder = LazyLoading extends LazyLoadingDisabled ? EagerUserOrder : LazyUserOrder
-
-export declare const UserOrder: (new (init: ModelInit<UserOrder>) => UserOrder) & {
-  copyOf(source: UserOrder, mutator: (draft: MutableModel<UserOrder>) => MutableModel<UserOrder> | void): UserOrder;
 }

@@ -111,6 +111,7 @@ const createStyles = (theme: any) =>
     text: {
       fontSize: getScreenHeight(1.8),
       color: theme.black,
+      fontWeight : "bold"
     },
   });
 

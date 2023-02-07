@@ -86,6 +86,27 @@ export const changeForgotSchema = (obj: any) => {
   }
 };
 
+export const createProductSchema = (obj: any) => {
+  try {
+    const FormData = z.object({
+      name: z.string().trim().nonempty({
+        message: 'Name is required!',
+      }),
+      description: z.string().trim().nonempty({
+        message: 'Description is required!',
+      }),
+      price: z.number(),
+      quantity : z.number(),
+    });
+    const res = FormData.parse(obj);
+    return res;
+  } catch (err) {
+    if (err instanceof z.ZodError) {
+      showToast(err.issues[0].message);
+    }
+  }
+};
+
 export const forgotSchema = (obj: any) => {
   try {
     const FormData = z.object({

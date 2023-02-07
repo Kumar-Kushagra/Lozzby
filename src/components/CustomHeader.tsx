@@ -41,9 +41,8 @@ const createStyles = (theme: any) =>
       paddingHorizontal: getScreenHeight(2),
     },
     title: {
-      fontSize: getScreenHeight(2.3),
+      fontSize: getScreenHeight(2),
       color: theme.white,
-      fontWeight :"bold"
     },
     imageContanier: {
       width: getScreenHeight(4),

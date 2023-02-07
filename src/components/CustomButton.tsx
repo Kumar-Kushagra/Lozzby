@@ -32,16 +32,14 @@ const createStyles = (theme: any) =>
     screen: {
       height: getScreenHeight(6),
       borderRadius: getScreenHeight(1),
-      width: '90%',
+      width: '100%',
       justifyContent: 'center',
       alignItems: 'center',
-      alignSelf:'center',
       backgroundColor: theme.primary,
     },
     title: {
-      fontSize: getScreenHeight(2.5),
+      fontSize: getScreenHeight(2),
       color: theme.white,
-      fontWeight : "bold"
     },
   });
 

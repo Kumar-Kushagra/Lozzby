@@ -209,15 +209,27 @@ export const onCreateOrder = /* GraphQL */ `
       }
       total
       status
-      users {
-        nextToken
-        startedAt
+      sellerID
+      userID
+      Address {
+        id
+        province
+        userID
+        pincode
+        country
+        phoneNumber
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
       }
       createdAt
       updatedAt
       _version
       _deleted
       _lastChangedAt
+      orderAddressId
     }
   }
 `;
@@ -231,15 +243,27 @@ export const onUpdateOrder = /* GraphQL */ `
       }
       total
       status
-      users {
-        nextToken
-        startedAt
+      sellerID
+      userID
+      Address {
+        id
+        province
+        userID
+        pincode
+        country
+        phoneNumber
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
       }
       createdAt
       updatedAt
       _version
       _deleted
       _lastChangedAt
+      orderAddressId
     }
   }
 `;
@@ -253,15 +277,27 @@ export const onDeleteOrder = /* GraphQL */ `
       }
       total
       status
-      users {
-        nextToken
-        startedAt
+      sellerID
+      userID
+      Address {
+        id
+        province
+        userID
+        pincode
+        country
+        phoneNumber
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
       }
       createdAt
       updatedAt
       _version
       _deleted
       _lastChangedAt
+      orderAddressId
     }
   }
 `;
@@ -271,7 +307,6 @@ export const onCreateOrderItem = /* GraphQL */ `
   ) {
     onCreateOrderItem(filter: $filter) {
       id
-      total
       Product {
         id
         name
@@ -290,6 +325,7 @@ export const onCreateOrderItem = /* GraphQL */ `
         _lastChangedAt
       }
       orderID
+      quantity
       createdAt
       updatedAt
       _version
@@ -305,7 +341,6 @@ export const onUpdateOrderItem = /* GraphQL */ `
   ) {
     onUpdateOrderItem(filter: $filter) {
       id
-      total
       Product {
         id
         name
@@ -324,6 +359,7 @@ export const onUpdateOrderItem = /* GraphQL */ `
         _lastChangedAt
       }
       orderID
+      quantity
       createdAt
       updatedAt
       _version
@@ -339,7 +375,6 @@ export const onDeleteOrderItem = /* GraphQL */ `
   ) {
     onDeleteOrderItem(filter: $filter) {
       id
-      total
       Product {
         id
         name
@@ -358,6 +393,7 @@ export const onDeleteOrderItem = /* GraphQL */ `
         _lastChangedAt
       }
       orderID
+      quantity
       createdAt
       updatedAt
       _version
@@ -516,12 +552,12 @@ export const onCreateUser = /* GraphQL */ `
         nextToken
         startedAt
       }
-      Orders {
+      phoneNumber
+      Carts {
         nextToken
         startedAt
       }
-      phoneNumber
-      Carts {
+      Orders {
         nextToken
         startedAt
       }
@@ -553,12 +589,12 @@ export const onUpdateUser = /* GraphQL */ `
         nextToken
         startedAt
       }
-      Orders {
+      phoneNumber
+      Carts {
         nextToken
         startedAt
       }
-      phoneNumber
-      Carts {
+      Orders {
         nextToken
         startedAt
       }
@@ -590,131 +626,14 @@ export const onDeleteUser = /* GraphQL */ `
         nextToken
         startedAt
       }
-      Orders {
-        nextToken
-        startedAt
-      }
       phoneNumber
       Carts {
         nextToken
         startedAt
       }
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-    }
-  }
-`;
-export const onCreateUserOrder = /* GraphQL */ `
-  subscription OnCreateUserOrder(
-    $filter: ModelSubscriptionUserOrderFilterInput
-  ) {
-    onCreateUserOrder(filter: $filter) {
-      id
-      orderId
-      userId
-      order {
-        id
-        total
-        status
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
-      user {
-        id
-        name
-        type
-        profile
-        email
-        phoneNumber
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-    }
-  }
-`;
-export const onUpdateUserOrder = /* GraphQL */ `
-  subscription OnUpdateUserOrder(
-    $filter: ModelSubscriptionUserOrderFilterInput
-  ) {
-    onUpdateUserOrder(filter: $filter) {
-      id
-      orderId
-      userId
-      order {
-        id
-        total
-        status
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
-      user {
-        id
-        name
-        type
-        profile
-        email
-        phoneNumber
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-    }
-  }
-`;
-export const onDeleteUserOrder = /* GraphQL */ `
-  subscription OnDeleteUserOrder(
-    $filter: ModelSubscriptionUserOrderFilterInput
-  ) {
-    onDeleteUserOrder(filter: $filter) {
-      id
-      orderId
-      userId
-      order {
-        id
-        total
-        status
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
-      user {
-        id
-        name
-        type
-        profile
-        email
-        phoneNumber
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
+      Orders {
+        nextToken
+        startedAt
       }
       createdAt
       updatedAt

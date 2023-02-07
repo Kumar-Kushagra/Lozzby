@@ -10,7 +10,7 @@ import {
   CustomAvatar,
   CustomButton,
 } from '../../components';
-import {logoutManager} from '../../redux/auth';
+import {becomeSellerManager, logoutManager} from '../../redux/auth';
 import {navigate} from '../../services/Routerservices';
 import {getScreenHeight} from '../../utils/domUtils';
 
@@ -71,6 +71,24 @@ const UserProfile = () => {
               }}
               title="Edit Profile"
             />
+          </View>
+
+          <View style={styles.item}>
+            {userData.type === 'seller' ? (
+              <CustomButton
+                action={() => {
+                  navigate('ManageProducts', {});
+                }}
+                title="Manage Products"
+              />
+            ) : (
+              <CustomButton
+                action={() => {
+                  dispatch<any>(becomeSellerManager());
+                }}
+                title="Become Seller"
+              />
+            )}
           </View>
 
           <View style={styles.item}>

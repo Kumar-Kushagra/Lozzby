@@ -239,15 +239,27 @@ export const createOrder = /* GraphQL */ `
       }
       total
       status
-      users {
-        nextToken
-        startedAt
+      sellerID
+      userID
+      Address {
+        id
+        province
+        userID
+        pincode
+        country
+        phoneNumber
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
       }
       createdAt
       updatedAt
       _version
       _deleted
       _lastChangedAt
+      orderAddressId
     }
   }
 `;
@@ -264,15 +276,27 @@ export const updateOrder = /* GraphQL */ `
       }
       total
       status
-      users {
-        nextToken
-        startedAt
+      sellerID
+      userID
+      Address {
+        id
+        province
+        userID
+        pincode
+        country
+        phoneNumber
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
       }
       createdAt
       updatedAt
       _version
       _deleted
       _lastChangedAt
+      orderAddressId
     }
   }
 `;
@@ -289,15 +313,27 @@ export const deleteOrder = /* GraphQL */ `
       }
       total
       status
-      users {
-        nextToken
-        startedAt
+      sellerID
+      userID
+      Address {
+        id
+        province
+        userID
+        pincode
+        country
+        phoneNumber
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
       }
       createdAt
       updatedAt
       _version
       _deleted
       _lastChangedAt
+      orderAddressId
     }
   }
 `;
@@ -308,7 +344,6 @@ export const createOrderItem = /* GraphQL */ `
   ) {
     createOrderItem(input: $input, condition: $condition) {
       id
-      total
       Product {
         id
         name
@@ -327,6 +362,7 @@ export const createOrderItem = /* GraphQL */ `
         _lastChangedAt
       }
       orderID
+      quantity
       createdAt
       updatedAt
       _version
@@ -343,7 +379,6 @@ export const updateOrderItem = /* GraphQL */ `
   ) {
     updateOrderItem(input: $input, condition: $condition) {
       id
-      total
       Product {
         id
         name
@@ -362,6 +397,7 @@ export const updateOrderItem = /* GraphQL */ `
         _lastChangedAt
       }
       orderID
+      quantity
       createdAt
       updatedAt
       _version
@@ -378,7 +414,6 @@ export const deleteOrderItem = /* GraphQL */ `
   ) {
     deleteOrderItem(input: $input, condition: $condition) {
       id
-      total
       Product {
         id
         name
@@ -397,6 +432,7 @@ export const deleteOrderItem = /* GraphQL */ `
         _lastChangedAt
       }
       orderID
+      quantity
       createdAt
       updatedAt
       _version
@@ -576,12 +612,12 @@ export const createUser = /* GraphQL */ `
         nextToken
         startedAt
       }
-      Orders {
+      phoneNumber
+      Carts {
         nextToken
         startedAt
       }
-      phoneNumber
-      Carts {
+      Orders {
         nextToken
         startedAt
       }
@@ -616,12 +652,12 @@ export const updateUser = /* GraphQL */ `
         nextToken
         startedAt
       }
-      Orders {
+      phoneNumber
+      Carts {
         nextToken
         startedAt
       }
-      phoneNumber
-      Carts {
+      Orders {
         nextToken
         startedAt
       }
@@ -656,134 +692,14 @@ export const deleteUser = /* GraphQL */ `
         nextToken
         startedAt
       }
-      Orders {
-        nextToken
-        startedAt
-      }
       phoneNumber
       Carts {
         nextToken
         startedAt
       }
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-    }
-  }
-`;
-export const createUserOrder = /* GraphQL */ `
-  mutation CreateUserOrder(
-    $input: CreateUserOrderInput!
-    $condition: ModelUserOrderConditionInput
-  ) {
-    createUserOrder(input: $input, condition: $condition) {
-      id
-      orderId
-      userId
-      order {
-        id
-        total
-        status
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
-      user {
-        id
-        name
-        type
-        profile
-        email
-        phoneNumber
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-    }
-  }
-`;
-export const updateUserOrder = /* GraphQL */ `
-  mutation UpdateUserOrder(
-    $input: UpdateUserOrderInput!
-    $condition: ModelUserOrderConditionInput
-  ) {
-    updateUserOrder(input: $input, condition: $condition) {
-      id
-      orderId
-      userId
-      order {
-        id
-        total
-        status
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
-      user {
-        id
-        name
-        type
-        profile
-        email
-        phoneNumber
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-    }
-  }
-`;
-export const deleteUserOrder = /* GraphQL */ `
-  mutation DeleteUserOrder(
-    $input: DeleteUserOrderInput!
-    $condition: ModelUserOrderConditionInput
-  ) {
-    deleteUserOrder(input: $input, condition: $condition) {
-      id
-      orderId
-      userId
-      order {
-        id
-        total
-        status
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
-      user {
-        id
-        name
-        type
-        profile
-        email
-        phoneNumber
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
+      Orders {
+        nextToken
+        startedAt
       }
       createdAt
       updatedAt
