@@ -39,7 +39,6 @@ enum OrderStatus {
   REJECTED
   COMPLETED
   CANCELLED
-  NEW
 }
 
 type Order @model @auth(rules: [{allow: public}]) {
@@ -47,14 +46,18 @@ type Order @model @auth(rules: [{allow: public}]) {
   OrderItems: [OrderItem] @hasMany(indexName: "byOrder", fields: ["id"])
   total: Float
   status: OrderStatus
-  users: [User] @manyToMany(relationName: "UserOrder")
+  sellerID: String
+  userID: ID! @index(name: "byUser")
+  Address: Address @hasOne
 }
 
 type OrderItem @model @auth(rules: [{allow: public}]) {
   id: ID!
-  total: Float
   Product: Product @hasOne
   orderID: ID! @index(name: "byOrder")
+  quantity: Int
+  productName: String
+  productPrice: Float
 }
 
 type Review @model @auth(rules: [{allow: public}]) {
@@ -90,8 +93,8 @@ type User @model @auth(rules: [{allow: public}]) {
   Products: [Product] @hasMany(indexName: "byUser", fields: ["id"])
   Reviews: [Review] @hasMany(indexName: "byUser", fields: ["id"])
   Addresses: [Address] @hasMany(indexName: "byUser", fields: ["id"])
-  Orders: [Order] @manyToMany(relationName: "UserOrder")
   phoneNumber: String
   Carts: [Cart] @hasMany(indexName: "byUser", fields: ["id"])
+  Orders: [Order] @hasMany(indexName: "byUser", fields: ["id"])
 }
  

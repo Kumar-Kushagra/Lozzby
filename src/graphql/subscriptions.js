@@ -326,6 +326,8 @@ export const onCreateOrderItem = /* GraphQL */ `
       }
       orderID
       quantity
+      productName
+      productPrice
       createdAt
       updatedAt
       _version
@@ -360,6 +362,8 @@ export const onUpdateOrderItem = /* GraphQL */ `
       }
       orderID
       quantity
+      productName
+      productPrice
       createdAt
       updatedAt
       _version
@@ -394,6 +398,8 @@ export const onDeleteOrderItem = /* GraphQL */ `
       }
       orderID
       quantity
+      productName
+      productPrice
       createdAt
       updatedAt
       _version

@@ -4,9 +4,8 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import AuthStack from './AuthStack';
 import HomeStack from './HomeStack';
 import {useDispatch, useSelector} from 'react-redux';
-import {CustomStatusBar} from '../components';
+import {CustomStatusBar, FullScreenLoader} from '../components';
 import {retrieveCurrentSessionManager} from '../redux/auth';
-import CustomLoader from '../components/CustomLoader';
 
 const Stack = createNativeStackNavigator();
 
@@ -22,13 +21,12 @@ const MainStack = () => {
   }, [dispatch, refetch]);
 
   if (mainLoading) {
-    return <CustomLoader />;
+    return <FullScreenLoader />;
   }
 
   return (
     <>
       <CustomStatusBar light color={theme.primary} />
-
       <Stack.Navigator
         initialRouteName="AuthStack"
         screenOptions={{headerShown: false}}>

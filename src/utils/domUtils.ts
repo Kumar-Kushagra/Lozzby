@@ -1,8 +1,9 @@
-import {Alert, Dimensions} from 'react-native';
+import { Dimensions} from 'react-native';
 import {z} from 'zod';
-import Toast from 'react-native-simple-toast';
+// import Toast from 'react-native-simple-toast';
 const screenWidth = Dimensions.get('window').width;
 const screenHeight = Dimensions.get('window').height;
+import Toast from 'react-native-toast-message';
 
 export const getScreenWidth = (value: any) => {
   if (value) {
@@ -15,10 +16,17 @@ export const getScreenWidth = (value: any) => {
 
 export const showToast = (value : any) => {
   if(value) {
-    Toast.show(value, Toast.SHORT, { backgroundColor: 'blue' });
+    Toast.show({
+      type: 'info',
+      text1: value,
+      position : "bottom"
+    });
   }
   else {
-    Toast.show("Error", Toast.SHORT, { backgroundColor: 'red' });
+       Toast.show({
+      type: 'error',
+      text1: 'Error',
+    });
   }
 }
 

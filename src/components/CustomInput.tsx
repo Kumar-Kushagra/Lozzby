@@ -1,18 +1,14 @@
-import React, {
-  forwardRef,
-  useImperativeHandle,
-  useMemo,
-  useState,
-} from 'react';
+import React, {forwardRef, useImperativeHandle, useMemo, useState} from 'react';
 import {
   StyleSheet,
   View,
   Text,
   TextInput,
   TouchableOpacity,
+  Image,
 } from 'react-native';
-import { useSelector } from 'react-redux';
-import { getScreenHeight } from '../utils/domUtils';
+import {useSelector} from 'react-redux';
+import {getScreenHeight} from '../utils/domUtils';
 
 const CustomInput = forwardRef((props: any, ref: any) => {
   const theme = useSelector((state: any) => state.theme.theme);
@@ -38,12 +34,13 @@ const CustomInput = forwardRef((props: any, ref: any) => {
         <View
           style={[
             styles.textinputcontanier,
-            { borderBottomWidth: props.border ? getScreenHeight(0.1) : 0 },
+            {borderBottomWidth: props.border ? getScreenHeight(0.1) : 0},
           ]}>
           {props.frontIcon ? (
             <View style={styles.iconcontanier}>{props.frontIcon}</View>
           ) : null}
           <TextInput
+            maxLength={props.max}
             editable={props.editable}
             {...props}
             ref={props.inputRef}
@@ -63,13 +60,19 @@ const CustomInput = forwardRef((props: any, ref: any) => {
             onChangeText={setText}
             value={text}
           />
-
           {props.icon ? (
             <TouchableOpacity
               onPress={props.rightAction}
-              disabled={props.rightAction ? false : true}
+              // disabled={props.rightAction ? false : true}
               style={styles.iconcontanier}>
-              {props.icon}
+              <Image
+                style={styles.image}
+                source={
+                  props.secure
+                    ? require('../assets/images/hide.png')
+                    : require('../assets/images/unhide.png')
+                }
+              />
             </TouchableOpacity>
           ) : null}
         </View>
@@ -84,7 +87,7 @@ const createStyles = (theme: any) =>
       borderWidth: getScreenHeight(0.1),
       borderBottomColor: theme.black,
       marginTop: 10,
-      borderRadius: 10
+      borderRadius: 10,
     },
 
     textinputcontanier: {
@@ -105,13 +108,21 @@ const createStyles = (theme: any) =>
     },
     iconcontanier: {
       width: '10%',
+      height: getScreenHeight(5),
       justifyContent: 'center',
       alignItems: 'center',
+      marginRight : getScreenHeight(1)
     },
     text: {
       fontSize: getScreenHeight(1.8),
       color: theme.black,
-      fontWeight : "bold"
+      fontWeight: 'bold',
+    },
+    image: {
+      width: getScreenHeight(3.5),
+      height: getScreenHeight(2.5),
+      resizeMode: 'contain',
+      tintColor: theme.primary,
     },
   });
 

@@ -462,6 +462,8 @@ export const getOrderItem = /* GraphQL */ `
       }
       orderID
       quantity
+      productName
+      productPrice
       createdAt
       updatedAt
       _version
@@ -482,6 +484,8 @@ export const listOrderItems = /* GraphQL */ `
         id
         orderID
         quantity
+        productName
+        productPrice
         createdAt
         updatedAt
         _version
@@ -511,6 +515,8 @@ export const syncOrderItems = /* GraphQL */ `
         id
         orderID
         quantity
+        productName
+        productPrice
         createdAt
         updatedAt
         _version
@@ -542,6 +548,8 @@ export const orderItemsByOrderID = /* GraphQL */ `
         id
         orderID
         quantity
+        productName
+        productPrice
         createdAt
         updatedAt
         _version

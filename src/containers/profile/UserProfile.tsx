@@ -10,6 +10,7 @@ import {
   CustomAvatar,
   CustomButton,
 } from '../../components';
+import CartCount from '../../components/CartCount';
 import {becomeSellerManager, logoutManager} from '../../redux/auth';
 import {navigate} from '../../services/Routerservices';
 import {getScreenHeight} from '../../utils/domUtils';
@@ -43,7 +44,7 @@ const UserProfile = () => {
     <SafeAreaView edges={['top']} style={styles.safe}>
       <CustomStatusBar light color={theme.primary} />
       <View style={styles.screen}>
-        <CustomHeader hide title="Profile" />
+        <CustomHeader hide title="Profile" cart={<CartCount/>}/>
 
         <ScrollView contentContainerStyle={styles.contanier}>
           <View style={styles.item}>

@@ -18,7 +18,7 @@ const Signup = () => {
   const theme = useSelector((state: any) => state.theme.theme);
   const styles = useMemo(() => createStyles(theme), [theme]);
   const dispatch = useDispatch();
-
+  const [eye,setEye] = useState(true)
   const emailRef: any = useRef(null);
   const emailValueRef: any = useRef(null);
   const passwordRef: any = useRef(null);
@@ -33,6 +33,7 @@ const Signup = () => {
     let password = passwordValueRef.current.getValue();
     let name = nameValueRef.current.getValue();
     let image = imageValueRef.current.getValue();
+    Keyboard.dismiss()
     dispatch<any>(signupManager({email, password, name, image}));
   };
 
@@ -59,6 +60,7 @@ const Signup = () => {
             <CustomInput
               ref={nameValueRef}
               placeholder={'Full Name'}
+              max = {30}
               inputRef={nameRef}
               type="next"
               onSubmit={() => {
@@ -81,7 +83,12 @@ const Signup = () => {
               ref={passwordValueRef}
               placeholder={'Password'}
               inputRef={passwordRef}
-              type="next"
+              type="done"
+              icon
+              rightAction ={() => {
+                setEye(!eye)
+              }}
+              secure = {eye}
               onSubmit={() => {
                 Keyboard.dismiss();
               }}

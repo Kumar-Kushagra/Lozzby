@@ -1,21 +1,59 @@
-export const getUserCart = /* GraphQL */ `
-  query MyUserCart($id: ID!) {
+export const getCart = /* GraphQL */ `
+  query MyCart($id: ID!) {
     # ($filter: ModelFrameFilterInput = {_deleted: {ne: true}})
-    listCartItems(filter: {cartID: {eq: $id}}) {
-      nextToken
-      startedAt
+    listCarts(filter: {userID: {eq: $id}}) {
       items {
-        quantity
+        userID
         id
+        updatedAt
         _version
+        createdAt
         _deleted
-        cartItemProductId
-        Product {
-          id
-          image
-          name
-          price
-          userID
+        CartItems {
+          items {
+            id
+            _deleted
+            cartItemProductId
+            cartID
+            quantity
+            _version
+            Product {
+              _deleted
+              _version
+              category
+              color
+              id
+              image
+              name
+              price
+              userID
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+
+export const getOrderDetail = /* GraphQL */ `
+  query GetOrderDetail($id: ID!) {
+    listOrders(filter: {id: {eq: $id}}) {
+      items {
+        Address {
+          phoneNumber
+          pincode
+          province
+          country
+        }
+        OrderItems {
+          items {
+            Product {
+              rating
+            }
+            quantity
+            productName
+            productPrice
+          }
         }
       }
     }

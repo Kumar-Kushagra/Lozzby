@@ -50,7 +50,7 @@ const MyProductItem = (props: any) => {
 const createStyles = (theme: any) =>
   StyleSheet.create({
     screen: {
-      backgroundColor: '#E8E8E8',
+      backgroundColor: 'lavender',
       borderRadius: getScreenHeight(1),
       paddingHorizontal: getScreenHeight(2),
     },

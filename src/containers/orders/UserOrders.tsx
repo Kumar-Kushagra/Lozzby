@@ -3,6 +3,7 @@ import {View, StyleSheet} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {useSelector} from 'react-redux';
 import {CustomHeader, CustomStatusBar} from '../../components';
+import CartCount from '../../components/CartCount';
 
 const UserOrders = () => {
   const theme = useSelector((state: any) => state.theme.theme);
@@ -11,7 +12,7 @@ const UserOrders = () => {
   return (
     <SafeAreaView edges={['top']} style={styles.safe}>
       <View style={styles.screen}>
-        <CustomHeader hide title="Order" />
+        <CustomHeader hide title="Order" cart={<CartCount/>}/>
       </View>
     </SafeAreaView>
   );

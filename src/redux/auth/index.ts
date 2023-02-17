@@ -16,6 +16,7 @@ import {
 import {setLoading} from '../common';
 import {goBack, navigate} from '../../services/Routerservices';
 import {resetHomeSlice} from '../home';
+import { cartDataManager } from '../cart';
 
 const authSlice = createSlice({
   name: 'auth',
@@ -64,16 +65,16 @@ export const logoutManager = () => {
 export const loginManager = (data: any) => {
   return async (dispatch: any, getState: any) => {
     const refetch = getState().auth.refetch;
-
-    dispatch(setLoading(true));
     let result = loginSchema(data);
     if (result) {
+        dispatch(setLoading(true));
       try {
         const res = await Auth.signIn(
           result.email.toLocaleLowerCase(),
           result.password,
         );
         if (res) {
+          showToast("User Successfully logged in")
           dispatch(setRefetch(!refetch));
         }
       } catch (error: any) {
@@ -116,6 +117,7 @@ export const retrieveCurrentSessionManager = () => {
           });
 
           dispatch(setUserData(fetchedUSER.data.createUser));
+          dispatch(createCartManager(res.attributes.sub));
         } else {
           const fetchedUSER: any = await API.graphql({
             query: queries.getUser,
@@ -125,7 +127,6 @@ export const retrieveCurrentSessionManager = () => {
         }
       }
     } catch (error) {
-      console.log('S>S>S>', error);
       if (error !== 'The user is not authenticated') {
         showToast('Something went wrong please try again later!');
       }
@@ -135,11 +136,29 @@ export const retrieveCurrentSessionManager = () => {
   };
 };
 
+export const createCartManager = (id: any) => {
+    return async (dispatch: any) => {
+      dispatch(setLoading(true));
+      try {
+        await API.graphql({
+          query: mutations.createCart,
+          variables: {input: {userID: id}},
+        });
+        dispatch(cartDataManager());
+      } catch (error) {
+        console.log(error);
+        showToast('Something went wrong please try again later!');
+      } finally {
+        dispatch(setLoading(false));
+      }
+    };
+  };
+
 export const becomeSellerManager = () => {
   return async (dispatch: any, getState: any) => {
-    dispatch(setLoading(true));
     const userData = getState().auth.userData;
     try {
+      dispatch(setLoading(true));
       let mainData: any = {
         type: 'seller',
         _version: userData._version,
@@ -162,8 +181,6 @@ export const becomeSellerManager = () => {
 
 export const updateProfileManager = (data: any) => {
   return async (dispatch: any, getState: any) => {
-    dispatch(setLoading(true));
-
     let profile = '';
     let result = editProfileSchema(data);
     if (result) {
@@ -178,6 +195,7 @@ export const updateProfileManager = (data: any) => {
       }
       const userData = getState().auth.userData;
       try {
+       dispatch(setLoading(true));
         let mainData: any = {
           name: result.name,
           _version: userData._version,
@@ -187,7 +205,6 @@ export const updateProfileManager = (data: any) => {
         if (profile.length) {
           mainData.profile = profile;
         }
-        console.log(mainData);
         const updatedProfile: any = await API.graphql({
           query: mutations.updateUser,
           variables: {input: mainData},
@@ -337,10 +354,11 @@ export const resendForgotConfirmationManager = (data: any) => {
 
 export const userConfirmationManager = (email: any) => {
   return async (dispatch: any) => {
-    dispatch(setLoading(true));
+
     try {
       const res = await Auth.resendSignUp(email);
       if (res) {
+        dispatch(setLoading(true));
         showToast('Please verify yourself first');
         navigate('VerifyOtp', {data: email, path: 'login'});
       }
@@ -355,10 +373,10 @@ export const userConfirmationManager = (email: any) => {
 
 export const uploadImage = (data: any) => {
   return async (dispatch: any) => {
-    dispatch(setLoading(true));
     const photoResponse = await fetch(data.uri);
     const blob = await photoResponse.blob();
     try {
+        dispatch(setLoading(true));
       const res = await Storage.put(data.fileName, blob, {
         contentType: data.type,
         completeCallback: event => {

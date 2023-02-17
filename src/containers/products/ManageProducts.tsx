@@ -26,7 +26,6 @@ const ManageProducts = () => {
     const sub = DataStore.observeQuery(Product, product =>
       product.userID.eq(userData.id),
     ).subscribe(({items}: any) => {
-      console.log(items);
       setLoading(false);
       setData(items);
     });

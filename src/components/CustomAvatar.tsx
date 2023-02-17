@@ -30,7 +30,7 @@ const CustomAvatar = forwardRef((props: any, ref: any) => {
       const result: any = await launchImageLibrary({mediaType: 'photo'});
       setImage(result.assets[0]);
     } catch (error) {
-      console.log('SS<S<S', error);
+      console.log(error);
     }
   };
 

@@ -7,15 +7,16 @@ import {
   FlatList,
   Text,
   Pressable,
-  TouchableOpacity,
   TextInput,
 } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {useDispatch, useSelector} from 'react-redux';
 import {CustomHeader, CustomStatusBar, FullScreenLoader} from '../components';
+import CartCount from '../components/CartCount';
 import ProductItem from '../components/ProductItem';
 import {Product, Productcategories} from '../models';
+import { cartDataManager } from '../redux/cart';
 import {navigate} from '../services/Routerservices';
 import {getScreenHeight, getScreenWidth} from '../utils/domUtils';
 
@@ -23,6 +24,7 @@ const Home = () => {
   
   const theme = useSelector((state: any) => state.theme.theme);
   const styles = useMemo(() => createStyles(theme), [theme]);
+  const userData = useSelector((state: any) => state.auth.userData);
 
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState([]);
@@ -30,14 +32,6 @@ const Home = () => {
   const dispatch = useDispatch();
   const subRef: any = useRef();
   const [search,setSearch] = useState("")
-
-  const filterManager = (text: any) => {
-    if (text?.sort) {
-      setFilter(text);
-    } else if (text?.categoryData || text?.priceData) {
-      setFilter(text);
-    }
-  };
 
   useEffect(() => {
     if (filter) {
@@ -83,7 +77,6 @@ const Home = () => {
         },
       );
     }
-
     return () => {
       subRef.current.unsubscribe();
     };
@@ -98,6 +91,11 @@ const Home = () => {
       </Pressable>
     );
   };
+  useEffect(() => {
+    if (userData) {
+      dispatch<any>(cartDataManager());
+    }
+  }, [dispatch, userData]);
 
   if (loading) {
     return <FullScreenLoader />;
@@ -107,7 +105,7 @@ const Home = () => {
     <SafeAreaView edges={['top']} style={styles.safe}>
       <CustomStatusBar light color={theme.primary} />
       <View style={styles.screen}>
-        <CustomHeader hide title="Home" />
+        <CustomHeader hide title="Home" cart={<CartCount/>}/>
         <View
           style={{
             height: getScreenHeight(6),
@@ -133,7 +131,6 @@ const Home = () => {
             placeholderTextColor = {theme.light_grey}
           />
           <View
-            activeOpacity={0.5}
             style={{
               width: '15%',
               borderRadius: getScreenHeight(2),
@@ -150,8 +147,7 @@ const Home = () => {
         <FlatList
           numColumns={2}
           data={data.filter(item => {
-            return item.name
-              .toLocaleLowerCase()
+            return item?.name.toLocaleLowerCase()
               .includes(search.toLocaleLowerCase());
         })}
           keyExtractor={(_, index) => index.toString()}
@@ -196,6 +192,7 @@ const createStyles = (theme: any) =>
       height: getScreenHeight(6),
       width: getScreenWidth(7),
     },
+    
   });
 
 export default Home;

@@ -710,6 +710,20 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
+                "productName": {
+                    "name": "productName",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "productPrice": {
+                    "name": "productPrice",
+                    "isArray": false,
+                    "type": "Float",
+                    "isRequired": false,
+                    "attributes": []
+                },
                 "createdAt": {
                     "name": "createdAt",
                     "isArray": false,
@@ -967,5 +981,5 @@ export const schema = {
     },
     "nonModels": {},
     "codegenVersion": "3.3.5",
-    "version": "6cde93851953d95268127f30bc2dc95e"
+    "version": "fcb9c439c4260cfd99b6effa5132bb90"
 };

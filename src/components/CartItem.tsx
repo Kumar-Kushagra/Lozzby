@@ -12,7 +12,6 @@ const CartItem = (props: any) => {
   const styles = useMemo(() => createStyles(theme), [theme]);
   const [image, setImage] = useState(null);
   const dispatch = useDispatch();
-  console.log(props.item._deleted);
   useEffect(() => {
     if (props?.item?.Product?.image) {
       getImage(props?.item?.Product?.image);
@@ -32,6 +31,7 @@ const CartItem = (props: any) => {
         {image ? (
           <FastImage
             style={styles.image}
+            resizeMode="cover"
             source={{
               uri: image,
               priority: FastImage.priority.high,
@@ -47,12 +47,12 @@ const CartItem = (props: any) => {
       </View>
       <View style={styles.contanier}>
         <Text style={styles.title}>{props?.item?.Product.name}</Text>
-        <View style={styles.row}>
-          <Text style={styles.price}>Price {props?.item?.Product.price}</Text>
-          <Text style={styles.price}>Quantity {props.item.quantity}</Text>
-        </View>
+        {/* <View style={styles.row}> */}
+           <Text style={{...styles.price,color:theme.primary,fontWeight:"900"}}>Price <Text style={{fontWeight:"500",...styles.price}}>{"$" + props.item?.Product?.price}</Text></Text>
+          <Text style={{...styles.price,color:theme.primary,fontWeight:"900"}}>Quantity <Text style={{fontWeight:"500",...styles.price}}>{props?.item?.quantity}</Text></Text>
+        {/* </View> */}
 
-        <TouchableOpacity
+        {/* <TouchableOpacity
           onPress={() => {
             dispatch<any>(
               deleteCartManager({
@@ -64,7 +64,7 @@ const CartItem = (props: any) => {
           <Text style={[styles.title, {color: theme.primary}]}>
             Remove From Cart
           </Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
       </View>
     </View>
   );
@@ -73,17 +73,20 @@ const CartItem = (props: any) => {
 const createStyles = (theme: any) =>
   StyleSheet.create({
     screen: {
-      backgroundColor: '#E8E8E8',
+      backgroundColor: 'lavender',
       borderRadius: getScreenHeight(2),
+      flexDirection :'row',
+      justifyContent : "space-between"
     },
     icon: {
       height: getScreenHeight(6),
       width: getScreenHeight(6),
+
     },
     image: {
-      height: getScreenHeight(25),
+      height: getScreenHeight(20),
       width: '100%',
-      borderTopRightRadius: getScreenHeight(2),
+      borderBottomLeftRadius: getScreenHeight(2),
       borderTopLeftRadius: getScreenHeight(2),
     },
     loading: {
@@ -91,18 +94,20 @@ const createStyles = (theme: any) =>
       position: 'absolute',
     },
     imagecontanier: {
-      height: getScreenHeight(25),
+      height: getScreenHeight(20),
       justifyContent: 'center',
       alignItems: 'center',
-      width: '100%',
+      width: '45%',
     },
     contanier: {
       padding: getScreenHeight(2),
+      width : '55%'
     },
     title: {
       color: theme.black,
-      fontSize: getScreenHeight(1.8),
+      fontSize: getScreenHeight(2.5),
       textTransform: 'capitalize',
+      fontWeight : "bold"
     },
     subtitle: {
       color: theme.black,
@@ -112,7 +117,8 @@ const createStyles = (theme: any) =>
     price: {
       color: theme.black,
       fontSize: getScreenHeight(2),
-      alignSelf: 'center',
+      marginTop : getScreenHeight(0.5)
+      // alignSelf: 'center',
     },
     row: {
       flexDirection: 'row',

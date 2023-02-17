@@ -55,8 +55,6 @@ const AddProduct = () => {
     if (category.length === 0) {
       return showToast('Please select Category');
     }
-
-    console.log(typeof priceRef.current.getValue())
     let data = {
       name: nameRef.current.getValue(),
       image: profileRef.current.getValue(),
@@ -117,6 +115,7 @@ const AddProduct = () => {
           <View style={styles.item}>
             <CustomButton action={validate} title="Add Product" />
           </View>
+          <View style = {{height:getScreenHeight(2)}}></View>
         </ScrollView>
       </View>
     </SafeAreaView>

@@ -77,7 +77,6 @@ export const createAddressManager = (data: any) => {
         query: mutations.createAddress,
         variables: {input: data},
       });
-      console.log(mainResult.data.createAddress);
       goBack();
       showToast('Address has been added');
     } catch (error) {
@@ -99,7 +98,6 @@ export const productDetailManager = (productId: any) => {
       if (productDetail) {
         dispatch(setProductDetail(productDetail[0]));
       }
-      console.log(productDetail[0]);
     } catch (error) {
       showToast('Something went wrong please try again later!');
     } finally {

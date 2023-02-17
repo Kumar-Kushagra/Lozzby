@@ -3,7 +3,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import {Provider} from 'react-redux';
 import {PersistGate} from 'redux-persist/integration/react';
 import {Amplify} from 'aws-amplify';
-
+import Toast from 'react-native-toast-message';
 import {persistor, store} from './src/redux/Store';
 import MainStack from './src/routes/MainStack';
 import {NavigationRef} from './src/services/Routerservices';
@@ -24,6 +24,7 @@ const App = () => {
           <MainStack />
         </NavigationContainer>
       </PersistGate>
+      <Toast/>
     </Provider>
   );
 };

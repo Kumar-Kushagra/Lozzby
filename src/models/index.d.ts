@@ -258,6 +258,8 @@ type EagerOrderItem = {
   readonly Product?: Product | null;
   readonly orderID: string;
   readonly quantity?: number | null;
+  readonly productName?: string | null;
+  readonly productPrice?: number | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
   readonly orderItemProductId?: string | null;
@@ -272,6 +274,8 @@ type LazyOrderItem = {
   readonly Product: AsyncItem<Product | undefined>;
   readonly orderID: string;
   readonly quantity?: number | null;
+  readonly productName?: string | null;
+  readonly productPrice?: number | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
   readonly orderItemProductId?: string | null;

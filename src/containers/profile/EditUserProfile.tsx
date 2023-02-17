@@ -10,8 +10,9 @@ import {
   CustomAvatar,
   CustomButton,
 } from '../../components';
+import CartCount from '../../components/CartCount';
 import {updateProfileManager} from '../../redux/auth';
-import {getScreenHeight} from '../../utils/domUtils';
+import {getScreenHeight, showToast} from '../../utils/domUtils';
 
 const EditUserProfile = () => {
   const theme = useSelector((state: any) => state.theme.theme);
@@ -36,6 +37,12 @@ const EditUserProfile = () => {
       image: profileRef.current.getValue(),
       phoneNumber: phoneNumberRef.current.getValue(),
     };
+    if(!nameRef.current.getValue()){
+      return showToast('Name Number is required!');
+    }
+    if(!phoneNumberRef.current.getValue()){
+      return showToast('Phone Number is required!');
+    }
     dispatch<any>(updateProfileManager(data));
   };
 
@@ -43,20 +50,18 @@ const EditUserProfile = () => {
     <SafeAreaView edges={['top']} style={styles.safe}>
       <CustomStatusBar light color={theme.primary} />
       <View style={styles.screen}>
-        <CustomHeader title="Edit Profile" />
-
+        <CustomHeader title="Edit Profile" cart={<CartCount/>}/>
         <ScrollView contentContainerStyle={styles.contanier}>
           <View style={styles.item}>
             <CustomAvatar ref={profileRef} />
           </View>
-
           <View style={styles.item}>
-            <CustomInput ref={nameRef} label={'Name'} />
+            <CustomInput max={30} ref={nameRef} label={'Name'} />
           </View>
-
           <View style={styles.item}>
             <CustomInput
               maxLength={12}
+              keyboardType = "numeric"
               ref={phoneNumberRef}
               label={'Phone Number'}
             />
