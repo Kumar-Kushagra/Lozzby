@@ -8,6 +8,7 @@ import Home from '../containers/Home';
 import UserOrders from '../containers/orders/UserOrders';
 import UserProfile from '../containers/profile/UserProfile';
 import FastImage from 'react-native-fast-image';
+import Setting from '../containers/Setting';
 
 const Tab = createBottomTabNavigator();
 
@@ -52,6 +53,12 @@ const BottomBar = () => {
       component: UserProfile,
       name: 'Profile',
       icon: require('../assets/images/profile.png'),
+    },
+    {
+      route: 'Setting',
+      component: Setting,
+      name: 'Setting',
+      icon: require('../assets/images/setting.png'),
     },
   ];
 

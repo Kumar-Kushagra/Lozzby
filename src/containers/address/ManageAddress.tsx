@@ -1,39 +1,50 @@
-import React, {useEffect, useMemo} from 'react';
-import {View, StyleSheet, FlatList, Text} from 'react-native';
-import FastImage from 'react-native-fast-image';
+import {DataStore} from 'aws-amplify';
+import React, {useEffect, useMemo, useState} from 'react';
+import {View, StyleSheet, FlatList, Text, Alert} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import {useDispatch, useSelector} from 'react-redux';
+import {useSelector} from 'react-redux';
 import {
   CustomButton,
   CustomHeader,
   CustomStatusBar,
   FullScreenLoader,
 } from '../../components';
-import CartItem from '../../components/CartItem';
-import {cartDataManager} from '../../redux/cart';
-
+import AddressItem from '../../components/AddressItem';
+import {Address} from '../../models';
 import {navigate} from '../../services/Routerservices';
 import {getScreenHeight} from '../../utils/domUtils';
 
-const Cart = () => {
+const ManageAddress = () => {
   const theme = useSelector((state: any) => state.theme.theme);
-  const cartProducts = useSelector((state: any) => state.cart.cartProducts);
+  const userData = useSelector((state: any) => state.auth.userData);
   const styles = useMemo(() => createStyles(theme), [theme]);
-  const dispatch = useDispatch();
+  const [loading, setLoading] = useState(true);
+  const [data, setData] = useState([]);
 
   useEffect(() => {
-    dispatch<any>(cartDataManager());
-  }, [dispatch]);
+    const sub = DataStore.observeQuery(Address, address =>
+      address.userID.eq(userData.id),
+    ).subscribe(({items}: any) => {
+      setLoading(false);
+      setData(items);
+    });
+
+    return () => {
+      sub.unsubscribe();
+    };
+  }, [userData?.id]);
+
+
 
   const renderItem = ({item}: any) => {
     return (
       <View style={styles.item}>
-        <CartItem item={item} />
+        <AddressItem item={item} />
       </View>
     );
   };
 
-  if (!cartProducts) {
+  if (loading) {
     return <FullScreenLoader />;
   }
 
@@ -41,30 +52,22 @@ const Cart = () => {
     <SafeAreaView edges={['top']} style={styles.safe}>
       <CustomStatusBar light color={theme.primary} />
       <View style={styles.screen}>
-        <CustomHeader title="Cart" />
+        <CustomHeader title="Addresses" />
 
         <FlatList
-          data={cartProducts}
+          data={data}
           ListEmptyComponent={() => (
-            <View style={{marginTop: getScreenHeight(20)}}>
-              <FastImage
-                style={styles.image}
-                source={require('../../assets/images/empty-cart.png')}
-              />
-            </View>
+            <Text style={styles.title}>No Addresses Found!</Text>
           )}
           keyExtractor={(_, index) => index.toString()}
           renderItem={renderItem}
           contentContainerStyle={{padding: getScreenHeight(2)}}
         />
-
         <View style={{padding: getScreenHeight(2)}}>
-          <CustomButton
-            action={() => {
-              navigate('ChooseAddress', {});
-            }}
-            title="Place Order"
-          />
+        <CustomButton
+          title="Add Address"
+          action={() => navigate('AddAddress', {})}
+        />
         </View>
       </View>
     </SafeAreaView>
@@ -91,10 +94,6 @@ const createStyles = (theme: any) =>
       color: theme.black,
       fontSize: getScreenHeight(1.8),
     },
-    image: {
-      height: getScreenHeight(30),
-      width: '100%',
-    },
   });
 
-export default Cart;
+export default ManageAddress;

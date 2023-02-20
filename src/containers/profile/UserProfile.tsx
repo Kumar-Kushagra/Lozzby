@@ -74,7 +74,7 @@ const UserProfile = () => {
             />
           </View>
 
-          <View style={styles.item}>
+          {/* <View style={styles.item}>
             {userData.type === 'seller' ? (
               <CustomButton
                 action={() => {
@@ -99,7 +99,7 @@ const UserProfile = () => {
               }}
               title="Logout"
             />
-          </View>
+          </View> */}
         </ScrollView>
       </View>
     </SafeAreaView>

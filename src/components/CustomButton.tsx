@@ -40,6 +40,7 @@ const createStyles = (theme: any) =>
     title: {
       fontSize: getScreenHeight(2),
       color: theme.white,
+      fontWeight:"500"
     },
   });
 

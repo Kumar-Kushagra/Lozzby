@@ -11,7 +11,7 @@ const AddressItem = (props: any) => {
   const dispatch = useDispatch();
 
   return (
-    <View style={styles.screen}>
+    <View style={{...styles.screen, backgroundColor : props.backgroundColor}}>
       <View style={[styles.row, {marginTop: getScreenHeight(1)}]}>
         <Text style={styles.title}>Country</Text>
         <Text style={styles.title}>{props.item.country}</Text>
@@ -32,7 +32,7 @@ const AddressItem = (props: any) => {
         <Text style={styles.title}>{props.item.phoneNumber}</Text>
       </View>
 
-      <TouchableOpacity
+      {/* <TouchableOpacity
         onPress={() => navigate('EditAddress', {item: props.item})}>
         <Text style={[styles.title, {color: theme.primary}]}>
           {'Edit Address'}
@@ -49,7 +49,7 @@ const AddressItem = (props: any) => {
         <Text style={[styles.title, {color: theme.primary}]}>
           {'Delete Address'}
         </Text>
-      </TouchableOpacity>
+      </TouchableOpacity> */}
     </View>
   );
 };
@@ -57,7 +57,6 @@ const AddressItem = (props: any) => {
 const createStyles = (theme: any) =>
   StyleSheet.create({
     screen: {
-      backgroundColor: '#E8E8E8',
       borderRadius: getScreenHeight(1),
       paddingHorizontal: getScreenHeight(2),
     },

@@ -56,6 +56,7 @@ export const logoutManager = () => {
       await Auth.signOut();
       dispatch(logout());
       dispatch(resetHomeSlice());
+      showToast("User successfully logged out!")
     } catch (error: any) {
       showToast(error.message);
     }
@@ -252,6 +253,25 @@ export const updateProductManager = (data: any) => {
       dispatch(setLoading(false));
     }
   };
+};
+
+export const updateAddressManager = (data: any) => {
+  return async (dispatch: any) => {
+    dispatch(setLoading(true));
+    try {
+      await API.graphql({
+        query: mutations.updateAddress,
+        variables: {input: data},
+      });
+     showToast('Address has been updated!');
+      goBack();
+    } catch (error) {
+      console.log(error);
+     showToast('Something went wrong please try again later!');
+    } finally {
+      dispatch(setLoading(false));
+    }
+  };
 };
 
 export const verifyOtpManager = (data: any) => {

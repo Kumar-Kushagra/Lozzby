@@ -37,8 +37,7 @@ const CustomHeader = (props: any) => {
         </TouchableOpacity>
       )} */}
 
-     {props.cart ? props.cart :        <View style={styles.imageContanier} /> }
-
+      {props.cart ? props.cart : <View style={styles.imageContanier} />}
     </View>
   );
 };
@@ -55,8 +54,9 @@ const createStyles = (theme: any) =>
       paddingHorizontal: getScreenHeight(2),
     },
     title: {
-      fontSize: getScreenHeight(2),
+      fontSize: getScreenHeight(2.3),
       color: theme.white,
+      fontWeight: '500',
     },
     imageContanier: {
       width: getScreenHeight(4),

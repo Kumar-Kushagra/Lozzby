@@ -8,13 +8,22 @@ import {persistor, store} from './src/redux/Store';
 import MainStack from './src/routes/MainStack';
 import {NavigationRef} from './src/services/Routerservices';
 import config from './src/aws-exports';
+import NetInfo from "@react-native-community/netinfo";
+const unsubscribe = NetInfo.addEventListener(state => {
+  console.log("Connection type", state.type);
+  console.log("Is connected?", state.isConnected);
+});
 
+// Unsubscribe
+unsubscribe();
 Amplify.configure({
   ...config,
   Analytics: {
     disabled: true,
   },
 });
+
+
 
 const App = () => {
   return (

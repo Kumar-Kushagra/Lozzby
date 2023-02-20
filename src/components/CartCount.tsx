@@ -23,7 +23,7 @@ const CartCount = (props: any) => {
 
   useEffect(() => {
     let a = 0
-    cartProducts.forEach(elem => {
+    cartProducts?.forEach(elem => {
       a = a + elem.quantity
     });
     setCount(a)
