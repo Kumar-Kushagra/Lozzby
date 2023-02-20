@@ -219,6 +219,8 @@ export const getAddress = /* GraphQL */ `
       pincode
       country
       phoneNumber
+      city
+      streetAddress
       createdAt
       updatedAt
       _version
@@ -241,6 +243,8 @@ export const listAddresses = /* GraphQL */ `
         pincode
         country
         phoneNumber
+        city
+        streetAddress
         createdAt
         updatedAt
         _version
@@ -272,6 +276,8 @@ export const syncAddresses = /* GraphQL */ `
         pincode
         country
         phoneNumber
+        city
+        streetAddress
         createdAt
         updatedAt
         _version
@@ -305,6 +311,8 @@ export const addressesByUserID = /* GraphQL */ `
         pincode
         country
         phoneNumber
+        city
+        streetAddress
         createdAt
         updatedAt
         _version
@@ -335,6 +343,8 @@ export const getOrder = /* GraphQL */ `
         pincode
         country
         phoneNumber
+        city
+        streetAddress
         createdAt
         updatedAt
         _version

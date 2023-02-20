@@ -30,26 +30,33 @@ const AddProduct = () => {
   const priceRef: any = useRef();
   const availableQuantityRef: any = useRef();
   const [category, setCategory] = useState('');
+  const userData = useSelector((state: any) => state.auth.userData);
+
+  useEffect(() => {
+    if (!userData?.phoneNumber) {
+      showToast('You cannot add products before completing your profile!');
+
+    }
+  }, []);
 
   function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
 
   const validate = () => {
- 
-    if(!profileRef.current.getValue()){
+    if (!profileRef.current.getValue()) {
       return showToast('Image is compulsry, Please add one');
     }
-    if(!nameRef.current.getValue()){
+    if (!nameRef.current.getValue()) {
       return showToast('Name is compulsry, Please add one');
     }
-    if(!descriptionRef.current.getValue()){
+    if (!descriptionRef.current.getValue()) {
       return showToast('Description is compulsry, Please add one');
     }
-    if(!priceRef.current.getValue()){
+    if (!priceRef.current.getValue()) {
       return showToast('Price is compulsry, Please add one');
     }
-    if(!availableQuantityRef.current.getValue()){
+    if (!availableQuantityRef.current.getValue()) {
       return showToast('Quantity is compulsry, Please add one');
     }
     if (category.length === 0) {
@@ -82,11 +89,15 @@ const AddProduct = () => {
             <CustomInput ref={descriptionRef} label={'Description'} />
           </View>
           <View style={styles.item}>
-            <CustomInput  keyboardType = {"numeric"} ref={priceRef} label={'Price'} />
+            <CustomInput
+              keyboardType={'numeric'}
+              ref={priceRef}
+              label={'Price'}
+            />
           </View>
           <View style={styles.item}>
             <CustomInput
-              keyboardType = {"numeric"}
+              keyboardType={'numeric'}
               ref={availableQuantityRef}
               label={'Available Quantity'}
             />
@@ -102,7 +113,9 @@ const AddProduct = () => {
                 onPress={() => setCategory(item)}
                 key={index}
                 style={styles.row}>
-                <Text style={styles.subtitle}>{capitalizeFirstLetter(item.toLocaleLowerCase())}</Text>
+                <Text style={styles.subtitle}>
+                  {capitalizeFirstLetter(item.toLocaleLowerCase())}
+                </Text>
 
                 <View style={styles.outerCircle}>
                   {category === item ? (
@@ -112,10 +125,15 @@ const AddProduct = () => {
               </TouchableOpacity>
             );
           })}
+
           <View style={styles.item}>
-            <CustomButton action={validate} title="Add Product" />
+            <CustomButton
+              disabled={userData?.phoneNumber?.length > 0 ? false : true}
+              action={validate}
+              title="Add Product"
+            />
           </View>
-          <View style = {{height:getScreenHeight(2)}}></View>
+          <View style={{height: getScreenHeight(2)}}></View>
         </ScrollView>
       </View>
     </SafeAreaView>
@@ -134,7 +152,7 @@ const createStyles = (theme: any) =>
     },
     item: {
       marginTop: getScreenHeight(2),
-      fontWeight : "bold"
+      fontWeight: 'bold',
     },
     contanier: {
       paddingHorizontal: getScreenHeight(2),
@@ -148,12 +166,12 @@ const createStyles = (theme: any) =>
     title: {
       fontSize: getScreenHeight(2),
       color: theme.black,
-      fontWeight : "bold"
+      fontWeight: 'bold',
     },
     subtitle: {
       fontSize: getScreenHeight(1.8),
       color: theme.black,
-      fontWeight : "bold"
+      fontWeight: 'bold',
     },
     outerCircle: {
       borderWidth: getScreenHeight(0.1),

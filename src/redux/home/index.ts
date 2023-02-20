@@ -87,6 +87,23 @@ export const createAddressManager = (data: any) => {
     }
   };
 };
+export const deleteAddressManager = (id: any, version: any) => {
+  return async (dispatch: any) => {
+    dispatch(setLoading(true));
+    try {
+      await API.graphql({
+        query: mutations.deleteAddress,
+        variables: {input: {id, _version: version}},
+      });
+      Alert.alert('Address has been deleted');
+    } catch (error) {
+      console.log(error);
+      Alert.alert('Something went wrong please try again later!');
+    } finally {
+      dispatch(setLoading(false));
+    }
+  };
+};
 
 export const productDetailManager = (productId: any) => {
   return async (dispatch: any) => {
@@ -106,23 +123,7 @@ export const productDetailManager = (productId: any) => {
   };
 };
 
-export const deleteAddressManager = (id: any, version: any) => {
-  return async (dispatch: any) => {
-    dispatch(setLoading(true));
-    try {
-      await API.graphql({
-        query: mutations.deleteAddress,
-        variables: {input: {id, _version: version}},
-      });
-      showToast('Address has been deleted');
-    } catch (error) {
-      console.log(error);
-      showToast('Something went wrong please try again later!');
-    } finally {
-      dispatch(setLoading(false));
-    }
-  };
-};
+
 
 export const deleteProductManager = (id: any, version: any) => {
   return async (dispatch: any) => {

@@ -37,8 +37,8 @@ const cartSlice = createSlice({
 export const cartDataManager = () => {
   return async (dispatch: any, getState: any) => {
     const userData = getState().auth.userData;
-    dispatch(setCartLoading(true));
     try {
+      dispatch(setCartLoading(true));
       const data: any = await API.graphql(
         graphqlOperation(getCart, {
           id: userData.id,
@@ -47,7 +47,7 @@ export const cartDataManager = () => {
       let cart = data.data.listCarts.items.filter(
         (item: any) => !item._deleted,
       );
-      let products = cart[0].CartItems.items.filter(
+      let products = cart[0]?.CartItems.items.filter(
         (item: any) => !item._deleted && !item?.Product?._deleted,
       );
       if (cart?.length) {
@@ -56,7 +56,8 @@ export const cartDataManager = () => {
       }
     } catch (error) {
       console.log(error);
-      showToast('Something went wrong please try again later!');
+      dispatch(setCartLoading(false));
+      //showToast('Something went wrong please try again later!');
     } finally {
       dispatch(setCartLoading(false));
     }

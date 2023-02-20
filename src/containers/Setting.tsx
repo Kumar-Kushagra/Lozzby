@@ -1,16 +1,7 @@
 import {useFocusEffect} from '@react-navigation/native';
 import {DataStore, Predicates, SortDirection} from 'aws-amplify';
 import React, {useEffect, useMemo, useRef, useState} from 'react';
-import {
-  View,
-  StyleSheet,
-  FlatList,
-  Text,
-  Pressable,
-  TextInput,
-  TouchableOpacity,
-} from 'react-native';
-import FastImage from 'react-native-fast-image';
+import {View, StyleSheet, Alert} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {useDispatch, useSelector} from 'react-redux';
 import {CustomHeader, CustomStatusBar, FullScreenLoader} from '../components';
@@ -18,7 +9,6 @@ import CartCount from '../components/CartCount';
 import SettingItem from '../components/SettingItem';
 import {becomeSellerManager, logoutManager} from '../redux/auth';
 import {navigate} from '../services/Routerservices';
-import {getScreenHeight, getScreenWidth} from '../utils/domUtils';
 
 const Setting = () => {
   const theme = useSelector((state: any) => state.theme.theme);
@@ -26,6 +16,25 @@ const Setting = () => {
   const userData = useSelector((state: any) => state.auth.userData);
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(true);
+
+  const becomeSeller = () => {
+    Alert.alert(
+      'Are you sure?',
+      'You wanted to become seller.',
+      [
+        {
+          text: 'Cancel',
+          onPress: () => console.log('Cancel Pressed'),
+          style: 'cancel',
+        },
+        {
+          text: 'OK',
+          onPress: () => dispatch<any>(becomeSellerManager()),
+        },
+      ],
+      {cancelable: false},
+    );
+  };
 
   return (
     <SafeAreaView edges={['top']} style={styles.safe}>
@@ -40,12 +49,17 @@ const Setting = () => {
             if (userData.type === 'seller') {
               navigate('ManageProducts', {});
             } else {
-              dispatch<any>(becomeSellerManager());
+              becomeSeller();
             }
           }}
         />
 
-        <SettingItem title="Manage Addresses" onPress= {() => {  navigate('ManageAddress', {})}}/>
+        <SettingItem
+          title="Manage Addresses"
+          onPress={() => {
+            navigate('ManageAddress', {});
+          }}
+        />
 
         <SettingItem
           title="Logout"

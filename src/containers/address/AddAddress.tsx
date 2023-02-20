@@ -16,10 +16,12 @@ const AddAddress = () => {
   const theme = useSelector((state: any) => state.theme.theme);
   const styles = useMemo(() => createStyles(theme), [theme]);
   const dispatch = useDispatch();
-  const provinceRef: any = useRef();
   const pincodeRef: any = useRef();
   const countryRef: any = useRef('');
   const phoneNumberRef: any = useRef();
+  const cityRef: any = useRef('');
+  const streetAddressRef: any = useRef('');
+
   const [selectedProvince, setSelectedProvince] = useState('');
   const provinces = [
     {key: '1', value: 'Alberta', abbreviation: 'AB'},
@@ -56,8 +58,24 @@ const AddAddress = () => {
       showToast("Province can't be empty!");
       return false;
     }
+    if (cityRef.current.getValue()?.length <= 0) {
+      showToast("City can't be empty!");
+      return false;
+    }
+    if (streetAddressRef.current.getValue()?.length <= 0) {
+      showToast("Street Address can't be empty!");
+      return false;
+    }
+    if (pincodeRef.current.getValue().length <= 0) {
+      showToast("Postal code can't be empty!");
+      return false;
+    }
     if (!testCanadianPostalCode(pincodeRef.current.getValue())) {
       showToast('Please enter a valid postal code!');
+      return false;
+    }
+    if (phoneNumberRef.current.getValue().length <= 0) {
+      showToast("Phone number can't be empty!");
       return false;
     }
     if (!testPhoneNumberValidation(phoneNumberRef.current.getValue())) {
@@ -65,9 +83,11 @@ const AddAddress = () => {
       return false;
     }
     let data = {
-      province: selectedProvince,
-      pincode: pincodeRef.current.getValue(),
       country: 'Canada',
+      province: selectedProvince,
+      city : cityRef.current.getValue(),
+      streetAddress : streetAddressRef.current.getValue(),
+      pincode: pincodeRef.current.getValue(),
       phoneNumber: "+1" + phoneNumberRef.current.getValue(),
     };
     dispatch<any>(createAddressManager(data));
@@ -107,7 +127,10 @@ const AddAddress = () => {
           </View>
 
           <View style={styles.item}>
-            <CustomInput ref={provinceRef} label={'City'} />
+            <CustomInput ref={cityRef} label={'City'} />
+          </View>
+          <View style={styles.item}>
+            <CustomInput ref={streetAddressRef} label={'Street Address'} />
           </View>
           <View style={styles.item}>
             <CustomInput maxLength={7} ref={pincodeRef} label={'Pincode'} />

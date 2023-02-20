@@ -36,10 +36,11 @@ const ManageAddress = () => {
 
 
 
+
   const renderItem = ({item}: any) => {
     return (
       <View style={styles.item}>
-        <AddressItem item={item} />
+        <AddressItem item={item} backgroundColor={"lavender"}/>
       </View>
     );
   };

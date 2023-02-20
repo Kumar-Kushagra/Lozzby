@@ -485,6 +485,20 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
+                "city": {
+                    "name": "city",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "streetAddress": {
+                    "name": "streetAddress",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
                 "createdAt": {
                     "name": "createdAt",
                     "isArray": false,
@@ -975,11 +989,12 @@ export const schema = {
                 "ACCEPTED",
                 "REJECTED",
                 "COMPLETED",
-                "CANCELLED"
+                "CANCELLED",
+                "DELIVERED"
             ]
         }
     },
     "nonModels": {},
     "codegenVersion": "3.3.5",
-    "version": "fcb9c439c4260cfd99b6effa5132bb90"
+    "version": "b4b42871c950e6daf7aff67e11ba7118"
 };

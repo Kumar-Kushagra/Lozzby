@@ -20,7 +20,8 @@ export enum OrderStatus {
   ACCEPTED = "ACCEPTED",
   REJECTED = "REJECTED",
   COMPLETED = "COMPLETED",
-  CANCELLED = "CANCELLED"
+  CANCELLED = "CANCELLED",
+  DELIVERED = "DELIVERED"
 }
 
 
@@ -184,6 +185,8 @@ type EagerAddress = {
   readonly pincode?: string | null;
   readonly country?: string | null;
   readonly phoneNumber?: string | null;
+  readonly city?: string | null;
+  readonly streetAddress?: string | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -199,6 +202,8 @@ type LazyAddress = {
   readonly pincode?: string | null;
   readonly country?: string | null;
   readonly phoneNumber?: string | null;
+  readonly city?: string | null;
+  readonly streetAddress?: string | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }

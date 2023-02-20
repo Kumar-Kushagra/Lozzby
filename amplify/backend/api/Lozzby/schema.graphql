@@ -31,6 +31,8 @@ type Address @model @auth(rules: [{allow: public}]) {
   pincode: String
   country: String
   phoneNumber: String
+  city: String
+  streetAddress: String
 }
 
 enum OrderStatus {
@@ -39,6 +41,7 @@ enum OrderStatus {
   REJECTED
   COMPLETED
   CANCELLED
+  DELIVERED
 }
 
 type Order @model @auth(rules: [{allow: public}]) {

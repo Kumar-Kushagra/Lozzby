@@ -157,6 +157,8 @@ export const onCreateAddress = /* GraphQL */ `
       pincode
       country
       phoneNumber
+      city
+      streetAddress
       createdAt
       updatedAt
       _version
@@ -174,6 +176,8 @@ export const onUpdateAddress = /* GraphQL */ `
       pincode
       country
       phoneNumber
+      city
+      streetAddress
       createdAt
       updatedAt
       _version
@@ -191,6 +195,8 @@ export const onDeleteAddress = /* GraphQL */ `
       pincode
       country
       phoneNumber
+      city
+      streetAddress
       createdAt
       updatedAt
       _version
@@ -218,6 +224,8 @@ export const onCreateOrder = /* GraphQL */ `
         pincode
         country
         phoneNumber
+        city
+        streetAddress
         createdAt
         updatedAt
         _version
@@ -252,6 +260,8 @@ export const onUpdateOrder = /* GraphQL */ `
         pincode
         country
         phoneNumber
+        city
+        streetAddress
         createdAt
         updatedAt
         _version
@@ -286,6 +296,8 @@ export const onDeleteOrder = /* GraphQL */ `
         pincode
         country
         phoneNumber
+        city
+        streetAddress
         createdAt
         updatedAt
         _version

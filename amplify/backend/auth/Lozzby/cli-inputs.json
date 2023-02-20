@@ -2,7 +2,7 @@
   "version": "1",
   "cognitoConfig": {
     "identityPoolName": "testAuthIdentityPool",
-    "allowUnauthenticatedIdentities": true,
+    "allowUnauthenticatedIdentities": false,
     "resourceNameTruncated": "lozzby3b69eb9d",
     "userPoolName": "Lozzby",
     "autoVerifiedAttributes": [
@@ -14,8 +14,8 @@
     ],
     "smsAuthenticationMessage": "Your authentication code is {####}",
     "smsVerificationMessage": "Your verification code is {####}",
-    "emailVerificationSubject": "Your Verification code: {####}",
-    "emailVerificationMessage": "Thanks for being with Capstone Lozzby,\nVerification code: {####}",
+    "emailVerificationSubject": "OTP for Verification",
+    "emailVerificationMessage": "Hey,\nYour one time password (OTP) to verify to your Lozzby account is : {####}\nYour OTP would valid only for 30 minutes. Please do not share it with anyone.\n\nCheers\nTeam Lozzby",
     "defaultPasswordPolicy": false,
     "passwordPolicyMinLength": 8,
     "passwordPolicyCharacters": [],
@@ -55,6 +55,7 @@
       ]
     },
     "breakCircularDependency": true,
-    "dependsOn": []
+    "dependsOn": [],
+    "hostedUI": false
   }
 }

@@ -20,7 +20,8 @@ const OrderStatus = {
   "ACCEPTED": "ACCEPTED",
   "REJECTED": "REJECTED",
   "COMPLETED": "COMPLETED",
-  "CANCELLED": "CANCELLED"
+  "CANCELLED": "CANCELLED",
+  "DELIVERED": "DELIVERED"
 };
 
 const { Cart, CartItem, Product, Review, Address, Order, OrderItem, User } = initSchema(schema);

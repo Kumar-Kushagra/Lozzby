@@ -27,21 +27,32 @@ const EditUserProfile = () => {
     React.useCallback(() => {
       nameRef.current.setValue(userData.name);
       profileRef.current.setValue(userData.profile);
-      phoneNumberRef.current.setValue(userData.phoneNumber);
+      phoneNumberRef.current.setValue(userData.phoneNumber ? userData.phoneNumber?.substring(2,12): userData.phoneNumber);
     }, [userData.name, userData.phoneNumber, userData.profile]),
   );
+
+  function testPhoneNumberValidation(phoneNumber: any) {
+    const phoneNumberRegex = new RegExp(
+      /^(1-?)?(([2-9]\d{2})|[2-9]\d{2})-?[2-9]\d{2}-?\d{4}$/i,
+    );
+    return phoneNumberRegex.test(phoneNumber);
+  }
 
   const validate = () => {
     let data = {
       name: nameRef.current.getValue(),
       image: profileRef.current.getValue(),
-      phoneNumber: phoneNumberRef.current.getValue(),
+      phoneNumber: "+1" + phoneNumberRef.current.getValue(),
     };
     if(!nameRef.current.getValue()){
       return showToast('Name Number is required!');
     }
     if(!phoneNumberRef.current.getValue()){
       return showToast('Phone Number is required!');
+    }
+    if (!testPhoneNumberValidation(phoneNumberRef.current.getValue())) {
+      showToast('Please enter a valid phone number!');
+      return false;
     }
     dispatch<any>(updateProfileManager(data));
   };
@@ -60,7 +71,7 @@ const EditUserProfile = () => {
           </View>
           <View style={styles.item}>
             <CustomInput
-              maxLength={12}
+              maxLength={10}
               keyboardType = "numeric"
               ref={phoneNumberRef}
               label={'Phone Number'}
