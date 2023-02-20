@@ -20,7 +20,7 @@ import AddressItem from '../../components/AddressItem';
 import {Address} from '../../models';
 import {createOrderManager} from '../../redux/cart';
 import {navigate} from '../../services/Routerservices';
-import {getScreenHeight} from '../../utils/domUtils';
+import {getScreenHeight, showToast} from '../../utils/domUtils';
 
 const ChooseAddress = () => {
   const theme = useSelector((state: any) => state.theme.theme);
@@ -55,7 +55,7 @@ const ChooseAddress = () => {
     setTotalAmount(total);
   }, [cartProducts]);
 
-  const renderItem = ({item}: any) => {
+  const renderItem = ({item, index}: any) => {
     return (
       <View style={styles.item}>
         <TouchableOpacity
@@ -63,11 +63,11 @@ const ChooseAddress = () => {
             setSelectedAddress(item.id);
           }}
           style={{
-            marginTop: getScreenHeight(2),
+            marginTop: index === 0 ? getScreenHeight(2):  getScreenHeight(0.1),
           }}>
           <AddressItem
             backgroundColor={
-              selectedAddress === item.id ? theme.primary : 'lavender'
+              selectedAddress === item.id ? '#C2AFDB' : 'lavender'
             }
             hide
             item={item}
@@ -94,25 +94,19 @@ const ChooseAddress = () => {
           )}
           keyExtractor={(_, index) => index.toString()}
           renderItem={renderItem}
-          contentContainerStyle={{padding: getScreenHeight(2)}}
+          contentContainerStyle={{paddingHorizontal: getScreenHeight(2)}}
         />
 
-        {cartProducts?.map((item: any, index: any) => {
-          return (
-            <View key={index} style={styles.row}>
-              <Text style={styles.subtitle}>
-                {item.Product.name} ({item.quantity})
-              </Text>
-              <Text style={styles.subtitle}>
-                {"$" + (item.quantity * item.Product.price).toFixed(2)}
-              </Text>
-            </View>
-          );
-        })}
+        <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+          <Text style={[styles.title, {margin: getScreenHeight(2),color:theme.primary,fontSize:getScreenHeight(2.3)}]}>
+            Total Amount:{' '}
+          </Text>
+          <Text style={[styles.title, {margin: getScreenHeight(2),color:"#8560B7",fontSize:getScreenHeight(2.3),fontWeight:'bold'}]}>
+            {' '}
+            {'$' + totalAmount.toFixed(2)}
+          </Text>
+        </View>
 
-        <Text style={[styles.title, {margin: getScreenHeight(2)}]}>
-          Total Amount: {'$' + totalAmount.toFixed(2)}
-        </Text>
         <View style={{padding: getScreenHeight(2)}}>
           <CustomButton
             title="Add Address"
@@ -125,7 +119,7 @@ const ChooseAddress = () => {
               if (selectedAddress) {
                 dispatch<any>(createOrderManager(selectedAddress, totalAmount));
               } else {
-                Alert.alert('Please select address');
+                showToast('Please select an address!');
               }
             }}
           />
@@ -157,7 +151,7 @@ const createStyles = (theme: any) =>
     },
     row: {
       padding: getScreenHeight(1),
-      paddingHorizontal:getScreenHeight(2),
+      paddingHorizontal: getScreenHeight(2),
       flexDirection: 'row',
       alignItems: 'center',
       justifyContent: 'space-between',
