@@ -46,7 +46,7 @@ const ProductItem = (props: any, ref: any) => {
       <View style={styles.contanier}>
         <Text style={styles.title}>{props.item.name}</Text>
         <View style={styles.row}>
-          <Text style={styles.price}>${props.item.price}</Text>
+          <Text style={styles.price}>${props.item.price.toFixed(2)}</Text>
           {/* <Text style={styles.price}>
             Rating {props.item.rating ? props.item.rating : 'NA'}
           </Text> */}

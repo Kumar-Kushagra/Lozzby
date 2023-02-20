@@ -11,50 +11,61 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useSelector } from "react-redux";
-import { CustomHeader, CustomStatusBar } from "../../components";
-import OrderItem from "../../components/OrderItem";
+import {
+  CustomHeader,
+  CustomStatusBar,
+  FullScreenLoader,
+} from "../../components";
+import SellerOrderItem from "../../components/SellerOrderItem";
 import { Order } from "../../models";
 import { getScreenHeight } from "../../utils/domUtils";
 
-const UserOrders = () => {
+const SellerOrders = () => {
   const theme = useSelector((state: any) => state.theme.theme);
+  const loading = useSelector((state: any) => state.common.loading);
   const userData = useSelector((state: any) => state.auth.userData);
   const styles = useMemo(() => createStyles(theme), [theme]);
   const [orderData, setOrderData] = useState([]);
   const [orderStatus, setOrderStatus] = useState("PENDING");
 
+  
   useFocusEffect(
     React.useCallback(() => {
       const res = DataStore.observeQuery(Order, (c) =>
         c.and((order) => [
-          order.userID.eq(userData.id),
+          order.sellerID.eq(userData.id),
           order.status.eq(orderStatus),
         ])
       ).subscribe(({ items }: any) => {
+        console.log(items),
         setOrderData(items);
       });
       return () => res.unsubscribe();
     }, [userData?.id, orderStatus])
   );
+
   const renderItem = ({ item }: any) => {
     return (
       <View style={styles.item}>
-        <OrderItem item={item} />
+        <SellerOrderItem item={item} />
       </View>
     );
   };
+
+  if (loading) {
+    return <FullScreenLoader />;
+  }
 
   return (
     <SafeAreaView edges={["top"]} style={styles.safe}>
       <CustomStatusBar light color={theme.primary} />
       <View style={styles.screen}>
-        <CustomHeader hide title="Orders" />
+        <CustomHeader title="Manage Orders" />
         <View style={{ padding: getScreenHeight(0.1),paddingTop:getScreenHeight(2.5) }}>
           <ScrollView
-            showsHorizontalScrollIndicator={false}
-            showsVerticalScrollIndicator={false}
-            horizontal
-          >
+          showsHorizontalScrollIndicator = {false}
+          showsVerticalScrollIndicator = {false}
+          horizontal>
             <TouchableOpacity
               onPress={() => {
                 setOrderStatus("PENDING");
@@ -78,7 +89,7 @@ const UserOrders = () => {
               onPress={() => {
                 setOrderStatus("ACCEPTED");
               }}
-              style={{ marginRight: getScreenHeight(1),marginLeft:getScreenHeight(1),  backgroundColor:"lavender",padding:getScreenHeight(1),borderRadius:16,paddingHorizontal:getScreenHeight(3) }}
+              style={{  marginRight: getScreenHeight(1),marginLeft:getScreenHeight(1),  backgroundColor:"lavender",padding:getScreenHeight(1),borderRadius:16,paddingHorizontal:getScreenHeight(3) }}
             >
               <Text
                 style={[
@@ -93,13 +104,14 @@ const UserOrders = () => {
               </Text>
             </TouchableOpacity>
 
+         
             <TouchableOpacity
               onPress={() => {
                 setOrderStatus("REJECTED");
               }}
               style={{  marginRight: getScreenHeight(1),marginLeft:getScreenHeight(1),  backgroundColor:"lavender",padding:getScreenHeight(1),borderRadius:16,paddingHorizontal:getScreenHeight(3) }}
             >
-              <Text
+               <Text
                 style={[
                   styles.title,
                   {
@@ -111,7 +123,6 @@ const UserOrders = () => {
                 Rejected
               </Text>
             </TouchableOpacity>
-
             <TouchableOpacity
               onPress={() => {
                 setOrderStatus("DELIVERED");
@@ -150,12 +161,12 @@ const UserOrders = () => {
               </Text>
             </TouchableOpacity>
 
-            <TouchableOpacity
-              onPress={() => {
-                setOrderStatus("CANCELLED");
-              }}
-              style={{ marginRight: getScreenHeight(1),marginLeft:getScreenHeight(1), backgroundColor:"lavender",padding:getScreenHeight(1),borderRadius:16,paddingHorizontal:getScreenHeight(3) }}
-            >
+            <TouchableOpacity 
+            
+            onPress={() => {
+              setOrderStatus("CANCELLED");
+            }}
+            style={{  marginRight: getScreenHeight(1),marginLeft:getScreenHeight(1),  backgroundColor:"lavender",padding:getScreenHeight(1),borderRadius:16,paddingHorizontal:getScreenHeight(3) }}>
               <Text
                 style={[
                   styles.title,
@@ -204,4 +215,4 @@ const createStyles = (theme: any) =>
     },
   });
 
-export default UserOrders;
+export default SellerOrders;

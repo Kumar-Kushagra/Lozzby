@@ -32,7 +32,8 @@ const AddressItem = (props: any) => {
 
   return (
     <View style={{...styles.screen, backgroundColor: props.backgroundColor}}>
-      <View style={[styles.row, {marginTop: getScreenHeight(1)}]}>
+        <Text style={{ ...styles.title,marginTop:getScreenHeight(1),width:"70%" }}>{ props.item?.streetAddress +", "  + props.item?.city +', '  + props.item?.province+', ' + props.item?.country+ " - " + props.item?.pincode.toUpperCase()}</Text>
+      {/* <View style={[styles.row, {marginTop: getScreenHeight(1)}]}>
         <Text style={{...styles.title}}>{props.item?.streetAddress}</Text>
       </View>
 
@@ -44,11 +45,11 @@ const AddressItem = (props: any) => {
             ',' +
             props.item?.country}
         </Text>
-      </View>
+      </View> */}
 
-      <View style={styles.row}>
-        <Text style={styles.title}>{props.item.pincode}</Text>
-      </View>
+      {/* <View style={styles.row}>
+        <Text style={styles.title}>{props.item.pincode.toUpperCase()}</Text>
+      </View> */}
 
       <View style={styles.row}>
         <Text style={styles.title}>{props.item.phoneNumber}</Text>
@@ -101,9 +102,9 @@ const createStyles = (theme: any) =>
       marginBottom: getScreenHeight(1),
     },
     title: {
-      fontSize: getScreenHeight(1.5),
+      fontSize: getScreenHeight(1.8),
       color: theme.black,
-      fontWeight: '700',
+      fontWeight: '500',
     },
     icon: {
       height: getScreenHeight(2.5),

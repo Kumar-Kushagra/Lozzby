@@ -186,7 +186,6 @@ export const updateOrderManager = (data: any) => {
         variables: {input: data},
       });
       dispatch(cartDataManager());
-      goBack();
       showToast('Order has been updated');
     } catch (error) {
       console.log(error);

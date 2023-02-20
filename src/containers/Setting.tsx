@@ -1,14 +1,14 @@
-import {useFocusEffect} from '@react-navigation/native';
-import {DataStore, Predicates, SortDirection} from 'aws-amplify';
-import React, {useEffect, useMemo, useRef, useState} from 'react';
-import {View, StyleSheet, Alert} from 'react-native';
-import {SafeAreaView} from 'react-native-safe-area-context';
-import {useDispatch, useSelector} from 'react-redux';
-import {CustomHeader, CustomStatusBar, FullScreenLoader} from '../components';
+import { useFocusEffect } from '@react-navigation/native';
+import { DataStore, Predicates, SortDirection } from 'aws-amplify';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
+import { View, StyleSheet, Alert } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { useDispatch, useSelector } from 'react-redux';
+import { CustomHeader, CustomStatusBar, FullScreenLoader } from '../components';
 import CartCount from '../components/CartCount';
 import SettingItem from '../components/SettingItem';
-import {becomeSellerManager, logoutManager} from '../redux/auth';
-import {navigate} from '../services/Routerservices';
+import { becomeSellerManager, logoutManager } from '../redux/auth';
+import { navigate } from '../services/Routerservices';
 
 const Setting = () => {
   const theme = useSelector((state: any) => state.theme.theme);
@@ -32,7 +32,7 @@ const Setting = () => {
           onPress: () => dispatch<any>(becomeSellerManager()),
         },
       ],
-      {cancelable: false},
+      { cancelable: false },
     );
   };
 
@@ -53,6 +53,15 @@ const Setting = () => {
             }
           }}
         />
+
+
+        {userData.type === 'seller' && <SettingItem
+          title={"Manage Order"}
+          onPress={() => {
+            navigate('SellerOrders', {});
+          }}
+        />}
+
 
         <SettingItem
           title="Manage Addresses"
