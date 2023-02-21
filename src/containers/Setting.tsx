@@ -15,7 +15,6 @@ const Setting = () => {
   const styles = useMemo(() => createStyles(theme), [theme]);
   const userData = useSelector((state: any) => state.auth.userData);
   const dispatch = useDispatch();
-  const [loading, setLoading] = useState(true);
 
   const becomeSeller = () => {
     Alert.alert(
@@ -40,10 +39,10 @@ const Setting = () => {
     <SafeAreaView edges={['top']} style={styles.safe}>
       <CustomStatusBar light color={theme.primary} />
       <View style={styles.screen}>
-        <CustomHeader hide title="Setting" cart={<CartCount />} />
+        <CustomHeader hide title="Settings" cart={<CartCount />} />
         <SettingItem
           title={
-            userData.type === 'seller' ? 'Manage Product' : 'Become Seller'
+            userData.type === 'seller' ? 'Manage Products' : 'Become Seller'
           }
           onPress={() => {
             if (userData.type === 'seller') {
@@ -53,23 +52,18 @@ const Setting = () => {
             }
           }}
         />
-
-
         {userData.type === 'seller' && <SettingItem
-          title={"Manage Order"}
+          title={"Manage Orders"}
           onPress={() => {
             navigate('SellerOrders', {});
           }}
         />}
-
-
         <SettingItem
           title="Manage Addresses"
           onPress={() => {
             navigate('ManageAddress', {});
           }}
         />
-
         <SettingItem
           title="Logout"
           onPress={() => {

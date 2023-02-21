@@ -56,7 +56,8 @@ const createStyles = (theme: any) =>
     title: {
       fontSize: getScreenHeight(2.3),
       color: theme.white,
-      fontWeight: '500',
+      fontWeight: '700',
+      textTransform: 'capitalize',
     },
     imageContanier: {
       width: getScreenHeight(4),

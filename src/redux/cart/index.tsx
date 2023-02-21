@@ -120,6 +120,7 @@ export const createOrderManager = (addressID: any, total: any) => {
         query: mutations.createOrder,
         variables: {input: data},
       });
+ 
       if (orderData.data.createOrder.id) {
         for (let i = 0; i < cartProducts.length; i++) {
           let orderItemData = {
@@ -148,7 +149,7 @@ export const createOrderManager = (addressID: any, total: any) => {
         dispatch(createCartManager(userData.id));
         navigate('Home', {});
       }
-      showToast('Order has been Placed');
+      showToast('Order has successfully been placed!');
     } catch (error: any) {
       showToast(error.message);
     } finally {
@@ -186,7 +187,7 @@ export const updateOrderManager = (data: any) => {
         variables: {input: data},
       });
       dispatch(cartDataManager());
-      showToast('Order has been updated');
+      showToast('Order has been successfully updated!');
     } catch (error) {
       console.log(error);
       showToast('Something went wrong please try again later!');

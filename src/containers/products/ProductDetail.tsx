@@ -66,13 +66,13 @@ const ProductDetail = (props: any) => {
           source={{uri: image, priority: FastImage.priority.normal}}
         />
         <ScrollView contentContainerStyle={styles.contanier}>
-          <Text style={styles.title}>${data.price}</Text>
+          <Text style={styles.title}>${data.price.toFixed(2)}</Text>
           <Text style={styles.subtitle}>{data.description}</Text>
           <Text style={styles.title}>Available Quantity</Text>
           <Text style={styles.subtitle}>{data.quantity}</Text>
 
           {userData?.id === data?.userID ? 
-            <Text style = {styles.title2}>This Product created by you.</Text>
+            <Text style = {{...styles.title2,alignSelf:"center"}}>This Product is created by you.You can not buy the product that is created by you </Text>
           : (
             <>
               <View>

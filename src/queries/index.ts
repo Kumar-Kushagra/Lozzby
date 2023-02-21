@@ -44,6 +44,8 @@ export const getOrderDetail = /* GraphQL */ `
           pincode
           province
           country
+          city
+          streetAddress
         }
         OrderItems {
           items {

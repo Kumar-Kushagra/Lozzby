@@ -114,7 +114,7 @@ const SellerOrderItem = (props: any) => {
           <Text style={styles.title}>
             Status
           </Text>
-          <Text style={[styles.title, { color: "darkred" }]}>Declined</Text>
+          <Text style={[styles.title, { color: "darkred" }]}>Rejected</Text>
         </View>
 
       ) : null}

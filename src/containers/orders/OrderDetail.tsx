@@ -190,35 +190,36 @@ const OrderDetail = (props: any) => {
                   }}>
                   Address
                 </Text>
+                {console.log(orderData)}
                 <Text
                   style={{
                     ...styles.title,
                     marginTop: getScreenHeight(0.5),
                     width: '80%',
                   }}>
-                  {orderData[0].Address.streetAddress +
+                  {orderData[0]?.Address.streetAddress +
                     ', ' +
-                    orderData[0].Address.city +
+                    orderData[0]?.Address.city +
                     ', ' +
-                    orderData[0].Address.province +
+                    orderData[0]?.Address.province +
                     ', ' +
-                    orderData[0].Address.country +
+                    orderData[0]?.Address.country +
                     ' - ' +
-                    orderData[0].Address.pincode.toUpperCase()}
+                    orderData[0]?.Address.pincode.toUpperCase()}
                 </Text>
                 <Text style={styles.title}>
-                  {orderData[0].Address.phoneNumber}
+                  {orderData[0]?.Address.phoneNumber}
                 </Text>
               </View>
             );
           }}
         />
-        {itemData.status === 'PENDING' && <Text style= {{fontSize:getScreenHeight(2.5),color:"grey",textAlign:'center'}}>Order still waiting for accepted or cancelled.</Text>}
-        {itemData.status === 'REJECTED' &&  userData.id !== itemData.sellerID && <Text style= {{fontSize:getScreenHeight(2.5),color:"#cc0000",textAlign:'center'}}>Order has been rejected by Seller.</Text>}
-        {itemData.status === 'CANCELLED' &&  userData.id === itemData.sellerID && <Text style= {{fontSize:getScreenHeight(2.5),color:"#cc0000",textAlign:'center'}}>Order has been cancelled by Customer.</Text>}
-        {itemData.status === 'DELIVERED'&&  userData.id !== itemData.sellerID  && <Text style= {{fontSize:getScreenHeight(2.5),color:"green",textAlign:'center'}}>Order has been delivered successfully by seller.</Text>}
-        {itemData.status === 'COMPLETED' &&  userData.id === itemData.sellerID  && <Text style= {{fontSize:getScreenHeight(2.5),color:"green",textAlign:'center'}}>Order has been completed successfully by customer.</Text>}
-        <View style={{padding: getScreenHeight(2)}}>
+        {itemData.status === 'PENDING' && <Text style= {{fontSize:getScreenHeight(2.5),color:"grey",textAlign:'center',width:"90%",alignSelf:"center"}}>Order is still waiting to accepted or rejected by seller.</Text> }
+        {itemData.status === 'CANCELLED' &&  userData.id === itemData.sellerID && <Text style= {{fontSize:getScreenHeight(2.5),color:"#cc0000",textAlign:'center',width:"90%",alignSelf:"center"}}>Order has been cancelled by Customer.</Text>}
+        {itemData.status === 'DELIVERED'&&  userData.id !== itemData.sellerID  && <Text style= {{fontSize:getScreenHeight(2.5),color:"green",textAlign:'center',width:"90%",alignSelf:"center"}}>Order has been delivered successfully by seller.</Text>}
+        {itemData.status === 'COMPLETED' &&  userData.id === itemData.sellerID  && <Text style= {{fontSize:getScreenHeight(2.5),color:"green",textAlign:'center',width:"90%",alignSelf:"center"}}>Order has been completed successfully by customer.</Text>}
+        {itemData.status === 'REJECTED'&&  userData.id !== itemData.sellerID  && <Text style= {{fontSize:getScreenHeight(2.5),color:"#cc0000",textAlign:'center',width:"90%",alignSelf:"center"}}>Order has been rejected by Seller.</Text>}
+        <View style={{paddingHorizontal: getScreenHeight(2)}}>
           {itemData.status === 'ACCEPTED' &&
           userData.id === itemData.sellerID ? (
             <CustomButton
@@ -238,32 +239,26 @@ const OrderDetail = (props: any) => {
           ) : null}
         </View>
 
-        <View
-          style={{
-            padding: getScreenHeight(2),
-            paddingHorizontal: getScreenHeight(3),
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            backgroundColor: 'lavender',
-          }}>
-          <Text
-            style={{
-              color: theme.black,
-              fontSize: getScreenHeight(2.5),
-              fontWeight: '700',
-            }}>
-            Total Amount{' '}
-          </Text>
-          <Text
-            style={{
-              color: theme.black,
-              fontSize: getScreenHeight(2.5),
-            }}>
-            {' '}
-            ${totalAmount.toFixed(2)}
-          </Text>
+        <View style={{paddingHorizontal: getScreenHeight(2), marginTop: getScreenHeight(1)}}>
+          {itemData.status === 'DELIVERED' &&
+          userData.id !== itemData.sellerID ? (
+            <CustomButton
+              title="Mark as Completed"
+              action={() => {
+                dispatch<any>(
+                  updateOrderManager({
+                    id: itemData.id,
+                    sellerID: itemData.sellerID,
+                    status: 'COMPLETED',
+                    _version: itemData._version,
+                  }),
+                );
+                goBack();
+              }}
+            />
+          ) : null}
         </View>
-        <View style={{padding: getScreenHeight(1)}}>
+        <View style={{paddingHorizontal: getScreenHeight(2), marginTop: getScreenHeight(1)}}>
           {itemData.status === 'PENDING' &&
           userData.id === itemData.sellerID ? (
             <View style={styles.row}>
@@ -309,6 +304,32 @@ const OrderDetail = (props: any) => {
             </View>
           ) : null}
         </View>
+        <View
+          style={{
+            padding: getScreenHeight(2),
+            paddingHorizontal: getScreenHeight(3),
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            backgroundColor: 'lavender',
+          }}>
+          <Text
+            style={{
+              color: theme.black,
+              fontSize: getScreenHeight(2.5),
+              fontWeight: '700',
+            }}>
+            Total Amount{' '}
+          </Text>
+          <Text
+            style={{
+              color: theme.black,
+              fontSize: getScreenHeight(2.5),
+            }}>
+            {' '}
+            ${totalAmount.toFixed(2)}
+          </Text>
+        </View>
+       
       </View>
     </SafeAreaView>
   );

@@ -174,7 +174,7 @@ const UserOrders = () => {
           contentContainerStyle={{ padding: getScreenHeight(2) }}
           data={orderData}
           ListEmptyComponent={() => (
-            <Text style={styles.title}>No data found</Text>
+            <Text style={styles.title}>No orders yet!</Text>
           )}
           keyExtractor={(_, index) => index.toString()}
           renderItem={renderItem}
