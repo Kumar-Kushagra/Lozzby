@@ -1,6 +1,7 @@
 import {DataStore} from 'aws-amplify';
 import React, {useEffect, useMemo, useState} from 'react';
 import {View, StyleSheet, FlatList, Text, Alert} from 'react-native';
+import FastImage from 'react-native-fast-image';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {useSelector} from 'react-redux';
 import {
@@ -35,8 +36,6 @@ const ManageAddress = () => {
   }, [userData?.id]);
 
 
-
-
   const renderItem = ({item}: any) => {
     return (
       <View style={styles.item}>
@@ -53,12 +52,19 @@ const ManageAddress = () => {
     <SafeAreaView edges={['top']} style={styles.safe}>
       <CustomStatusBar light color={theme.primary} />
       <View style={styles.screen}>
-        <CustomHeader title="Addresses" />
+        <CustomHeader title="My Addresses" />
 
         <FlatList
           data={data}
           ListEmptyComponent={() => (
-            <Text style={styles.title}>No Addresses Found!</Text>
+            <View style={{marginTop: getScreenHeight(25)}}>
+               <FastImage
+                style={styles.image}
+                resizeMode={"contain"}
+                source={require("../../assets/images/noaddress.png")}
+              />
+            <Text style={{ marginTop : getScreenHeight(2),...styles.title,textAlign : "center", fontSize : getScreenHeight(2.5),color : theme.primary, fontWeight:'bold'}}>No Addresses Saved Yet!</Text>
+            </View>
           )}
           keyExtractor={(_, index) => index.toString()}
           renderItem={renderItem}
@@ -93,7 +99,11 @@ const createStyles = (theme: any) =>
     },
     title: {
       color: theme.black,
-      fontSize: getScreenHeight(1.8),
+      fontSize: getScreenHeight(1.8)
+    },
+    image: {
+      height: getScreenHeight(20),
+      width: '100%',
     },
   });
 

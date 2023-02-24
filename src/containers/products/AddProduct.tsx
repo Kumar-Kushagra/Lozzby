@@ -86,7 +86,7 @@ const AddProduct = () => {
             <CustomInput ref={nameRef} label={'Name'} />
           </View>
           <View style={styles.item}>
-            <CustomInput ref={descriptionRef} label={'Description'} />
+            <CustomInput ref={descriptionRef} multiline={true} label={'Description'} />
           </View>
           <View style={styles.item}>
             <CustomInput

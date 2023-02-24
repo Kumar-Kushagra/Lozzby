@@ -1,5 +1,5 @@
-import { Dimensions} from 'react-native';
-import {z} from 'zod';
+import { Dimensions } from 'react-native';
+import { z } from 'zod';
 // import Toast from 'react-native-simple-toast';
 const screenWidth = Dimensions.get('window').width;
 const screenHeight = Dimensions.get('window').height;
@@ -14,16 +14,17 @@ export const getScreenWidth = (value: any) => {
   }
 };
 
-export const showToast = (value : any) => {
-  if(value) {
+export const showToast = (value: any) => {
+  if (value) {
     Toast.show({
       type: 'info',
       text1: value,
-      position : "bottom"
+      position: "bottom",
+      visibilityTime : 1000
     });
   }
   else {
-       Toast.show({
+    Toast.show({
       type: 'error',
       text1: 'Error',
     });
@@ -39,7 +40,7 @@ export const loginSchema = (obj: any) => {
         .nonempty({
           message: 'Email is required!',
         })
-        .email({message: 'Email is invalid!'}),
+        .email({ message: 'Email is invalid!' }),
       password: z.string().trim().nonempty({
         message: 'Password is required!',
       }),
@@ -83,7 +84,7 @@ export const changeForgotSchema = (obj: any) => {
         .nonempty({
           message: 'Password is required!',
         })
-        .min(8, {message: 'Password must be atleast of 8 digits!'}),
+        .min(8, { message: 'Password must be atleast of 8 digits!' }),
     });
     const res = FormData.parse(obj);
     return res;
@@ -104,7 +105,7 @@ export const createProductSchema = (obj: any) => {
         message: 'Description is required!',
       }),
       price: z.number(),
-      quantity : z.number(),
+      quantity: z.number(),
     });
     const res = FormData.parse(obj);
     return res;
@@ -124,7 +125,7 @@ export const forgotSchema = (obj: any) => {
         .nonempty({
           message: 'Email is required!',
         })
-        .email({message: 'Email is invalid!'}),
+        .email({ message: 'Email is invalid!' }),
     });
     const res = FormData.parse(obj);
     return res;
@@ -147,14 +148,14 @@ export const signupSchema = (obj: any) => {
         .nonempty({
           message: 'Email is required!',
         })
-        .email({message: 'Email is invalid!'}),
+        .email({ message: 'Email is invalid!' }),
       password: z
         .string()
         .trim()
         .nonempty({
           message: 'Password is required!',
         })
-        .min(8, {message: 'Password must be atlest of 8 digits!'}),
+        .min(8, { message: 'Password must be atlest of 8 digits!' }),
     });
     const res = FormData.parse(obj);
     return res;

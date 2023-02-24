@@ -16,12 +16,11 @@ import {CustomHeader, CustomStatusBar, FullScreenLoader} from '../components';
 import CartCount from '../components/CartCount';
 import ProductItem from '../components/ProductItem';
 import {Product, Productcategories} from '../models';
-import { cartDataManager } from '../redux/cart';
+import {cartDataManager} from '../redux/cart';
 import {navigate} from '../services/Routerservices';
 import {getScreenHeight, getScreenWidth} from '../utils/domUtils';
 
 const Home = () => {
-  
   const theme = useSelector((state: any) => state.theme.theme);
   const styles = useMemo(() => createStyles(theme), [theme]);
   const userData = useSelector((state: any) => state.auth.userData);
@@ -31,7 +30,7 @@ const Home = () => {
   const [filter, setFilter]: any = useState(null);
   const dispatch = useDispatch();
   const subRef: any = useRef();
-  const [search,setSearch] = useState("")
+  const [search, setSearch] = useState('');
 
   useEffect(() => {
     if (filter) {
@@ -105,7 +104,7 @@ const Home = () => {
     <SafeAreaView edges={['top']} style={styles.safe}>
       <CustomStatusBar light color={theme.primary} />
       <View style={styles.screen}>
-        <CustomHeader hide title="Home" cart={<CartCount/>}/>
+        <CustomHeader hide title="Home" cart={<CartCount />} />
         <View
           style={{
             height: getScreenHeight(6),
@@ -119,16 +118,16 @@ const Home = () => {
           }}>
           <TextInput
             placeholder="Search"
-            value = {search}
-            onChangeText = {setSearch}
+            value={search}
+            onChangeText={setSearch}
             style={{
               width: '85%',
               borderRadius: getScreenHeight(2),
-              paddingLeft : getScreenHeight(3),
-              fontWeight : "bold",
-              fontSize : getScreenWidth(4)
+              paddingLeft: getScreenHeight(3),
+              fontWeight: 'bold',
+              fontSize: getScreenWidth(4),
             }}
-            placeholderTextColor = {theme.light_grey}
+            placeholderTextColor={theme.light_grey}
           />
           <View
             style={{
@@ -147,12 +146,32 @@ const Home = () => {
         <FlatList
           numColumns={2}
           data={data.filter(item => {
-            return item?.name.toLocaleLowerCase()
+            return item?.name
+              .toLocaleLowerCase()
               .includes(search.toLocaleLowerCase());
-        })}
+          })}
           keyExtractor={(_, index) => index.toString()}
           renderItem={renderItem}
-          ListEmptyComponent={<Text>No Data Found</Text>}
+          ListEmptyComponent={
+            <View style={{marginTop: getScreenHeight(22)}}>
+              <FastImage
+                style={styles.image1}
+                resizeMode={'contain'}
+                source={require('../assets/images/empty-product.png')}
+              />
+              <Text
+                style={{
+                  marginTop: getScreenHeight(2),
+                  ...styles.title,
+                  textAlign: 'center',
+                  fontSize: getScreenHeight(2.5),
+                  color: theme.primary,
+                  fontWeight: 'bold',
+                }}>
+                No Product Added Yet!
+              </Text>
+            </View>
+          }
           contentContainerStyle={styles.flatlist}
         />
       </View>
@@ -192,7 +211,10 @@ const createStyles = (theme: any) =>
       height: getScreenHeight(6),
       width: getScreenWidth(7),
     },
-    
+    image1: {
+      height: getScreenHeight(20),
+      width: '100%',
+    },
   });
 
 export default Home;

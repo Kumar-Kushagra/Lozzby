@@ -13,20 +13,20 @@ import Setting from '../containers/Setting';
 const Tab = createBottomTabNavigator();
 
 const TabButton = (props: any) => {
-  const {item, onPress, accessibilityState, styles,theme } = props;
+  const {item, onPress, accessibilityState, styles, theme} = props;
   const focused = accessibilityState.selected;
   return (
     <TouchableOpacity
       activeOpacity={1}
       onPress={onPress}
       style={styles.contanier}>
-        <FastImage
+      <FastImage
         tintColor={focused ? theme.primary : theme.black}
         resizeMode="contain"
         style={styles.icon}
         source={item.icon}
       />
-      <Text style={styles.title}>{item.name}</Text>
+      <Text style={{...styles.title,color : focused ? theme.primary : theme.black}}>{item.name}</Text>
     </TouchableOpacity>
   );
 };
@@ -76,7 +76,12 @@ const BottomBar = () => {
             options={{
               tabBarShowLabel: false,
               tabBarButton: props => (
-                <TabButton {...props} item={item} theme={theme} styles={styles} />
+                <TabButton
+                  {...props}
+                  item={item}
+                  theme={theme}
+                  styles={styles}
+                />
               ),
             }}
             name={item.route}
@@ -98,7 +103,7 @@ const createStyles = (theme: any) =>
       height: Platform.OS === 'ios' ? getScreenHeight(8) : getScreenHeight(8),
     },
     title: {
-      fontSize: getScreenHeight(1.5),
+      fontSize: getScreenHeight(1.6),
       color: 'black',
       marginTop: getScreenHeight(0.5),
     },

@@ -51,6 +51,8 @@ const CustomInput = forwardRef((props: any, ref: any) => {
               {
                 width: props.icon || props.frontIcon ? '90%' : '100%',
                 color: theme.black,
+                textAlignVertical : props.multiline ?  "top" : "center" ,
+                minHeight : getScreenHeight(5)
               },
             ]}
             keyboardType={props.keyboardType}
@@ -59,6 +61,7 @@ const CustomInput = forwardRef((props: any, ref: any) => {
             secureTextEntry={props.secure}
             onChangeText={setText}
             value={text}
+            multiline = {props.multiline}
           />
           {props.icon ? (
             <TouchableOpacity
@@ -99,7 +102,7 @@ const createStyles = (theme: any) =>
     textinput: {
       flex: 1,
       fontSize: getScreenHeight(1.8),
-      height: getScreenHeight(6),
+      // height: getScreenHeight(6),
     },
     label: {
       fontSize: getScreenHeight(1.8),

@@ -56,7 +56,7 @@ export const createProductManager = (data: any) => {
           variables: {input: mainData},
         });
         goBack();
-        showToast('Product has been added');
+        showToast('Product has been added successfuly!');
       } catch (error) {
         console.log(error);
         showToast('Something went wrong please try again later!');
@@ -78,7 +78,7 @@ export const createAddressManager = (data: any) => {
         variables: {input: data},
       });
       goBack();
-      showToast('Address has been added');
+      showToast('Address has been added successfuly!');
     } catch (error) {
       console.log(error);
       showToast('Something went wrong please try again later!');
@@ -95,10 +95,10 @@ export const deleteAddressManager = (id: any, version: any) => {
         query: mutations.deleteAddress,
         variables: {input: {id, _version: version}},
       });
-      Alert.alert('Address has been deleted');
+       showToast('Address has been successfully deleted!');
     } catch (error) {
       console.log(error);
-      Alert.alert('Something went wrong please try again later!');
+      showToast('Something went wrong please try again later!');
     } finally {
       dispatch(setLoading(false));
     }
@@ -122,8 +122,6 @@ export const productDetailManager = (productId: any) => {
     }
   };
 };
-
-
 
 export const deleteProductManager = (id: any, version: any) => {
   return async (dispatch: any) => {

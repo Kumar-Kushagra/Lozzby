@@ -46,11 +46,23 @@ const Cart = () => {
         <FlatList
           data={cartProducts}
           ListEmptyComponent={() => (
-            <View style={{marginTop: getScreenHeight(20)}}>
+            <View style={{marginTop: getScreenHeight(28)}}>
               <FastImage
                 style={styles.image}
+                resizeMode={'contain'}
                 source={require('../../assets/images/empty-cart.png')}
               />
+              <Text
+                style={{
+                  marginTop: getScreenHeight(2),
+                  ...styles.title,
+                  fontSize: getScreenHeight(2.5),
+                  color: theme.primary,
+                  fontWeight: 'bold',
+                  textAlign : "center"
+                }}>
+                No Product Added to Cart Yet!
+              </Text>
             </View>
           )}
           keyExtractor={(_, index) => index.toString()}
@@ -58,6 +70,7 @@ const Cart = () => {
           contentContainerStyle={{padding: getScreenHeight(2)}}
         />
 
+        {cartProducts.length > 0 && 
         <View style={{padding: getScreenHeight(2)}}>
           <CustomButton
             action={() => {
@@ -65,7 +78,7 @@ const Cart = () => {
             }}
             title="Place Order"
           />
-        </View>
+        </View>}
       </View>
     </SafeAreaView>
   );
@@ -92,7 +105,7 @@ const createStyles = (theme: any) =>
       fontSize: getScreenHeight(1.8),
     },
     image: {
-      height: getScreenHeight(30),
+      height: getScreenHeight(20),
       width: '100%',
     },
   });

@@ -1,11 +1,13 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-
+import NetInfo from '@react-native-community/netinfo';
 import AuthStack from './AuthStack';
 import HomeStack from './HomeStack';
 import {useDispatch, useSelector} from 'react-redux';
 import {CustomStatusBar, FullScreenLoader} from '../components';
 import {retrieveCurrentSessionManager} from '../redux/auth';
+import NoInternet from '../containers/NoInternet';
+import { setInternet } from '../redux/common';
 
 const Stack = createNativeStackNavigator();
 
@@ -15,11 +17,22 @@ const MainStack = () => {
   const refetch = useSelector((state: any) => state.auth.refetch);
   const mainLoading = useSelector((state: any) => state.auth.mainLoading);
   const dispatch = useDispatch();
+  const [connected, setConnected] = useState(true);
 
   useEffect(() => {
     dispatch<any>(retrieveCurrentSessionManager());
   }, [dispatch, refetch]);
 
+  useEffect(() => {
+    const unsubscribe = NetInfo.addEventListener(state => {
+      setConnected(state.isConnected);
+      dispatch(setInternet(state.isConnected))
+    });
+    return () => {
+      unsubscribe();
+    };
+  }, []);
+  
   if (mainLoading) {
     return <FullScreenLoader />;
   }
@@ -30,10 +43,14 @@ const MainStack = () => {
       <Stack.Navigator
         initialRouteName="AuthStack"
         screenOptions={{headerShown: false}}>
-        {userData ? (
-          <Stack.Screen name="HomeStack" component={HomeStack} />
+        {connected ? (
+          userData ? (
+            <Stack.Screen name="HomeStack" component={HomeStack} />
+          ) : (
+            <Stack.Screen name="AuthStack" component={AuthStack} />
+          )
         ) : (
-          <Stack.Screen name="AuthStack" component={AuthStack} />
+          <Stack.Screen name="NoInternet" component={NoInternet} />
         )}
       </Stack.Navigator>
     </>

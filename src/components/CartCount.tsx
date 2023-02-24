@@ -1,4 +1,5 @@
-import React, {useState, useMemo, useEffect} from 'react';
+import {useFocusEffect} from '@react-navigation/native';
+import React, {useState, useMemo, useEffect, useCallback} from 'react';
 import {
   TouchableOpacity,
   StyleSheet,
@@ -7,8 +8,7 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import FastImage from 'react-native-fast-image';
-import {useDispatch, useSelector} from 'react-redux';
-import {deleteAddressManager} from '../redux/home';
+import {useSelector} from 'react-redux';
 import {navigate} from '../services/Routerservices';
 import {getScreenHeight} from '../utils/domUtils';
 
@@ -21,23 +21,22 @@ const CartCount = (props: any) => {
   const cartProducts = useSelector((state: any) => state?.cart?.cartProducts);
   const cartLoading = useSelector((state: any) => state?.cart?.cartLoading);
 
-  useEffect(() => {
-    let a = 0
-    cartProducts?.forEach(elem => {
-      a = a + elem.quantity
-    });
-    setCount(a)
-  },[])
-  
+  useFocusEffect(
+    useCallback(() => {
+      let a = 0;
+      cartProducts?.forEach((elem) => {
+        a = a + elem.quantity;
+      });
+      setCount(a);
+    }, [cartProducts]),
+  );
   return (
     <TouchableOpacity
       disabled={cartLoading}
       onPress={() => {
         navigate('Cart', {});
       }}>
-      {cartLoading ? (
-        <ActivityIndicator />
-      ) : (
+
         <View>
           <FastImage
             tintColor={'white'}
@@ -51,7 +50,6 @@ const CartCount = (props: any) => {
             </View>
           ) : null}
         </View>
-      )}
     </TouchableOpacity>
   );
 };
@@ -82,7 +80,8 @@ const createStyles = (theme: any) =>
     count: {
       color: theme.white,
       fontSize: getScreenHeight(1.3),
-      fontWeight: 'bold',alignSelf:'center'
+      fontWeight: 'bold',
+      alignSelf: 'center',
     },
   });
 

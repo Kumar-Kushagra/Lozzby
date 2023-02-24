@@ -9,6 +9,7 @@ import {
   ScrollView,
   TouchableOpacity,
 } from "react-native";
+import FastImage from "react-native-fast-image";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useSelector } from "react-redux";
 import {
@@ -37,7 +38,6 @@ const SellerOrders = () => {
           order.status.eq(orderStatus),
         ])
       ).subscribe(({ items }: any) => {
-        console.log(items),
         setOrderData(items);
       });
       return () => res.unsubscribe();
@@ -185,7 +185,24 @@ const SellerOrders = () => {
           contentContainerStyle={{ padding: getScreenHeight(2) }}
           data={orderData}
           ListEmptyComponent={() => (
-            <Text style={styles.title}>No orders yet!</Text>
+            <View style={{marginTop: getScreenHeight(22)}}>
+            <FastImage
+              style={styles.image}
+              resizeMode={'contain'}
+              source={require('../../assets/images/empty-orders.png')}
+            />
+            <Text
+              style={{
+                marginTop: getScreenHeight(2),
+                ...styles.title,
+                textAlign: 'center',
+                fontSize: getScreenHeight(2.5),
+                color: theme.primary,
+                fontWeight: 'bold',
+              }}>
+              No Orders Yet!
+            </Text>
+          </View>
           )}
           keyExtractor={(_, index) => index.toString()}
           renderItem={renderItem}
@@ -212,6 +229,10 @@ const createStyles = (theme: any) =>
     },
     item: {
       marginBottom: getScreenHeight(2),
+    },
+    image: {
+      height: getScreenHeight(20),
+      width: '100%',
     },
   });
 

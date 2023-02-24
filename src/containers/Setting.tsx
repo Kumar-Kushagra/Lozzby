@@ -59,7 +59,7 @@ const Setting = () => {
           }}
         />}
         <SettingItem
-          title="Manage Addresses"
+          title="My Addresses"
           onPress={() => {
             navigate('ManageAddress', {});
           }}

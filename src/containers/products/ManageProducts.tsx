@@ -55,12 +55,24 @@ const ManageProducts = () => {
         <FlatList
           data={data}
           ListEmptyComponent={() => (
-           <>
+            <View style={{marginTop: getScreenHeight(25)}}>
               <FastImage
                 style={styles.image}
-                source={require("../../assets/images/noItems.png")}
+                resizeMode={'contain'}
+                source={require('../../assets/images/empty-product.png')}
               />
-            </>
+              <Text
+                style={{
+                  marginTop: getScreenHeight(2),
+                  ...styles.title,
+                  textAlign: 'center',
+                  fontSize: getScreenHeight(2.5),
+                  color: theme.primary,
+                  fontWeight: 'bold',
+                }}>
+                No Product Added Yet!
+              </Text>
+            </View>
           )}
           keyExtractor={(_, index) => index.toString()}
           renderItem={renderItem}
@@ -105,7 +117,7 @@ const createStyles = (theme: any) =>
       fontSize: getScreenHeight(1.8),
     },
     image: {
-      height: getScreenHeight(30),
+      height: getScreenHeight(20),
       width: '100%',
     },
   });

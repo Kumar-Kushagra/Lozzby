@@ -129,7 +129,7 @@ export const retrieveCurrentSessionManager = () => {
       }
     } catch (error) {
       if (error !== 'The user is not authenticated') {
-        showToast('Something went wrong please try again later!');
+        //showToast('Something went wrong please try again later!');
       }
     } finally {
       dispatch(setMainLoading(false));

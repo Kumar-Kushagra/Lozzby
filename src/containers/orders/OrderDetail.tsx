@@ -195,7 +195,7 @@ const OrderDetail = (props: any) => {
                   style={{
                     ...styles.title,
                     marginTop: getScreenHeight(0.5),
-                    width: '80%',
+                    width: '65%',
                   }}>
                   {orderData[0]?.Address.streetAddress +
                     ', ' +
