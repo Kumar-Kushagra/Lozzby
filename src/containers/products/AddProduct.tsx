@@ -35,7 +35,6 @@ const AddProduct = () => {
   useEffect(() => {
     if (!userData?.phoneNumber) {
       showToast('You cannot add products before completing your profile!');
-
     }
   }, []);
 
@@ -78,7 +77,7 @@ const AddProduct = () => {
       <CustomStatusBar light color={theme.primary} />
       <View style={styles.screen}>
         <CustomHeader title="Add Product" />
-        <ScrollView contentContainerStyle={styles.contanier}>
+        <ScrollView bounces={false} contentContainerStyle={styles.contanier}>
           <View style={styles.item}>
             <CustomAvatar ref={profileRef} />
           </View>
@@ -86,7 +85,11 @@ const AddProduct = () => {
             <CustomInput ref={nameRef} label={'Name'} />
           </View>
           <View style={styles.item}>
-            <CustomInput ref={descriptionRef} multiline={true} label={'Description'} />
+            <CustomInput
+              ref={descriptionRef}
+              multiline={true}
+              label={'Description'}
+            />
           </View>
           <View style={styles.item}>
             <CustomInput

@@ -129,7 +129,7 @@ const EditAddress = (props: any) => {
       <View style={styles.screen}>
         <CustomHeader title="Edit Address" />
 
-        <ScrollView contentContainerStyle={styles.contanier}>
+        <ScrollView bounces = {false} contentContainerStyle={styles.contanier}>
           <View style={styles.item}>
             <CustomInput
               placeholder={'Canada'}

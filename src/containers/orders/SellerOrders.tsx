@@ -1,6 +1,6 @@
-import { useFocusEffect } from "@react-navigation/native";
-import { DataStore } from "aws-amplify";
-import React, { useMemo, useState } from "react";
+import {useFocusEffect} from '@react-navigation/native';
+import {DataStore} from 'aws-amplify';
+import React, {useMemo, useState} from 'react';
 import {
   View,
   StyleSheet,
@@ -8,18 +8,18 @@ import {
   Text,
   ScrollView,
   TouchableOpacity,
-} from "react-native";
-import FastImage from "react-native-fast-image";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { useSelector } from "react-redux";
+} from 'react-native';
+import FastImage from 'react-native-fast-image';
+import {SafeAreaView} from 'react-native-safe-area-context';
+import {useSelector} from 'react-redux';
 import {
   CustomHeader,
   CustomStatusBar,
   FullScreenLoader,
-} from "../../components";
-import SellerOrderItem from "../../components/SellerOrderItem";
-import { Order } from "../../models";
-import { getScreenHeight } from "../../utils/domUtils";
+} from '../../components';
+import SellerOrderItem from '../../components/SellerOrderItem';
+import {Order} from '../../models';
+import {getScreenHeight} from '../../utils/domUtils';
 
 const SellerOrders = () => {
   const theme = useSelector((state: any) => state.theme.theme);
@@ -27,24 +27,23 @@ const SellerOrders = () => {
   const userData = useSelector((state: any) => state.auth.userData);
   const styles = useMemo(() => createStyles(theme), [theme]);
   const [orderData, setOrderData] = useState([]);
-  const [orderStatus, setOrderStatus] = useState("PENDING");
+  const [orderStatus, setOrderStatus] = useState('PENDING');
 
-  
   useFocusEffect(
     React.useCallback(() => {
-      const res = DataStore.observeQuery(Order, (c) =>
-        c.and((order) => [
+      const res = DataStore.observeQuery(Order, c =>
+        c.and(order => [
           order.sellerID.eq(userData.id),
           order.status.eq(orderStatus),
-        ])
-      ).subscribe(({ items }: any) => {
+        ]),
+      ).subscribe(({items}: any) => {
         setOrderData(items);
       });
       return () => res.unsubscribe();
-    }, [userData?.id, orderStatus])
+    }, [userData?.id, orderStatus]),
   );
 
-  const renderItem = ({ item }: any) => {
+  const renderItem = ({item}: any) => {
     return (
       <View style={styles.item}>
         <SellerOrderItem item={item} />
@@ -57,152 +56,192 @@ const SellerOrders = () => {
   }
 
   return (
-    <SafeAreaView edges={["top"]} style={styles.safe}>
+    <SafeAreaView edges={['top']} style={styles.safe}>
       <CustomStatusBar light color={theme.primary} />
       <View style={styles.screen}>
         <CustomHeader title="Manage Orders" />
-        <View style={{ padding: getScreenHeight(0.1),paddingTop:getScreenHeight(2.5) }}>
+        <View
+          style={{
+            padding: getScreenHeight(0.1),
+            paddingTop: getScreenHeight(2.5),
+          }}>
           <ScrollView
-          showsHorizontalScrollIndicator = {false}
-          showsVerticalScrollIndicator = {false}
-          horizontal>
+            bounces={false}
+            showsHorizontalScrollIndicator={false}
+            showsVerticalScrollIndicator={false}
+            horizontal>
             <TouchableOpacity
+                  activeOpacity={1}
               onPress={() => {
-                setOrderStatus("PENDING");
+                setOrderStatus('PENDING');
               }}
-              style={{  marginRight: getScreenHeight(1),marginLeft:getScreenHeight(1),  backgroundColor:"lavender",padding:getScreenHeight(1),borderRadius:16,paddingHorizontal:getScreenHeight(3) }}
-            >
+              style={{
+                marginRight: getScreenHeight(1),
+                marginLeft: getScreenHeight(1),
+                backgroundColor:  orderStatus === 'PENDING' ? theme.primary : "lavender",
+                padding: getScreenHeight(1),
+                borderRadius: 16,
+                paddingHorizontal: getScreenHeight(3),
+              }}>
               <Text
                 style={[
                   styles.title,
                   {
                     color:
-                      orderStatus === "PENDING" ? theme.primary : theme.black,
+                      orderStatus === 'PENDING' ? theme.white : theme.black,
                   },
-                ]}
-              >
+                ]}>
                 Pending
               </Text>
             </TouchableOpacity>
 
             <TouchableOpacity
+                  activeOpacity={1}
               onPress={() => {
-                setOrderStatus("ACCEPTED");
+                setOrderStatus('ACCEPTED');
               }}
-              style={{  marginRight: getScreenHeight(1),marginLeft:getScreenHeight(1),  backgroundColor:"lavender",padding:getScreenHeight(1),borderRadius:16,paddingHorizontal:getScreenHeight(3) }}
-            >
+              style={{
+                marginRight: getScreenHeight(1),
+                marginLeft: getScreenHeight(1),
+                backgroundColor: orderStatus === 'ACCEPTED' ? theme.primary : "lavender",
+                padding: getScreenHeight(1),
+                borderRadius: 16,
+                paddingHorizontal: getScreenHeight(3),
+              }}>
               <Text
                 style={[
                   styles.title,
                   {
                     color:
-                      orderStatus === "ACCEPTED" ? theme.primary : theme.black,
+                      orderStatus === 'ACCEPTED' ? theme.white : theme.black,
                   },
-                ]}
-              >
+                ]}>
                 Accepted
               </Text>
             </TouchableOpacity>
 
-         
             <TouchableOpacity
+                  activeOpacity={1}
               onPress={() => {
-                setOrderStatus("REJECTED");
+                setOrderStatus('REJECTED');
               }}
-              style={{  marginRight: getScreenHeight(1),marginLeft:getScreenHeight(1),  backgroundColor:"lavender",padding:getScreenHeight(1),borderRadius:16,paddingHorizontal:getScreenHeight(3) }}
-            >
-               <Text
+              style={{
+                marginRight: getScreenHeight(1),
+                marginLeft: getScreenHeight(1),
+                backgroundColor: orderStatus === 'REJECTED' ? theme.primary : "lavender",
+                padding: getScreenHeight(1),
+                borderRadius: 16,
+                paddingHorizontal: getScreenHeight(3),
+              }}>
+              <Text
                 style={[
                   styles.title,
                   {
                     color:
-                      orderStatus === "REJECTED" ? theme.primary : theme.black,
+                      orderStatus === 'REJECTED' ? theme.white : theme.black,
                   },
-                ]}
-              >
+                ]}>
                 Rejected
               </Text>
             </TouchableOpacity>
             <TouchableOpacity
+                  activeOpacity={1}
               onPress={() => {
-                setOrderStatus("DELIVERED");
+                setOrderStatus('DELIVERED');
               }}
-              style={{  marginRight: getScreenHeight(1),marginLeft:getScreenHeight(1),  backgroundColor:"lavender",padding:getScreenHeight(1),borderRadius:16,paddingHorizontal:getScreenHeight(3) }}
-            >
-               <Text
+              style={{
+                marginRight: getScreenHeight(1),
+                marginLeft: getScreenHeight(1),
+                backgroundColor: orderStatus === 'DELIVERED' ? theme.primary : "lavender",
+                padding: getScreenHeight(1),
+                borderRadius: 16,
+                paddingHorizontal: getScreenHeight(3),
+              }}>
+              <Text
                 style={[
                   styles.title,
                   {
                     color:
-                      orderStatus === "DELIVERED" ? theme.primary : theme.black,
+                      orderStatus === 'DELIVERED' ? theme.white : theme.black,
                   },
-                ]}
-              >
+                ]}>
                 Delivered
               </Text>
             </TouchableOpacity>
 
             <TouchableOpacity
+                  activeOpacity={1}
               onPress={() => {
-                setOrderStatus("COMPLETED");
+                setOrderStatus('COMPLETED');
               }}
-              style={{  marginRight: getScreenHeight(1),marginLeft:getScreenHeight(1),  backgroundColor:"lavender",padding:getScreenHeight(1),borderRadius:16,paddingHorizontal:getScreenHeight(3) }}
-            >
+              style={{
+                marginRight: getScreenHeight(1),
+                marginLeft: getScreenHeight(1),
+                backgroundColor: orderStatus === 'COMPLETED' ? theme.primary : "lavender",
+                padding: getScreenHeight(1),
+                borderRadius: 16,
+                paddingHorizontal: getScreenHeight(3),
+              }}>
               <Text
                 style={[
                   styles.title,
                   {
                     color:
-                      orderStatus === "COMPLETED" ? theme.primary : theme.black,
+                      orderStatus === 'COMPLETED' ? theme.white : theme.black,
                   },
-                ]}
-              >
+                ]}>
                 Completed
               </Text>
             </TouchableOpacity>
 
-            <TouchableOpacity 
-            
-            onPress={() => {
-              setOrderStatus("CANCELLED");
-            }}
-            style={{  marginRight: getScreenHeight(1),marginLeft:getScreenHeight(1),  backgroundColor:"lavender",padding:getScreenHeight(1),borderRadius:16,paddingHorizontal:getScreenHeight(3) }}>
+            <TouchableOpacity
+                  activeOpacity={1}
+              onPress={() => {
+                setOrderStatus('CANCELLED');
+              }}
+              style={{
+                marginRight: getScreenHeight(1),
+                marginLeft: getScreenHeight(1),
+                backgroundColor: orderStatus === 'CANCELLED' ? theme.primary : "lavender",
+                padding: getScreenHeight(1),
+                borderRadius: 16,
+                paddingHorizontal: getScreenHeight(3),
+              }}>
               <Text
                 style={[
                   styles.title,
                   {
                     color:
-                      orderStatus === "CANCELLED" ? theme.primary : theme.black,
+                      orderStatus === 'CANCELLED' ? theme.white : theme.black,
                   },
-                ]}
-              >
+                ]}>
                 Cancelled
               </Text>
             </TouchableOpacity>
           </ScrollView>
         </View>
         <FlatList
-          contentContainerStyle={{ padding: getScreenHeight(2) }}
+          contentContainerStyle={{padding: getScreenHeight(2)}}
           data={orderData}
           ListEmptyComponent={() => (
             <View style={{marginTop: getScreenHeight(22)}}>
-            <FastImage
-              style={styles.image}
-              resizeMode={'contain'}
-              source={require('../../assets/images/empty-orders.png')}
-            />
-            <Text
-              style={{
-                marginTop: getScreenHeight(2),
-                ...styles.title,
-                textAlign: 'center',
-                fontSize: getScreenHeight(2.5),
-                color: theme.primary,
-                fontWeight: 'bold',
-              }}>
-              No Orders Yet!
-            </Text>
-          </View>
+              <FastImage
+                style={styles.image}
+                resizeMode={'contain'}
+                source={require('../../assets/images/empty-orders.png')}
+              />
+              <Text
+                style={{
+                  marginTop: getScreenHeight(2),
+                  ...styles.title,
+                  textAlign: 'center',
+                  fontSize: getScreenHeight(2.5),
+                  color: theme.primary,
+                  fontWeight: 'bold',
+                }}>
+                No {orderStatus.toLocaleLowerCase()} orders yet!
+              </Text>
+            </View>
           )}
           keyExtractor={(_, index) => index.toString()}
           renderItem={renderItem}
@@ -225,7 +264,7 @@ const createStyles = (theme: any) =>
     title: {
       fontSize: getScreenHeight(1.8),
       color: theme.black,
-      fontWeight:"700"
+      fontWeight: '700',
     },
     item: {
       marginBottom: getScreenHeight(2),

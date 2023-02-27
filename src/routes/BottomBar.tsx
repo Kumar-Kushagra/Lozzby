@@ -100,7 +100,7 @@ const createStyles = (theme: any) =>
       justifyContent: 'center',
       alignItems: 'center',
       borderColor: theme.primary,
-      height: Platform.OS === 'ios' ? getScreenHeight(8) : getScreenHeight(8),
+      height: Platform.OS === 'ios' ? getScreenHeight(7) : getScreenHeight(8),
     },
     title: {
       fontSize: getScreenHeight(1.6),

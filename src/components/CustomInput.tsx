@@ -6,6 +6,7 @@ import {
   TextInput,
   TouchableOpacity,
   Image,
+  Platform,
 } from 'react-native';
 import {useSelector} from 'react-redux';
 import {getScreenHeight} from '../utils/domUtils';
@@ -52,7 +53,8 @@ const CustomInput = forwardRef((props: any, ref: any) => {
                 width: props.icon || props.frontIcon ? '90%' : '100%',
                 color: theme.black,
                 textAlignVertical : props.multiline ?  "top" : "center" ,
-                minHeight : getScreenHeight(5)
+                minHeight : getScreenHeight(5),
+                paddingHorizontal : Platform.OS == "ios" ? getScreenHeight(1) : getScreenHeight(0.5)
               },
             ]}
             keyboardType={props.keyboardType}

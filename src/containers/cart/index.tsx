@@ -26,6 +26,7 @@ const Cart = () => {
   }, [dispatch]);
 
   const renderItem = ({item}: any) => {
+    console.log(item);
     return (
       <View style={styles.item}>
         <CartItem item={item} />
@@ -42,7 +43,6 @@ const Cart = () => {
       <CustomStatusBar light color={theme.primary} />
       <View style={styles.screen}>
         <CustomHeader title="Cart" />
-
         <FlatList
           data={cartProducts}
           ListEmptyComponent={() => (
@@ -59,7 +59,7 @@ const Cart = () => {
                   fontSize: getScreenHeight(2.5),
                   color: theme.primary,
                   fontWeight: 'bold',
-                  textAlign : "center"
+                  textAlign: 'center',
                 }}>
                 No Product Added to Cart Yet!
               </Text>
@@ -70,15 +70,16 @@ const Cart = () => {
           contentContainerStyle={{padding: getScreenHeight(2)}}
         />
 
-        {cartProducts.length > 0 && 
-        <View style={{padding: getScreenHeight(2)}}>
-          <CustomButton
-            action={() => {
-              navigate('ChooseAddress', {});
-            }}
-            title="Place Order"
-          />
-        </View>}
+        {cartProducts.length > 0 && (
+          <View style={{padding: getScreenHeight(2)}}>
+            <CustomButton
+              action={() => {
+                navigate('ChooseAddress', {});
+              }}
+              title="Place Order"
+            />
+          </View>
+        )}
       </View>
     </SafeAreaView>
   );

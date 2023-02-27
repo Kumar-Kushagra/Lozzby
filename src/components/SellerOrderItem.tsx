@@ -70,7 +70,6 @@ const SellerOrderItem = (props: any) => {
       { cancelable: false }
     );
   };
-{console.log(props.item.status)}
   return (
     <Pressable
       onPress={() => navigate("OrderDetail", { item: props.item })}

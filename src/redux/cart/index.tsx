@@ -221,9 +221,7 @@ export const createCartItemManager = (data: any) => {
               query: mutations.createCartItem,
               variables: {input: data},
             });
-            // dispatch(cartDataManager());
-            goBack();
-            navigate('Cart', {});
+            dispatch(cartDataManager());
             showToast('Product has been added to cart');
           } catch (error) {
             console.log(error);

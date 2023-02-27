@@ -46,7 +46,7 @@ const UserProfile = () => {
       <View style={styles.screen}>
         <CustomHeader hide title="Profile" cart={<CartCount/>}/>
 
-        <ScrollView contentContainerStyle={styles.contanier}>
+        <ScrollView bounces = {false} contentContainerStyle={styles.contanier}>
           <View style={styles.item}>
             <CustomAvatar disabled={true} ref={profileRef} />
           </View>

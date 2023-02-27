@@ -58,14 +58,14 @@ const ProductDetail = (props: any) => {
   return (
     <SafeAreaView edges={['top']} style={styles.safe}>
       <CustomStatusBar light color={theme.primary} />
-      <ScrollView style={styles.screen}>
+      <ScrollView bounces={false} style={styles.screen}>
         <CustomHeader title={data.name} />
         <FastImage
           style={styles.image}
           resizeMode="contain"
           source={{uri: image, priority: FastImage.priority.normal}}
         />
-        <ScrollView contentContainerStyle={styles.contanier}>
+        <ScrollView bounces = {false} contentContainerStyle={styles.contanier}>
           <Text style={styles.title}>${data.price.toFixed(2)}</Text>
           <Text style={styles.subtitle}>{data.description}</Text>
           <Text style={styles.title}>Available Quantity</Text>

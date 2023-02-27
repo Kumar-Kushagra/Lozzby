@@ -21,35 +21,37 @@ const CartCount = (props: any) => {
   const cartProducts = useSelector((state: any) => state?.cart?.cartProducts);
   const cartLoading = useSelector((state: any) => state?.cart?.cartLoading);
 
-  useFocusEffect(
-    useCallback(() => {
-      let a = 0;
-      cartProducts?.forEach((elem) => {
-        a = a + elem.quantity;
-      });
-      setCount(a);
-    }, [cartProducts]),
-  );
+  // useFocusEffect(
+  //   useCallback(() => {
+  //     let a = 0;
+  //     cartProducts?.forEach(elem => {
+  //       a = a + elem.quantity;
+  //     });
+  //     setCount(a);
+  //   }, [cartProducts]),
+  // );
+
+
+
   return (
     <TouchableOpacity
       disabled={cartLoading}
       onPress={() => {
         navigate('Cart', {});
       }}>
-
-        <View>
-          <FastImage
-            tintColor={'white'}
-            source={require('../assets/images/cart.png')}
-            resizeMode="contain"
-            style={styles.icon}
-          />
-          {cartProducts?.length ? (
-            <View style={styles.textContanier}>
-              <Text style={styles.count}>{count}</Text>
-            </View>
-          ) : null}
-        </View>
+      <View>
+        <FastImage
+          tintColor={'white'}
+          source={require('../assets/images/cart.png')}
+          resizeMode="contain"
+          style={styles.icon}
+        />
+        {cartProducts?.length ? (
+          <View style={styles.textContanier}>
+            <Text style={styles.count}>{cartProducts?.length}</Text>
+          </View>
+        ) : null}
+      </View>
     </TouchableOpacity>
   );
 };
@@ -72,7 +74,6 @@ const createStyles = (theme: any) =>
       backgroundColor: theme.black,
       height: getScreenHeight(2.5),
       width: getScreenHeight(2.5),
-      // padding: getScreenHeight(0.5),
       borderRadius: getScreenHeight(100),
       justifyContent: 'center',
       alignItems: 'center',

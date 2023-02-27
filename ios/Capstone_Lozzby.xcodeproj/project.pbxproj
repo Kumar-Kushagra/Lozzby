@@ -8,12 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* Capstone_LozzbyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* Capstone_LozzbyTests.m */; };
-		0C80B921A6F3F58F76C31292 /* libPods-Capstone_Lozzby.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DCACB8F33CDC322A6C60F78 /* libPods-Capstone_Lozzby.a */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
-		7699B88040F8A987B510C191 /* libPods-Capstone_Lozzby-Capstone_LozzbyTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F6CBCC0A4E27FBF8BF4A61 /* libPods-Capstone_Lozzby-Capstone_LozzbyTests.a */; };
+		18FB5A4C35877963A692A985 /* libPods-Capstone_Lozzby-Capstone_LozzbyTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F9EC7C091AEA8DA95BA21428 /* libPods-Capstone_Lozzby-Capstone_LozzbyTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		96316204EF377BCD6D7BB40B /* libPods-Capstone_Lozzby.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A600F16DD0AD50911212E7F1 /* libPods-Capstone_Lozzby.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -30,20 +30,20 @@
 		00E356EE1AD99517003FC87E /* Capstone_LozzbyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Capstone_LozzbyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* Capstone_LozzbyTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Capstone_LozzbyTests.m; sourceTree = "<group>"; };
-		13B07F961A680F5B00A75B9A /* Capstone_Lozzby.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Capstone_Lozzby.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		0612C9E40E80BF1C7A108145 /* Pods-Capstone_Lozzby.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Capstone_Lozzby.release.xcconfig"; path = "Target Support Files/Pods-Capstone_Lozzby/Pods-Capstone_Lozzby.release.xcconfig"; sourceTree = "<group>"; };
+		13B07F961A680F5B00A75B9A /* Lozzby.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Lozzby.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = Capstone_Lozzby/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AppDelegate.mm; path = Capstone_Lozzby/AppDelegate.mm; sourceTree = "<group>"; };
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = Capstone_Lozzby/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Capstone_Lozzby/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = Capstone_Lozzby/main.m; sourceTree = "<group>"; };
-		19F6CBCC0A4E27FBF8BF4A61 /* libPods-Capstone_Lozzby-Capstone_LozzbyTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Capstone_Lozzby-Capstone_LozzbyTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		3B4392A12AC88292D35C810B /* Pods-Capstone_Lozzby.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Capstone_Lozzby.debug.xcconfig"; path = "Target Support Files/Pods-Capstone_Lozzby/Pods-Capstone_Lozzby.debug.xcconfig"; sourceTree = "<group>"; };
-		5709B34CF0A7D63546082F79 /* Pods-Capstone_Lozzby.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Capstone_Lozzby.release.xcconfig"; path = "Target Support Files/Pods-Capstone_Lozzby/Pods-Capstone_Lozzby.release.xcconfig"; sourceTree = "<group>"; };
-		5B7EB9410499542E8C5724F5 /* Pods-Capstone_Lozzby-Capstone_LozzbyTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Capstone_Lozzby-Capstone_LozzbyTests.debug.xcconfig"; path = "Target Support Files/Pods-Capstone_Lozzby-Capstone_LozzbyTests/Pods-Capstone_Lozzby-Capstone_LozzbyTests.debug.xcconfig"; sourceTree = "<group>"; };
-		5DCACB8F33CDC322A6C60F78 /* libPods-Capstone_Lozzby.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Capstone_Lozzby.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1EC7359F4E21C53783196B90 /* Pods-Capstone_Lozzby.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Capstone_Lozzby.debug.xcconfig"; path = "Target Support Files/Pods-Capstone_Lozzby/Pods-Capstone_Lozzby.debug.xcconfig"; sourceTree = "<group>"; };
+		60DBEBBBC298B25625FEDA1C /* Pods-Capstone_Lozzby-Capstone_LozzbyTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Capstone_Lozzby-Capstone_LozzbyTests.release.xcconfig"; path = "Target Support Files/Pods-Capstone_Lozzby-Capstone_LozzbyTests/Pods-Capstone_Lozzby-Capstone_LozzbyTests.release.xcconfig"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = Capstone_Lozzby/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		89C6BE57DB24E9ADA2F236DE /* Pods-Capstone_Lozzby-Capstone_LozzbyTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Capstone_Lozzby-Capstone_LozzbyTests.release.xcconfig"; path = "Target Support Files/Pods-Capstone_Lozzby-Capstone_LozzbyTests/Pods-Capstone_Lozzby-Capstone_LozzbyTests.release.xcconfig"; sourceTree = "<group>"; };
+		99E2EA20DE7C86A749A73E33 /* Pods-Capstone_Lozzby-Capstone_LozzbyTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Capstone_Lozzby-Capstone_LozzbyTests.debug.xcconfig"; path = "Target Support Files/Pods-Capstone_Lozzby-Capstone_LozzbyTests/Pods-Capstone_Lozzby-Capstone_LozzbyTests.debug.xcconfig"; sourceTree = "<group>"; };
+		A600F16DD0AD50911212E7F1 /* libPods-Capstone_Lozzby.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Capstone_Lozzby.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		F9EC7C091AEA8DA95BA21428 /* libPods-Capstone_Lozzby-Capstone_LozzbyTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Capstone_Lozzby-Capstone_LozzbyTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,7 +51,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7699B88040F8A987B510C191 /* libPods-Capstone_Lozzby-Capstone_LozzbyTests.a in Frameworks */,
+				18FB5A4C35877963A692A985 /* libPods-Capstone_Lozzby-Capstone_LozzbyTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -59,7 +59,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0C80B921A6F3F58F76C31292 /* libPods-Capstone_Lozzby.a in Frameworks */,
+				96316204EF377BCD6D7BB40B /* libPods-Capstone_Lozzby.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -100,8 +100,8 @@
 			isa = PBXGroup;
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
-				5DCACB8F33CDC322A6C60F78 /* libPods-Capstone_Lozzby.a */,
-				19F6CBCC0A4E27FBF8BF4A61 /* libPods-Capstone_Lozzby-Capstone_LozzbyTests.a */,
+				A600F16DD0AD50911212E7F1 /* libPods-Capstone_Lozzby.a */,
+				F9EC7C091AEA8DA95BA21428 /* libPods-Capstone_Lozzby-Capstone_LozzbyTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -131,7 +131,7 @@
 		83CBBA001A601CBA00E9B192 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				13B07F961A680F5B00A75B9A /* Capstone_Lozzby.app */,
+				13B07F961A680F5B00A75B9A /* Lozzby.app */,
 				00E356EE1AD99517003FC87E /* Capstone_LozzbyTests.xctest */,
 			);
 			name = Products;
@@ -140,10 +140,10 @@
 		BBD78D7AC51CEA395F1C20DB /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				3B4392A12AC88292D35C810B /* Pods-Capstone_Lozzby.debug.xcconfig */,
-				5709B34CF0A7D63546082F79 /* Pods-Capstone_Lozzby.release.xcconfig */,
-				5B7EB9410499542E8C5724F5 /* Pods-Capstone_Lozzby-Capstone_LozzbyTests.debug.xcconfig */,
-				89C6BE57DB24E9ADA2F236DE /* Pods-Capstone_Lozzby-Capstone_LozzbyTests.release.xcconfig */,
+				1EC7359F4E21C53783196B90 /* Pods-Capstone_Lozzby.debug.xcconfig */,
+				0612C9E40E80BF1C7A108145 /* Pods-Capstone_Lozzby.release.xcconfig */,
+				99E2EA20DE7C86A749A73E33 /* Pods-Capstone_Lozzby-Capstone_LozzbyTests.debug.xcconfig */,
+				60DBEBBBC298B25625FEDA1C /* Pods-Capstone_Lozzby-Capstone_LozzbyTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -155,12 +155,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "Capstone_LozzbyTests" */;
 			buildPhases = (
-				A55EABD7B0C7F3A422A6CC61 /* [CP] Check Pods Manifest.lock */,
+				BD12405847A80399F4E36124 /* [CP] Check Pods Manifest.lock */,
 				00E356EA1AD99517003FC87E /* Sources */,
 				00E356EB1AD99517003FC87E /* Frameworks */,
 				00E356EC1AD99517003FC87E /* Resources */,
-				C59DA0FBD6956966B86A3779 /* [CP] Embed Pods Frameworks */,
-				F6A41C54EA430FDDC6A6ED99 /* [CP] Copy Pods Resources */,
+				FADD64F02F2998D7C0A236F0 /* [CP] Embed Pods Frameworks */,
+				AA1B9A7016226FB8AF32F32A /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -172,26 +172,26 @@
 			productReference = 00E356EE1AD99517003FC87E /* Capstone_LozzbyTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		13B07F861A680F5B00A75B9A /* Capstone_Lozzby */ = {
+		13B07F861A680F5B00A75B9A /* Lozzby */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "Capstone_Lozzby" */;
+			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "Lozzby" */;
 			buildPhases = (
-				C38B50BA6285516D6DCD4F65 /* [CP] Check Pods Manifest.lock */,
+				C84BB036E63D7FE4DF768FC6 /* [CP] Check Pods Manifest.lock */,
 				FD10A7F022414F080027D42C /* Start Packager */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
-				00EEFC60759A1932668264C0 /* [CP] Embed Pods Frameworks */,
-				E235C05ADACE081382539298 /* [CP] Copy Pods Resources */,
+				025D71262A88F252D92DF3A0 /* [CP] Embed Pods Frameworks */,
+				BE35BEF7BC8FC1D337965F9E /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = Capstone_Lozzby;
+			name = Lozzby;
 			productName = Capstone_Lozzby;
-			productReference = 13B07F961A680F5B00A75B9A /* Capstone_Lozzby.app */;
+			productReference = 13B07F961A680F5B00A75B9A /* Lozzby.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -224,7 +224,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				13B07F861A680F5B00A75B9A /* Capstone_Lozzby */,
+				13B07F861A680F5B00A75B9A /* Lozzby */,
 				00E356ED1AD99517003FC87E /* Capstone_LozzbyTests */,
 			);
 		};
@@ -266,7 +266,7 @@
 			shellPath = /bin/sh;
 			shellScript = "set -e\n\nWITH_ENVIRONMENT=\"../node_modules/react-native/scripts/xcode/with-environment.sh\"\nNODE_BINARY=/Users/thomashuber/.nvm/versions/node/v16.14.0/bin/node\nREACT_NATIVE_XCODE=\"../node_modules/react-native/scripts/react-native-xcode.sh\"\n\n/bin/sh -c \"$WITH_ENVIRONMENT $REACT_NATIVE_XCODE\"\n";
 		};
-		00EEFC60759A1932668264C0 /* [CP] Embed Pods Frameworks */ = {
+		025D71262A88F252D92DF3A0 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -283,7 +283,24 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Capstone_Lozzby/Pods-Capstone_Lozzby-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		A55EABD7B0C7F3A422A6CC61 /* [CP] Check Pods Manifest.lock */ = {
+		AA1B9A7016226FB8AF32F32A /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Capstone_Lozzby-Capstone_LozzbyTests/Pods-Capstone_Lozzby-Capstone_LozzbyTests-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Capstone_Lozzby-Capstone_LozzbyTests/Pods-Capstone_Lozzby-Capstone_LozzbyTests-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Capstone_Lozzby-Capstone_LozzbyTests/Pods-Capstone_Lozzby-Capstone_LozzbyTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BD12405847A80399F4E36124 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -305,7 +322,24 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		C38B50BA6285516D6DCD4F65 /* [CP] Check Pods Manifest.lock */ = {
+		BE35BEF7BC8FC1D337965F9E /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Capstone_Lozzby/Pods-Capstone_Lozzby-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Capstone_Lozzby/Pods-Capstone_Lozzby-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Capstone_Lozzby/Pods-Capstone_Lozzby-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C84BB036E63D7FE4DF768FC6 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -327,7 +361,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		C59DA0FBD6956966B86A3779 /* [CP] Embed Pods Frameworks */ = {
+		FADD64F02F2998D7C0A236F0 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -342,40 +376,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Capstone_Lozzby-Capstone_LozzbyTests/Pods-Capstone_Lozzby-Capstone_LozzbyTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		E235C05ADACE081382539298 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Capstone_Lozzby/Pods-Capstone_Lozzby-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Capstone_Lozzby/Pods-Capstone_Lozzby-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Capstone_Lozzby/Pods-Capstone_Lozzby-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		F6A41C54EA430FDDC6A6ED99 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Capstone_Lozzby-Capstone_LozzbyTests/Pods-Capstone_Lozzby-Capstone_LozzbyTests-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Capstone_Lozzby-Capstone_LozzbyTests/Pods-Capstone_Lozzby-Capstone_LozzbyTests-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Capstone_Lozzby-Capstone_LozzbyTests/Pods-Capstone_Lozzby-Capstone_LozzbyTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		FD10A7F022414F080027D42C /* Start Packager */ = {
@@ -422,7 +422,7 @@
 /* Begin PBXTargetDependency section */
 		00E356F51AD99517003FC87E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 13B07F861A680F5B00A75B9A /* Capstone_Lozzby */;
+			target = 13B07F861A680F5B00A75B9A /* Lozzby */;
 			targetProxy = 00E356F41AD99517003FC87E /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -430,7 +430,7 @@
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5B7EB9410499542E8C5724F5 /* Pods-Capstone_Lozzby-Capstone_LozzbyTests.debug.xcconfig */;
+			baseConfigurationReference = 99E2EA20DE7C86A749A73E33 /* Pods-Capstone_Lozzby-Capstone_LozzbyTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -457,7 +457,7 @@
 		};
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 89C6BE57DB24E9ADA2F236DE /* Pods-Capstone_Lozzby-Capstone_LozzbyTests.release.xcconfig */;
+			baseConfigurationReference = 60DBEBBBC298B25625FEDA1C /* Pods-Capstone_Lozzby-Capstone_LozzbyTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
@@ -481,7 +481,7 @@
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3B4392A12AC88292D35C810B /* Pods-Capstone_Lozzby.debug.xcconfig */;
+			baseConfigurationReference = 1EC7359F4E21C53783196B90 /* Pods-Capstone_Lozzby.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -489,6 +489,7 @@
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Capstone_Lozzby/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Lozzby;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.business";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -500,7 +501,7 @@
 					"-lc++",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = Capstone_Lozzby;
+				PRODUCT_NAME = Lozzby;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -509,13 +510,14 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5709B34CF0A7D63546082F79 /* Pods-Capstone_Lozzby.release.xcconfig */;
+			baseConfigurationReference = 0612C9E40E80BF1C7A108145 /* Pods-Capstone_Lozzby.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				INFOPLIST_FILE = Capstone_Lozzby/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Lozzby;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.business";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -527,7 +529,7 @@
 					"-lc++",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = Capstone_Lozzby;
+				PRODUCT_NAME = Lozzby;
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -682,7 +684,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "Capstone_Lozzby" */ = {
+		13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "Lozzby" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				13B07F941A680F5B00A75B9A /* Debug */,

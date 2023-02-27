@@ -1,7 +1,7 @@
 import React, {useEffect, useMemo, useState} from 'react';
 import {StyleSheet, View, Text} from 'react-native';
 import {useSelector} from 'react-redux';
-import {getScreenHeight} from '../utils/domUtils';
+import {getScreenHeight, getScreenWidth} from '../utils/domUtils';
 import FastImage from 'react-native-fast-image';
 import {gallery} from '../constants/images';
 import {Storage} from 'aws-amplify';
@@ -61,8 +61,10 @@ const createStyles = (theme: any) =>
     screen: {
       backgroundColor: "lavender",
       borderRadius: getScreenHeight(2),
-      width : 180,
-      marginLeft : getScreenHeight(1) 
+      width : getScreenWidth(45),
+      marginRight : getScreenHeight(1) ,
+      alignSelf:"center"
+
     },
     icon: {
       height: getScreenHeight(6),

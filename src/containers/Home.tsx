@@ -111,7 +111,7 @@ const Home = () => {
             backgroundColor: 'lavender',
             marginTop: getScreenHeight(1),
             borderRadius: getScreenHeight(2),
-            width: '92%',
+            width: '94%',
             alignSelf: 'center',
             flexDirection: 'row',
             justifyContent: 'space-between',
@@ -144,6 +144,7 @@ const Home = () => {
           </View>
         </View>
         <FlatList
+          style = {{alignSelf:"center",width:'97%'}}
           numColumns={2}
           data={data.filter(item => {
             return item?.name
@@ -191,6 +192,9 @@ const createStyles = (theme: any) =>
     },
     item: {
       marginBottom: getScreenHeight(2),
+      //backgroundColor:'red',
+     // marginLeft : getScreenHeight(0.5),
+      alignSelf:"center"
     },
     title: {
       fontSize: getScreenHeight(2),

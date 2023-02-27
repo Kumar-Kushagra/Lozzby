@@ -85,10 +85,10 @@ const AddAddress = () => {
     let data = {
       country: 'Canada',
       province: selectedProvince,
-      city : cityRef.current.getValue(),
-      streetAddress : streetAddressRef.current.getValue(),
+      city: cityRef.current.getValue(),
+      streetAddress: streetAddressRef.current.getValue(),
       pincode: pincodeRef.current.getValue(),
-      phoneNumber: "+1" + phoneNumberRef.current.getValue(),
+      phoneNumber: '+1' + phoneNumberRef.current.getValue(),
     };
     dispatch<any>(createAddressManager(data));
   };
@@ -98,7 +98,7 @@ const AddAddress = () => {
       <CustomStatusBar light color={theme.primary} />
       <View style={styles.screen}>
         <CustomHeader title="Add Address" />
-        <ScrollView contentContainerStyle={styles.contanier}>
+        <ScrollView bounces={false} contentContainerStyle={styles.contanier}>
           <View style={styles.item}>
             <CustomInput
               placeholder={'Canada'}
@@ -123,6 +123,11 @@ const AddAddress = () => {
               data={provinces}
               save="value"
               placeholder={'Select a province'}
+              inputStyles={{
+                right: getScreenHeight(1.7),
+                fontSize: getScreenHeight(1.8),
+                color: theme.black,
+              }}
             />
           </View>
 

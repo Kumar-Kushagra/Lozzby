@@ -62,7 +62,7 @@ const EditUserProfile = () => {
       <CustomStatusBar light color={theme.primary} />
       <View style={styles.screen}>
         <CustomHeader title="Edit Profile" cart={<CartCount/>}/>
-        <ScrollView contentContainerStyle={styles.contanier}>
+        <ScrollView bounces = {false} contentContainerStyle={styles.contanier}>
           <View style={styles.item}>
             <CustomAvatar ref={profileRef} />
           </View>
