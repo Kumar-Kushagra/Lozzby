@@ -35,11 +35,10 @@ const ManageAddress = () => {
     };
   }, [userData?.id]);
 
-
   const renderItem = ({item}: any) => {
     return (
       <View style={styles.item}>
-        <AddressItem item={item} backgroundColor={"lavender"}/>
+        <AddressItem item={item} backgroundColor={'lavender'} />
       </View>
     );
   };
@@ -58,12 +57,22 @@ const ManageAddress = () => {
           data={data}
           ListEmptyComponent={() => (
             <View style={{marginTop: getScreenHeight(25)}}>
-               <FastImage
+              <FastImage
                 style={styles.image}
-                resizeMode={"contain"}
-                source={require("../../assets/images/noaddress.png")}
+                resizeMode={'contain'}
+                source={require('../../assets/images/noaddress.png')}
               />
-            <Text style={{ marginTop : getScreenHeight(2),...styles.title,textAlign : "center", fontSize : getScreenHeight(2.5),color : theme.primary, fontWeight:'bold'}}>No Addresses Saved Yet!</Text>
+              <Text
+                style={{
+                  marginTop: getScreenHeight(2),
+                  ...styles.title,
+                  textAlign: 'center',
+                  fontSize: getScreenHeight(2.5),
+                  color: theme.primary,
+                  fontWeight: 'bold',
+                }}>
+                No Addresses Saved Yet!
+              </Text>
             </View>
           )}
           keyExtractor={(_, index) => index.toString()}
@@ -71,10 +80,10 @@ const ManageAddress = () => {
           contentContainerStyle={{padding: getScreenHeight(2)}}
         />
         <View style={{padding: getScreenHeight(2)}}>
-        <CustomButton
-          title="Add Address"
-          action={() => navigate('AddAddress', {})}
-        />
+          <CustomButton
+            title="Add Address"
+            action={() => navigate('AddAddress', {})}
+          />
         </View>
       </View>
     </SafeAreaView>
@@ -99,7 +108,7 @@ const createStyles = (theme: any) =>
     },
     title: {
       color: theme.black,
-      fontSize: getScreenHeight(1.8)
+      fontSize: getScreenHeight(1.8),
     },
     image: {
       height: getScreenHeight(20),

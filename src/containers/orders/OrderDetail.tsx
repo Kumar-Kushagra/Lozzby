@@ -214,11 +214,70 @@ const OrderDetail = (props: any) => {
             );
           }}
         />
-        {itemData.status === 'PENDING' && <Text style= {{fontSize:getScreenHeight(2.5),color:"grey",textAlign:'center',width:"90%",alignSelf:"center"}}>Order is still waiting to accepted or rejected by seller.</Text> }
-        {itemData.status === 'CANCELLED' &&  userData.id === itemData.sellerID && <Text style= {{fontSize:getScreenHeight(2.5),color:"#cc0000",textAlign:'center',width:"90%",alignSelf:"center"}}>Order has been cancelled by Customer.</Text>}
-        {itemData.status === 'DELIVERED'&&  userData.id !== itemData.sellerID  && <Text style= {{fontSize:getScreenHeight(2.5),color:"green",textAlign:'center',width:"90%",alignSelf:"center"}}>Order has been delivered successfully by seller.</Text>}
-        {itemData.status === 'COMPLETED' &&  userData.id === itemData.sellerID  && <Text style= {{fontSize:getScreenHeight(2.5),color:"green",textAlign:'center',width:"90%",alignSelf:"center"}}>Order has been completed successfully by customer.</Text>}
-        {itemData.status === 'REJECTED'&&  userData.id !== itemData.sellerID  && <Text style= {{fontSize:getScreenHeight(2.5),color:"#cc0000",textAlign:'center',width:"90%",alignSelf:"center"}}>Order has been rejected by Seller.</Text>}
+        {itemData.status === 'PENDING' && (
+          <Text
+            style={{
+              fontSize: getScreenHeight(2.5),
+              color: 'grey',
+              textAlign: 'center',
+              width: '90%',
+              alignSelf: 'center',
+            }}>
+            Order is still waiting to accepted or rejected by seller.
+          </Text>
+        )}
+        {itemData.status === 'CANCELLED' &&
+          userData.id === itemData.sellerID && (
+            <Text
+              style={{
+                fontSize: getScreenHeight(2.5),
+                color: '#cc0000',
+                textAlign: 'center',
+                width: '90%',
+                alignSelf: 'center',
+              }}>
+              Order has been cancelled by Customer.
+            </Text>
+          )}
+        {itemData.status === 'DELIVERED' &&
+        userData.id !== itemData.sellerID && (
+          <Text
+            style={{
+              fontSize: getScreenHeight(2.5),
+              color: 'green',
+              textAlign: 'center',
+              width: '90%',
+              alignSelf: 'center',
+            }}>
+            Order has been delivered successfully by seller.
+          </Text>
+        )}
+        {itemData.status === 'COMPLETED' &&
+          userData.id === itemData.sellerID && (
+            <Text
+              style={{
+                fontSize: getScreenHeight(2.5),
+                color: 'green',
+                textAlign: 'center',
+                width: '90%',
+                alignSelf: 'center',
+              }}>
+              Order has been completed successfully by customer.
+            </Text>
+          )}
+        {itemData.status === 'REJECTED' &&
+          userData.id !== itemData.sellerID && (
+            <Text
+              style={{
+                fontSize: getScreenHeight(2.5),
+                color: '#cc0000',
+                textAlign: 'center',
+                width: '90%',
+                alignSelf: 'center',
+              }}>
+              Order has been rejected by Seller.
+            </Text>
+          )}
         <View style={{paddingHorizontal: getScreenHeight(2)}}>
           {itemData.status === 'ACCEPTED' &&
           userData.id === itemData.sellerID ? (
@@ -239,7 +298,11 @@ const OrderDetail = (props: any) => {
           ) : null}
         </View>
 
-        <View style={{paddingHorizontal: getScreenHeight(2), marginTop: getScreenHeight(1)}}>
+        <View
+          style={{
+            paddingHorizontal: getScreenHeight(2),
+            marginTop: getScreenHeight(1),
+          }}>
           {itemData.status === 'DELIVERED' &&
           userData.id !== itemData.sellerID ? (
             <CustomButton
@@ -258,10 +321,14 @@ const OrderDetail = (props: any) => {
             />
           ) : null}
         </View>
-        <View style={{paddingHorizontal: getScreenHeight(2), marginTop: getScreenHeight(1)}}>
+        <View
+          style={{
+            paddingHorizontal: getScreenHeight(2),
+            marginTop: getScreenHeight(1),
+          }}>
           {itemData.status === 'PENDING' &&
           userData.id === itemData.sellerID ? (
-            <View style={styles.row}>
+            <View style={{marginBottom: getScreenHeight(2), ...styles.row}}>
               <TouchableOpacity
                 style={{
                   borderRadius: getScreenHeight(5),
@@ -329,7 +396,6 @@ const OrderDetail = (props: any) => {
             ${totalAmount.toFixed(2)}
           </Text>
         </View>
-       
       </View>
     </SafeAreaView>
   );

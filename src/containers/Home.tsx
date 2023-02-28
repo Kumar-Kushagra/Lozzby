@@ -32,6 +32,7 @@ const Home = () => {
   const subRef: any = useRef();
   const [search, setSearch] = useState('');
 
+
   useEffect(() => {
     if (filter) {
       if (filter?.sort) {
@@ -72,7 +73,13 @@ const Home = () => {
       subRef.current = DataStore.observeQuery(Product).subscribe(
         ({items}: any) => {
           setLoading(false);
-          setData(items);
+          let a = []
+          items.forEach((element) => {
+             if (element?.userID !== userData.userID){
+                   a.push(element)
+             }
+          });
+          setData(a);
         },
       );
     }

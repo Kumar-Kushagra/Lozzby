@@ -122,9 +122,12 @@ const AddAddress = () => {
               setSelected={val => setSelectedProvince(val)}
               data={provinces}
               save="value"
-              placeholder={'Select a province'}
+              placeholder={'Select a Province'}
+              searchicon={<></>}
+              searchPlaceholder="Search Provinces"
               inputStyles={{
-                right: getScreenHeight(1.7),
+                right: getScreenHeight(1.6),
+                marginRight: getScreenHeight(1.7),
                 fontSize: getScreenHeight(1.8),
                 color: theme.black,
               }}
@@ -148,6 +151,7 @@ const AddAddress = () => {
               label={'Phone Number'}
             />
           </View>
+
           <View style={styles.item}>
             <CustomButton action={validate} title="Add Address" />
           </View>

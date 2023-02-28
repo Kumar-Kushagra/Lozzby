@@ -21,6 +21,7 @@ const ManageProducts = () => {
   const styles = useMemo(() => createStyles(theme), [theme]);
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState([]);
+  const loader = useSelector((state: any) => state.common.loading);
 
   useEffect(() => {
     const sub = DataStore.observeQuery(Product, product =>
@@ -44,6 +45,9 @@ const ManageProducts = () => {
   };
 
   if (loading) {
+    return <FullScreenLoader />;
+  }
+  if (loader) {
     return <FullScreenLoader />;
   }
 
@@ -78,7 +82,7 @@ const ManageProducts = () => {
           renderItem={renderItem}
           contentContainerStyle={{padding: getScreenHeight(2)}}
         />
-
+        <View style={{height: getScreenHeight(6)}}></View>
         <View
           style={{
             width: '90%',

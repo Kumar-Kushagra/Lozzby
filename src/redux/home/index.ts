@@ -1,7 +1,5 @@
 import {createSlice} from '@reduxjs/toolkit';
-import {Alert} from 'react-native';
 import {API, DataStore} from 'aws-amplify';
-import * as queries from '../../graphql/queries';
 import * as mutations from '../../graphql/mutations';
 import {createProductSchema, showToast} from '../../utils/domUtils';
 import {setLoading} from '../common';

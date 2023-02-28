@@ -32,24 +32,18 @@ const AddressItem = (props: any) => {
 
   return (
     <View style={{...styles.screen, backgroundColor: props.backgroundColor}}>
-        <Text style={{ ...styles.title,marginTop:getScreenHeight(1),width:"70%" }}>{ props.item?.streetAddress +", "  + props.item?.city +', '  + props.item?.province+', ' + props.item?.country+ " - " + props.item?.pincode.toUpperCase()}</Text>
-      {/* <View style={[styles.row, {marginTop: getScreenHeight(1)}]}>
-        <Text style={{...styles.title}}>{props.item?.streetAddress}</Text>
-      </View>
-
-      <View style={styles.row}>
-        <Text style={styles.title}>
-          {props.item?.city +
-            ',' +
-            props.item.province +
-            ',' +
-            props.item?.country}
-        </Text>
-      </View> */}
-
-      {/* <View style={styles.row}>
-        <Text style={styles.title}>{props.item.pincode.toUpperCase()}</Text>
-      </View> */}
+      <Text
+        style={{...styles.title, marginTop: getScreenHeight(1), width: '70%'}}>
+        {props.item?.streetAddress +
+          ', ' +
+          props.item?.city +
+          ', ' +
+          props.item?.province +
+          ', ' +
+          props.item?.country +
+          ' - ' +
+          props.item?.pincode.toUpperCase()}
+      </Text>
 
       <View style={styles.row}>
         <Text style={styles.title}>{props.item.phoneNumber}</Text>
@@ -59,7 +53,7 @@ const AddressItem = (props: any) => {
         style={{
           position: 'absolute',
           zIndex: 1000,
-          right: 5,
+          right: 10,
           top: getScreenHeight(1),
         }}>
         <FastImage
@@ -75,7 +69,7 @@ const AddressItem = (props: any) => {
         style={{
           position: 'absolute',
           zIndex: 1000,
-          right: 30,
+          right: 45,
           top: getScreenHeight(1),
         }}>
         <FastImage
@@ -107,8 +101,8 @@ const createStyles = (theme: any) =>
       fontWeight: '500',
     },
     icon: {
-      height: getScreenHeight(2.5),
-      width: getScreenHeight(2.5),
+      height: getScreenHeight(3),
+      width: getScreenHeight(3),
     },
   });
 
