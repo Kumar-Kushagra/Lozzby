@@ -56,7 +56,19 @@ const MyProductItem = (props: any) => {
           marginBottom: getScreenHeight(1),
           marginTop: getScreenHeight(1),
         }}>
-       
+        <TouchableOpacity
+          onPress={() => navigate('EditProduct', {data: props.item})}
+          style={{
+            marginRight: getScreenHeight(2),
+          }}>
+          <FastImage
+            tintColor={theme.primary}
+            source={require('../assets/images/edit.png')}
+            resizeMode="contain"
+            style={styles.icon}
+          />
+        </TouchableOpacity>
+
         <TouchableOpacity
           onPress={() => handler(props.item.id, props.item._version)}>
           <FastImage

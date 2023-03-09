@@ -68,9 +68,9 @@ const Login = () => {
                 Keyboard.dismiss();
               }}
             />
-            {/* <TouchableOpacity onPress={() => navigate('ForgotPassword')}>
+            <TouchableOpacity onPress={() => navigate('ForgotPassword')}>
               <Text style={styles.subtitle}>Forgot Password?</Text>
-            </TouchableOpacity> */}
+            </TouchableOpacity>
             <View style={styles.customButton}>
               <CustomButton action={loginActionHandler} title="Login" />
             </View>

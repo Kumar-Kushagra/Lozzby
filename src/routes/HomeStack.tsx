@@ -12,6 +12,7 @@ import EditAddress from '../containers/address/EditAddress';
 import ChooseAddress from '../containers/cart/ChooseAddress';
 import OrderDetail from '../containers/orders/OrderDetail';
 import SellerOrders from '../containers/orders/SellerOrders';
+import EditProduct from '../containers/products/EditProduct';
 
 
 const Stack = createNativeStackNavigator();
@@ -34,6 +35,7 @@ const HomeStack = () => {
         <Stack.Screen name="ChooseAddress" component={ChooseAddress} />
         <Stack.Screen name="OrderDetail" component={OrderDetail} />
         <Stack.Screen name="SellerOrders" component={SellerOrders} />
+        <Stack.Screen name="EditProduct" component={EditProduct} />
       </Stack.Navigator>
     </>
   );

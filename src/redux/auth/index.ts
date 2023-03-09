@@ -244,7 +244,7 @@ export const updateProductManager = (data: any) => {
         query: mutations.updateProduct,
         variables: {input: data},
       });
-      showToast('Product has been Updated');
+      showToast('Product has been updated successfully!');
       goBack();
     } catch (error) {
       console.log(error);
@@ -307,7 +307,7 @@ export const verifyFrogotOtpManager = (data: any) => {
         );
         if (res) {
           navigate('Login');
-          showToast('Password change');
+          showToast('Password has been changed successfully!');
         }
       } catch (error: any) {
         showToast(error.message);
@@ -332,7 +332,7 @@ export const forgotPasswordManager = (data: any) => {
           });
         }
       } catch (error: any) {
-        showToast(error.message);
+        showToast("User does not exist!");
       } finally {
         dispatch(setLoading(false));
       }
@@ -346,7 +346,7 @@ export const resendConfirmationCodeManager = (data: any) => {
     try {
       const res = await Auth.resendSignUp(data.email);
       if (res) {
-        showToast('code resent successfully');
+        showToast('Code has been resent successfully!');
       }
     } catch (error: any) {
       showToast(error.message);
@@ -362,7 +362,7 @@ export const resendForgotConfirmationManager = (data: any) => {
     try {
       const res = await Auth.forgotPassword(data.email);
       if (res) {
-        showToast('code resent successfully');
+        showToast('Code has been resent successfully!');
       }
     } catch (error: any) {
       showToast(error.message);

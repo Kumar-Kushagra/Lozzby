@@ -125,7 +125,7 @@ export const forgotSchema = (obj: any) => {
         .nonempty({
           message: 'Email is required!',
         })
-        .email({ message: 'Email is invalid!' }),
+        .email({ message: 'Please enter a valid email address!' }),
     });
     const res = FormData.parse(obj);
     return res;

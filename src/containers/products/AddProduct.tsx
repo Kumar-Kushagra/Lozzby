@@ -32,14 +32,14 @@ const AddProduct = () => {
   const availableQuantityRef: any = useRef();
   const [category, setCategory] = useState('');
   const userData = useSelector((state: any) => state.auth.userData);
-  
+
   useEffect(() => {
     if (!userData?.phoneNumber) {
       showToast('You cannot add products before completing your profile!');
     }
   }, []);
 
-  function capitalizeFirstLetter(string) {
+  function capitalizeFirstLetter(string: any) {
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
 
@@ -48,30 +48,30 @@ const AddProduct = () => {
   }
 
   const validate = () => {
-    // if (!profileRef.current.getValue()) {
-    //   return showToast('Image is compulsry, Please add one');
-    // }
-    // if (!nameRef.current.getValue()) {
-    //   return showToast('Name is compulsry, Please add one!');
-    // }
-    // if (!descriptionRef.current.getValue()) {
-    //   return showToast('Description is compulsry, Please add one!');
-    // }
-    // if (!priceRef.current.getValue()) {
-    //   return showToast('Price is compulsry, Please add one!');
-    // }
-    // if (!containsOnlyNumbers(priceRef.current.getValue())) {
-    //   return showToast('Price can only be a number!');
-    // }
-    // if (!availableQuantityRef.current.getValue()) {
-    //   return showToast('Quantity is compulsry, Please add one!');
-    // }
-    // if (!containsOnlyNumbers(availableQuantityRef.current.getValue())) {
-    //   return showToast('Quantity can only be a number!');
-    // }
-    // if (category.length === 0) {
-    //   return showToast('Please select category!');
-    // }
+    if (!profileRef.current.getValue()) {
+      return showToast('Image is compulsry, Please add one');
+    }
+    if (!nameRef.current.getValue()) {
+      return showToast('Name is compulsry, Please add one!');
+    }
+    if (!descriptionRef.current.getValue()) {
+      return showToast('Description is compulsry, Please add one!');
+    }
+    if (!priceRef.current.getValue()) {
+      return showToast('Price is compulsry, Please add one!');
+    }
+    if (!containsOnlyNumbers(priceRef.current.getValue())) {
+      return showToast('Price can only be a number!');
+    }
+    if (!availableQuantityRef.current.getValue()) {
+      return showToast('Quantity is compulsry, Please add one!');
+    }
+    if (!containsOnlyNumbers(availableQuantityRef.current.getValue())) {
+      return showToast('Quantity can only be a number!');
+    }
+    if (category.length === 0) {
+      return showToast('Please select category!');
+    }
     let data = {
       name: nameRef.current.getValue(),
       image: profileRef.current.getValue(),
@@ -83,9 +83,6 @@ const AddProduct = () => {
     dispatch<any>(createProductManager(data));
   };
 
-
- 
-
   return (
     <SafeAreaView edges={['top']} style={styles.safe}>
       <CustomStatusBar light color={theme.primary} />
@@ -96,7 +93,7 @@ const AddProduct = () => {
             <CustomAvatar ref={profileRef} />
           </View>
           <View style={styles.item}>
-            <CustomInput ref={nameRef} label={'Name'} />
+            <CustomInput ref={nameRef} maxLength={20} label={'Name'} />
           </View>
           <View style={styles.item}>
             <CustomInput
