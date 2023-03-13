@@ -93,7 +93,7 @@ export const deleteCartManager = (data: any) => {
         variables: {input: data},
       });
       dispatch(cartDataManager());
-      showToast('Item has been removed');
+      showToast('Item has been removed successfully!');
     } catch (error) {
       showToast('Something went wrong please try again later!');
     } finally {
@@ -222,6 +222,7 @@ export const createCartItemManager = (data: any) => {
               variables: {input: data},
             });
             dispatch(cartDataManager());
+            navigate('Cart', {});
             showToast('Product has been added to cart');
           } catch (error) {
             console.log(error);

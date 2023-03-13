@@ -40,7 +40,7 @@ const MyProductItem = (props: any) => {
 
       <View style={styles.row}>
         <Text style={styles.title}>Price</Text>
-        <Text style={styles.title}>{props.item.price}</Text>
+        <Text style={styles.title}>{"$" + props.item.price}</Text>
       </View>
 
       <View style={styles.row}>

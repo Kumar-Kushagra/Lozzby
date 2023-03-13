@@ -32,7 +32,6 @@ const ProductDetail = (props: any) => {
   const item = props.route.params.data;
   const dispatch = useDispatch();
 
-
   useEffect(() => {
     if (data?.image) {
       getImage(data.image);
@@ -65,15 +64,18 @@ const ProductDetail = (props: any) => {
           resizeMode="contain"
           source={{uri: image, priority: FastImage.priority.normal}}
         />
-        <ScrollView bounces = {false} contentContainerStyle={styles.contanier}>
+        <ScrollView bounces={false} contentContainerStyle={styles.contanier}>
           <Text style={styles.title}>${data.price.toFixed(2)}</Text>
           <Text style={styles.subtitle}>{data.description}</Text>
           <Text style={styles.title}>Available Quantity</Text>
           <Text style={styles.subtitle}>{data.quantity}</Text>
 
-          {userData?.id === data?.userID ? 
-            <Text style = {{...styles.title2,alignSelf:"center"}}>This Product is created by you.You can not buy the product that is created by you </Text>
-          : (
+          {userData?.id === data?.userID ? (
+            <Text style={{...styles.title2, alignSelf: 'center'}}>
+              This Product is created by you.You can not buy the product that is
+              created by you{' '}
+            </Text>
+          ) : (
             <>
               <View>
                 <Text style={styles.title}>Quantity Selected</Text>
@@ -82,9 +84,10 @@ const ProductDetail = (props: any) => {
                     onPress={() => {
                       if (quantity > 0) {
                         setQuantity(pre => pre - 1);
-                      }
-                      else{
-                        showToast("You can not select product with no quantity!")
+                      } else {
+                        showToast(
+                          'You can not select product with no quantity!',
+                        );
                       }
                     }}>
                     <Image
@@ -92,17 +95,26 @@ const ProductDetail = (props: any) => {
                       source={require('../../assets/images/minus.png')}
                     />
                   </TouchableOpacity>
-                  <Text style={{...styles.subtitle,fontSize : getScreenHeight(2.2),marginBottom : 0,marginLeft: getScreenWidth(3),marginRight:getScreenWidth(3)}}>{quantity}</Text>
+                  <Text
+                    style={{
+                      ...styles.subtitle,
+                      fontSize: getScreenHeight(2.2),
+                      marginBottom: 0,
+                      marginLeft: getScreenWidth(3),
+                      marginRight: getScreenWidth(3),
+                    }}>
+                    {quantity}
+                  </Text>
                   <TouchableOpacity
                     onPress={() => {
                       if (quantity < parseInt(data.quantity)) {
                         setQuantity(pre => pre + 1);
+                      } else {
+                        showToast(
+                          "You can't select product above maximum quantity!",
+                        );
                       }
-                      else{
-                        showToast("You can't select product above maximum quantity!")
-                      }
-                    }}
-                    >
+                    }}>
                     <Image
                       style={styles.inc}
                       source={require('../../assets/images/plus.png')}
@@ -113,16 +125,16 @@ const ProductDetail = (props: any) => {
               <View style={{height: getScreenHeight(4)}} />
               <CustomButton
                 action={() => {
-                  if(quantity !== 0){
-                  dispatch<any>(
-                    createCartItemManager({
-                      cartItemProductId: data.id,
-                      quantity: quantity,
-                      userID: data.userID,
-                    }),
-                  );}
-                  else {
-                    showToast("Please select a quantity!")
+                  if (quantity !== 0) {
+                    dispatch<any>(
+                      createCartItemManager({
+                        cartItemProductId: data?.id,
+                        quantity: quantity,
+                        userID: data?.userID,
+                      }),
+                    );
+                  } else {
+                    showToast('Please select a quantity!');
                   }
                 }}
                 title="Add To Cart"
@@ -166,7 +178,7 @@ const createStyles = (theme: any) =>
       fontSize: getScreenHeight(2.2),
       color: 'black',
       fontWeight: '700',
-      color: theme.primary,
+      color : theme.primary,
     },
     row: {
       flexDirection: 'row',

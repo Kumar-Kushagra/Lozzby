@@ -1,5 +1,5 @@
 import React, {useEffect, useMemo, useState} from 'react';
-import {StyleSheet, View, Text, TouchableOpacity} from 'react-native';
+import {StyleSheet, View, Text, TouchableOpacity,Alert} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import {getScreenHeight} from '../utils/domUtils';
 import FastImage from 'react-native-fast-image';
@@ -25,6 +25,32 @@ const CartItem = (props: any) => {
     setImage(mainLink);
   };
 
+  const handler = () => {
+    Alert.alert(
+      "Are you sure?",
+      "you wanted to remove this item from cart?", 
+      [
+        {
+          text: "Cancel",
+          onPress: () => console.log("Cancel Pressed"),
+          style: "cancel",
+        },
+        {
+          text: "OK",
+          onPress: () =>
+            dispatch<any>(
+              deleteCartManager({
+                _version: props.item._version,
+                id: props.item.id,
+              })
+            ),
+        },
+      ],
+      { cancelable: false }
+    );
+  };
+
+
   return (
     <View style={{...styles.screen}}>
       <View style={styles.imagecontanier}>
@@ -46,25 +72,32 @@ const CartItem = (props: any) => {
         )}
       </View>
       <View style={styles.contanier}>
-        <Text style={styles.title}>{props?.item?.Product.name}</Text>
+        <Text style={styles.title}>{props?.item?.Product?.name}</Text>
         {/* <View style={styles.row}> */}
-           <Text style={{...styles.price,color:theme.primary,fontWeight:"900"}}>Price <Text style={{fontWeight:"500",...styles.price}}>{"$" + props.item?.Product?.price}</Text></Text>
-          <Text style={{...styles.price,color:theme.primary,fontWeight:"900"}}>Quantity <Text style={{fontWeight:"500",...styles.price}}>{props?.item?.quantity}</Text></Text>
+        <Text
+          style={{...styles.price, color: theme.primary, fontWeight: '900'}}>
+          Price{' '}
+          <Text style={{fontWeight: '500', ...styles.price}}>
+            {'$' + props.item?.Product?.price}
+          </Text>
+        </Text>
+        <Text
+          style={{...styles.price, color: theme.primary, fontWeight: '900'}}>
+          Quantity{' '}
+          <Text style={{fontWeight: '500', ...styles.price}}>
+            {props?.item?.quantity}
+          </Text>
+        </Text>
         {/* </View> */}
 
-        {/* <TouchableOpacity
-          onPress={() => {
-            dispatch<any>(
-              deleteCartManager({
-                _version: props.item._version,
-                id: props.item.id,
-              }),
-            );
-          }}>
-          <Text style={[styles.title, {color: theme.primary}]}>
-            Remove From Cart
-          </Text>
-        </TouchableOpacity> */}
+        <TouchableOpacity style={styles.iconContanier} onPress={handler}>
+          <FastImage
+            tintColor={theme.primary}
+            resizeMode="contain"
+            source={require('../assets/images/delete.png')}
+            style={styles.smallIcon}
+          />
+        </TouchableOpacity>
       </View>
     </View>
   );
@@ -75,13 +108,12 @@ const createStyles = (theme: any) =>
     screen: {
       backgroundColor: 'lavender',
       borderRadius: getScreenHeight(2),
-      flexDirection :'row',
-      justifyContent : "space-between"
+      flexDirection: 'row',
+      justifyContent: 'space-between',
     },
     icon: {
       height: getScreenHeight(6),
       width: getScreenHeight(6),
-
     },
     image: {
       height: getScreenHeight(20),
@@ -101,13 +133,13 @@ const createStyles = (theme: any) =>
     },
     contanier: {
       padding: getScreenHeight(2),
-      width : '55%'
+      width: '55%',
     },
     title: {
       color: theme.black,
       fontSize: getScreenHeight(2.5),
       textTransform: 'capitalize',
-      fontWeight : "bold"
+      fontWeight: 'bold',
     },
     subtitle: {
       color: theme.black,
@@ -117,13 +149,23 @@ const createStyles = (theme: any) =>
     price: {
       color: theme.black,
       fontSize: getScreenHeight(2),
-      marginTop : getScreenHeight(0.5)
+      marginTop: getScreenHeight(0.5),
       // alignSelf: 'center',
     },
     row: {
       flexDirection: 'row',
       alignItems: 'center',
       justifyContent: 'space-between',
+    },
+    smallIcon: {
+      height: getScreenHeight(2.5),
+      width: getScreenHeight(2.5),
+    },
+    iconContanier: {
+      position: "absolute",
+      zIndex: 100,
+      right: getScreenHeight(1),
+      top: getScreenHeight(1),
     },
   });
 
