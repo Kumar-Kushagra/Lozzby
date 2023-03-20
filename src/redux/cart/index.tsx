@@ -102,6 +102,28 @@ export const deleteCartManager = (data: any) => {
   };
 };
 
+export const clearCartManager = () => {
+  return async (dispatch: any, getState: any) => {
+    const cartData = getState().cart.cartData;
+    const userData = getState().auth.userData;
+    setLoading(true)
+
+    await API.graphql({
+      query: mutations.deleteCart,
+      variables: {
+        input: {
+          _version: cartData._version,
+          id: cartData.id,
+        },
+      },
+    });
+    setLoading(false)
+    showToast("Cart has been successfully cleared!")
+    dispatch(createCartManager(userData.id));
+    navigate('Home', {});
+  }
+}
+
 export const createOrderManager = (addressID: any, total: any) => {
   return async (dispatch: any, getState: any) => {
     const userData = getState().auth.userData;

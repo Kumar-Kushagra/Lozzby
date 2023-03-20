@@ -1,5 +1,5 @@
 import React, {useEffect, useMemo} from 'react';
-import {View, StyleSheet, FlatList, Text} from 'react-native';
+import {View, StyleSheet, FlatList, Text, TouchableOpacity} from 'react-native';
 import FastImage from 'react-native-fast-image';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {useDispatch, useSelector} from 'react-redux';
@@ -10,10 +10,10 @@ import {
   FullScreenLoader,
 } from '../../components';
 import CartItem from '../../components/CartItem';
-import {cartDataManager} from '../../redux/cart';
+import {cartDataManager, clearCartManager} from '../../redux/cart';
 
 import {navigate} from '../../services/Routerservices';
-import {getScreenHeight} from '../../utils/domUtils';
+import {getScreenHeight, getScreenWidth} from '../../utils/domUtils';
 
 const Cart = () => {
   const theme = useSelector((state: any) => state.theme.theme);
@@ -43,6 +43,11 @@ const Cart = () => {
       <CustomStatusBar light color={theme.primary} />
       <View style={styles.screen}>
         <CustomHeader title="Cart" />
+        {cartProducts?.length > 0 && <TouchableOpacity
+          style={styles.clear}
+          onPress={() => dispatch<any>(clearCartManager())}>
+          <Text style={styles.clearText}>Clear Cart</Text>
+        </TouchableOpacity>}
         <FlatList
           data={cartProducts}
           ListEmptyComponent={() => (
@@ -109,6 +114,23 @@ const createStyles = (theme: any) =>
       height: getScreenHeight(20),
       width: '100%',
     },
+    clear: {
+      justifyContent: 'center',
+      alignItems: 'center',
+      height: getScreenHeight(5),
+      width: getScreenWidth(34),
+      alignSelf: 'flex-end',
+      backgroundColor:"red",
+      marginRight: getScreenHeight(2),
+      marginTop: getScreenHeight(1),
+      borderRadius : getScreenHeight(1),
+      backgroundColor : theme.primary
+    },
+    clearText:{
+     fontSize : getScreenHeight(2.5),
+     fontWeight : "bold",
+     color : theme.white
+    }
   });
 
 export default Cart;
