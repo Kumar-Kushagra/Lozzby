@@ -13,6 +13,7 @@ import ChooseAddress from '../containers/cart/ChooseAddress';
 import OrderDetail from '../containers/orders/OrderDetail';
 import SellerOrders from '../containers/orders/SellerOrders';
 import EditProduct from '../containers/products/EditProduct';
+import Filters from '../containers/filters';
 
 
 const Stack = createNativeStackNavigator();
@@ -36,6 +37,7 @@ const HomeStack = () => {
         <Stack.Screen name="OrderDetail" component={OrderDetail} />
         <Stack.Screen name="SellerOrders" component={SellerOrders} />
         <Stack.Screen name="EditProduct" component={EditProduct} />
+        <Stack.Screen name="Filters" component={Filters} />
       </Stack.Navigator>
     </>
   );

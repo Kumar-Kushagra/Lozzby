@@ -1,8 +1,8 @@
-import React, {useEffect, useMemo} from 'react';
-import {View, StyleSheet, FlatList, Text, TouchableOpacity} from 'react-native';
+import React, { useEffect, useMemo } from 'react';
+import { View, StyleSheet, FlatList, Alert, Text, TouchableOpacity } from 'react-native';
 import FastImage from 'react-native-fast-image';
-import {SafeAreaView} from 'react-native-safe-area-context';
-import {useDispatch, useSelector} from 'react-redux';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   CustomButton,
   CustomHeader,
@@ -10,10 +10,10 @@ import {
   FullScreenLoader,
 } from '../../components';
 import CartItem from '../../components/CartItem';
-import {cartDataManager, clearCartManager} from '../../redux/cart';
+import { cartDataManager, clearCartManager } from '../../redux/cart';
 
-import {navigate} from '../../services/Routerservices';
-import {getScreenHeight, getScreenWidth} from '../../utils/domUtils';
+import { navigate } from '../../services/Routerservices';
+import { getScreenHeight, getScreenWidth } from '../../utils/domUtils';
 
 const Cart = () => {
   const theme = useSelector((state: any) => state.theme.theme);
@@ -25,7 +25,7 @@ const Cart = () => {
     dispatch<any>(cartDataManager());
   }, [dispatch]);
 
-  const renderItem = ({item}: any) => {
+  const renderItem = ({ item }: any) => {
     console.log(item);
     return (
       <View style={styles.item}>
@@ -38,6 +38,26 @@ const Cart = () => {
     return <FullScreenLoader />;
   }
 
+  const handler = () => {
+    Alert.alert(
+      "Are you sure?",
+      "You want to remove all the items from cart?",
+      [
+        {
+          text: "Cancel",
+          onPress: () => console.log("Cancel Pressed"),
+          style: "cancel",
+        },
+        {
+          text: "OK",
+          onPress: () =>
+            dispatch<any>(clearCartManager())
+        },
+      ],
+      { cancelable: false }
+    );
+  };
+
   return (
     <SafeAreaView edges={['top']} style={styles.safe}>
       <CustomStatusBar light color={theme.primary} />
@@ -45,13 +65,13 @@ const Cart = () => {
         <CustomHeader title="Cart" />
         {cartProducts?.length > 0 && <TouchableOpacity
           style={styles.clear}
-          onPress={() => dispatch<any>(clearCartManager())}>
+          onPress={() => handler()}>
           <Text style={styles.clearText}>Clear Cart</Text>
         </TouchableOpacity>}
         <FlatList
           data={cartProducts}
           ListEmptyComponent={() => (
-            <View style={{marginTop: getScreenHeight(28)}}>
+            <View style={{ marginTop: getScreenHeight(28) }}>
               <FastImage
                 style={styles.image}
                 resizeMode={'contain'}
@@ -72,11 +92,11 @@ const Cart = () => {
           )}
           keyExtractor={(_, index) => index.toString()}
           renderItem={renderItem}
-          contentContainerStyle={{padding: getScreenHeight(2)}}
+          contentContainerStyle={{ padding: getScreenHeight(2) }}
         />
 
         {cartProducts.length > 0 && (
-          <View style={{padding: getScreenHeight(2)}}>
+          <View style={{ padding: getScreenHeight(2) }}>
             <CustomButton
               action={() => {
                 navigate('ChooseAddress', {});
@@ -120,16 +140,16 @@ const createStyles = (theme: any) =>
       height: getScreenHeight(5),
       width: getScreenWidth(34),
       alignSelf: 'flex-end',
-      backgroundColor:"red",
+      backgroundColor: "red",
       marginRight: getScreenHeight(2),
       marginTop: getScreenHeight(1),
-      borderRadius : getScreenHeight(1),
-      backgroundColor : theme.primary
+      borderRadius: getScreenHeight(1),
+      backgroundColor: theme.primary
     },
-    clearText:{
-     fontSize : getScreenHeight(2.5),
-     fontWeight : "bold",
-     color : theme.white
+    clearText: {
+      fontSize: getScreenHeight(2.5),
+      fontWeight: "bold",
+      color: theme.white
     }
   });
 

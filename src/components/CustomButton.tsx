@@ -38,9 +38,9 @@ const createStyles = (theme: any) =>
       backgroundColor: theme.primary,
     },
     title: {
-      fontSize: getScreenHeight(2),
+      fontSize: getScreenHeight(2.2),
       color: theme.white,
-      fontWeight:"500"
+      fontWeight:"800"
     },
   });
 

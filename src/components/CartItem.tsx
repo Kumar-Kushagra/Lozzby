@@ -1,17 +1,19 @@
-import React, {useEffect, useMemo, useState} from 'react';
-import {StyleSheet, View, Text, TouchableOpacity,Alert} from 'react-native';
-import {useDispatch, useSelector} from 'react-redux';
-import {getScreenHeight} from '../utils/domUtils';
+import React, { useEffect, useMemo, useState } from 'react';
+import { StyleSheet, View, Text, TouchableOpacity, Alert, Image } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
+import { getScreenHeight, getScreenWidth } from '../utils/domUtils';
 import FastImage from 'react-native-fast-image';
-import {gallery} from '../constants/images';
-import {Storage} from 'aws-amplify';
-import {deleteCartManager} from '../redux/cart';
+import { gallery } from '../constants/images';
+import { Storage } from 'aws-amplify';
+import { deleteCartManager, updateCartItemQuantityManager } from '../redux/cart';
 
 const CartItem = (props: any) => {
   const theme = useSelector((state: any) => state.theme.theme);
   const styles = useMemo(() => createStyles(theme), [theme]);
   const [image, setImage] = useState(null);
   const dispatch = useDispatch();
+  const [quantity, setQuantity] = useState(0);
+
   useEffect(() => {
     if (props?.item?.Product?.image) {
       getImage(props?.item?.Product?.image);
@@ -19,6 +21,11 @@ const CartItem = (props: any) => {
       setImage(null);
     }
   }, [props?.item?.Product?.image]);
+
+
+  useEffect(() => {
+    setQuantity(parseInt(props?.item?.quantity));
+  }, [props?.item?.quantity]);
 
   const getImage = async (value: any) => {
     const mainLink: any = await Storage.get(value, {});
@@ -28,7 +35,7 @@ const CartItem = (props: any) => {
   const handler = () => {
     Alert.alert(
       "Are you sure?",
-      "you wanted to remove this item from cart?", 
+      "you wanted to remove this item from cart?",
       [
         {
           text: "Cancel",
@@ -52,7 +59,7 @@ const CartItem = (props: any) => {
 
 
   return (
-    <View style={{...styles.screen}}>
+    <View style={{ ...styles.screen }}>
       <View style={styles.imagecontanier}>
         {image ? (
           <FastImage
@@ -73,23 +80,57 @@ const CartItem = (props: any) => {
       </View>
       <View style={styles.contanier}>
         <Text style={styles.title}>{props?.item?.Product?.name}</Text>
-        {/* <View style={styles.row}> */}
         <Text
-          style={{...styles.price, color: theme.primary, fontWeight: '900'}}>
+          style={{ ...styles.price, color: theme.primary, fontWeight: '900' }}>
           Price{' '}
-          <Text style={{fontWeight: '500', ...styles.price}}>
+          <Text style={{ fontWeight: '500', ...styles.price }}>
             {'$' + props.item?.Product?.price}
           </Text>
         </Text>
-        <Text
-          style={{...styles.price, color: theme.primary, fontWeight: '900'}}>
-          Quantity{' '}
-          <Text style={{fontWeight: '500', ...styles.price}}>
-            {props?.item?.quantity}
-          </Text>
-        </Text>
-        {/* </View> */}
-
+        <View style={styles.row}>
+          <Text
+            style={{ ...styles.price, color: theme.primary, fontWeight: '900' }}>
+            Quantity</Text>
+          <View style={{ flexDirection: "row", justifyContent: 'space-between', width: getScreenWidth(15), marginRight: getScreenHeight(0.1) }}>
+            <TouchableOpacity
+              onPress={() => {
+                if (quantity === 1) {
+                  handler();
+                } else {
+                  dispatch<any>(
+                    updateCartItemQuantityManager({
+                      quantity: quantity - 1,
+                      id: props.item.id,
+                      _version: props.item._version,
+                    }),
+                  );
+                }
+              }}>
+              <Image
+                style={styles.inc}
+                source={require('../assets/images/minus.png')}
+              />
+            </TouchableOpacity>
+            <Text style={{ fontWeight: '500', ...styles.title2 }}>
+              {props?.item?.quantity}
+            </Text>
+            <TouchableOpacity
+              onPress={() => {
+                dispatch<any>(
+                  updateCartItemQuantityManager({
+                    quantity: quantity + 1,
+                    id: props.item.id,
+                    _version: props.item._version,
+                  }),
+                );
+              }}>
+              <Image
+                style={styles.inc}
+                source={require('../assets/images/plus.png')}
+              />
+            </TouchableOpacity>
+          </View>
+        </View>
         <TouchableOpacity style={styles.iconContanier} onPress={handler}>
           <FastImage
             tintColor={theme.primary}
@@ -166,6 +207,20 @@ const createStyles = (theme: any) =>
       zIndex: 100,
       right: getScreenHeight(1),
       top: getScreenHeight(1),
+    },
+    action: {
+      fontSize: getScreenHeight(2.5),
+      color: theme.black,
+    },
+    inc: {
+      height: getScreenHeight(5),
+      width: getScreenWidth(5),
+      resizeMode: 'contain',
+    },
+    title2: {
+      fontSize: getScreenHeight(2),
+      color: theme.black,
+      marginTop : getScreenHeight(1)
     },
   });
 
