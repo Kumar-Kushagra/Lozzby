@@ -241,6 +241,31 @@ export const addToWishlistManager = (id: any) => {
   };
 };
 
+export const removeToWishlistManager = (dataNew: any) => {
+    return async (dispatch: any, getState: any) => {
+      const userData = getState().auth.userData;
+      dispatch(setCartLoading(true));
+      try {
+        const data: any = await API.graphql({
+          query: mutations.deleteWishlistItem,
+          variables: {
+            input: dataNew,
+          },
+        });
+        if (data) {
+          dispatch(getWishlistItemsManager(userData.id));
+          showToast('Item has been removed from wishlist successfully!');
+        }
+      } catch (error) {
+        console.log(error);
+        showToast('Something went wrong please try again later!');
+      } finally {
+        dispatch(setCartLoading(false));
+      }
+    };
+  };
+  
+
 export const updateCartItemQuantityManager = (data: any) => {
   return async (dispatch: any) => {
     dispatch(setLoading(true));

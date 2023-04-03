@@ -78,7 +78,7 @@ const ProductItem = (props: any, ref: any) => {
           <TouchableOpacity
             disabled={wishlistLoading}
             onPress={() => {
-              
+              dispatch<any>(removeToWishlistManager(existed));
             }}
             style={styles.likeButton}>
             <FastImage

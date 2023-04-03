@@ -9,6 +9,7 @@ import UserOrders from '../containers/orders/UserOrders';
 import UserProfile from '../containers/profile/UserProfile';
 import FastImage from 'react-native-fast-image';
 import Setting from '../containers/Setting';
+import Wishlist from '../containers/wishlist';
 
 const Tab = createBottomTabNavigator();
 
@@ -47,6 +48,12 @@ const BottomBar = () => {
       component: UserOrders,
       name: 'Orders',
       icon: require('../assets/images/order.png'),
+    },
+    {
+      route: 'Wishlist',
+      component: Wishlist,
+      name: 'Wishlist',
+      icon: require('../assets/images/heart.png'),
     },
     {
       route: 'Profile',

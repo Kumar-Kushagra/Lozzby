@@ -15,24 +15,9 @@ import {getScreenHeight} from '../utils/domUtils';
 const CartCount = (props: any) => {
   const theme = useSelector((state: any) => state.theme.theme);
   const styles = useMemo(() => createStyles(theme), [theme]);
-
-  let [count, setCount] = useState(0);
-
   const cartProducts = useSelector((state: any) => state?.cart?.cartProducts);
   const cartLoading = useSelector((state: any) => state?.cart?.cartLoading);
-
-  // useFocusEffect(
-  //   useCallback(() => {
-  //     let a = 0;
-  //     cartProducts?.forEach(elem => {
-  //       a = a + elem.quantity;
-  //     });
-  //     setCount(a);
-  //   }, [cartProducts]),
-  // );
-
-
-
+  
   return (
     <TouchableOpacity
       disabled={cartLoading}

@@ -58,7 +58,7 @@ const ProductDetail = (props: any) => {
     <SafeAreaView edges={['top']} style={styles.safe}>
       <CustomStatusBar light color={theme.primary} />
       <ScrollView bounces={false} style={styles.screen}>
-        <CustomHeader title={data.name} />
+        <CustomHeader title={data.name}/>
         <FastImage
           style={styles.image}
           resizeMode="contain"
@@ -192,6 +192,10 @@ const createStyles = (theme: any) =>
     title2: {
       fontSize: getScreenHeight(2),
       color: 'black',
+    },
+    icon: {
+      height: getScreenHeight(2.5),
+      width: getScreenHeight(2.5),
     },
   });
 

@@ -23,6 +23,7 @@ export const getCart = /* GraphQL */ `
               category
               color
               id
+              quantity
               image
               name
               price
