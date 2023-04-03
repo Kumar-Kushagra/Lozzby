@@ -44,8 +44,6 @@ export const getOrderDetail = /* GraphQL */ `
           pincode
           province
           country
-          city
-          streetAddress
         }
         OrderItems {
           items {
@@ -56,6 +54,28 @@ export const getOrderDetail = /* GraphQL */ `
             productName
             productPrice
           }
+        }
+      }
+    }
+  }
+`;
+
+export const getWishlistItems = /* GraphQL */ `
+  query GetWishlistItems($id: ID!) {
+    listWishlistItems(filter: {userID: {eq: $id}}) {
+      items {
+        _version
+        id
+        userID
+        _deleted
+        wishlistItemProductId
+        Product {
+          color
+          id
+          description
+          image
+          name
+          price
         }
       }
     }

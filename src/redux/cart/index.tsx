@@ -1,13 +1,14 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { Alert } from 'react-native';
-import { API, DataStore, graphqlOperation } from 'aws-amplify';
+import {createSlice} from '@reduxjs/toolkit';
+import {Alert} from 'react-native';
+import {API, DataStore, graphqlOperation} from 'aws-amplify';
 import * as queries from '../../graphql/queries';
 import * as mutations from '../../graphql/mutations';
-import { setLoading } from '../common';
-import { getCart, getOrderDetail } from '../../queries';
-import { goBack, navigate } from '../../services/Routerservices';
-import { createCartManager } from '../auth';
-import { showToast } from '../../utils/domUtils';
+import {setLoading} from '../common';
+import {getCart, getOrderDetail} from '../../queries';
+import {goBack, navigate} from '../../services/Routerservices';
+import {createCartManager} from '../auth';
+import {showToast} from '../../utils/domUtils';
+import {getWishlistItems} from '../../queries';
 
 const cartSlice = createSlice({
   name: 'cart',
@@ -16,6 +17,8 @@ const cartSlice = createSlice({
     cartProducts: null,
     cartLoading: false,
     orderData: null,
+    wishlistItems: [],
+    wishlistLoading: false,
   },
   reducers: {
     setOrderData(state, action) {
@@ -30,6 +33,12 @@ const cartSlice = createSlice({
 
     setCartProducts(state, action) {
       state.cartProducts = action.payload;
+    },
+    setWishlistLoading(state, action) {
+      state.wishlistLoading = action.payload;
+    },
+    setWishlistItems(state, action) {
+      state.wishlistItems = action.payload;
     },
   },
 });
@@ -90,7 +99,7 @@ export const deleteCartManager = (data: any) => {
     try {
       await API.graphql({
         query: mutations.deleteCartItem,
-        variables: { input: data },
+        variables: {input: data},
       });
       dispatch(cartDataManager());
       showToast('Item has been removed successfully!');
@@ -106,7 +115,7 @@ export const clearCartManager = () => {
   return async (dispatch: any, getState: any) => {
     const cartData = getState().cart.cartData;
     const userData = getState().auth.userData;
-    setLoading(true)
+    setLoading(true);
 
     await API.graphql({
       query: mutations.deleteCart,
@@ -117,12 +126,12 @@ export const clearCartManager = () => {
         },
       },
     });
-    setLoading(false)
-    showToast("Cart has been successfully cleared!")
+    setLoading(false);
+    showToast('Cart has been successfully cleared!');
     dispatch(createCartManager(userData.id));
     navigate('Home', {});
-  }
-}
+  };
+};
 
 export const createOrderManager = (addressID: any, total: any) => {
   return async (dispatch: any, getState: any) => {
@@ -140,7 +149,7 @@ export const createOrderManager = (addressID: any, total: any) => {
     try {
       const orderData: any = await API.graphql({
         query: mutations.createOrder,
-        variables: { input: data },
+        variables: {input: data},
       });
 
       if (orderData.data.createOrder.id) {
@@ -180,6 +189,58 @@ export const createOrderManager = (addressID: any, total: any) => {
   };
 };
 
+export const getWishlistItemsManager = (id: any) => {
+  return async (dispatch: any, getState: any) => {
+    dispatch(setWishlistLoading(true));
+    try {
+      const data: any = await API.graphql(
+        graphqlOperation(getWishlistItems, {
+          id: id,
+        }),
+      );
+      if (data) {
+        if (data?.data?.listWishlistItems?.items) {
+          const filtered = data.data.listWishlistItems.items.filter(
+            (item: any) => !item._deleted,
+          );
+          dispatch(setWishlistItems(filtered));
+        }
+      }
+    } catch (error) {
+      console.log(error);
+      showToast('Something went wrong please try again later!');
+    } finally {
+      dispatch(setWishlistLoading(false));
+    }
+  };
+};
+
+export const addToWishlistManager = (id: any) => {
+  return async (dispatch: any, getState: any) => {
+    const userData = getState().auth.userData;
+    dispatch(setCartLoading(true));
+    try {
+      const data: any = await API.graphql({
+        query: mutations.createWishlistItem,
+        variables: {
+          input: {
+            userID: userData.id,
+            wishlistItemProductId: id,
+          },
+        },
+      });
+      if (data) {
+        dispatch(getWishlistItemsManager(userData.id));
+        showToast('Item has been added to wishlist successfully!');
+      }
+    } catch (error) {
+      showToast('Something went wrong please try again later!');
+    } finally {
+      dispatch(setCartLoading(false));
+    }
+  };
+};
+
 export const updateCartItemQuantityManager = (data: any) => {
   return async (dispatch: any) => {
     dispatch(setLoading(true));
@@ -189,8 +250,7 @@ export const updateCartItemQuantityManager = (data: any) => {
         variables: {input: data},
       });
       dispatch(cartDataManager());
-      goBack();
-      showToast('Cart item has been updated successfully!') 
+      showToast('Cart item has been updated successfully!');
     } catch (error) {
       console.log(error);
       showToast('Something went wrong please try again later!');
@@ -206,7 +266,7 @@ export const updateCartItemManager = (data: any) => {
     try {
       await API.graphql({
         query: mutations.updateCartItem,
-        variables: { input: data },
+        variables: {input: data},
       });
       dispatch(cartDataManager());
       showToast('Product has been added to cart');
@@ -225,7 +285,7 @@ export const updateOrderManager = (data: any) => {
     try {
       await API.graphql({
         query: mutations.updateOrder,
-        variables: { input: data },
+        variables: {input: data},
       });
       dispatch(cartDataManager());
       showToast('Order has been successfully updated!');
@@ -260,7 +320,7 @@ export const createCartItemManager = (data: any) => {
           try {
             await API.graphql({
               query: mutations.createCartItem,
-              variables: { input: data },
+              variables: {input: data},
             });
             dispatch(cartDataManager());
             navigate('Cart', {});
@@ -287,7 +347,13 @@ export const createCartItemManager = (data: any) => {
   };
 };
 
-export const { setCartData, setCartProducts, setCartLoading, setOrderData } =
-  cartSlice.actions;
+export const {
+  setCartData,
+  setCartProducts,
+  setCartLoading,
+  setOrderData,
+  setWishlistItems,
+  setWishlistLoading,
+} = cartSlice.actions;
 
 export default cartSlice.reducer;

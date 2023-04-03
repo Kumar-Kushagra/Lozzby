@@ -24,13 +24,14 @@ const OrderStatus = {
   "DELIVERED": "DELIVERED"
 };
 
-const { Cart, CartItem, Product, Review, Address, Order, OrderItem, User } = initSchema(schema);
+const { WishlistItem, Product, Review, Cart, CartItem, Address, Order, OrderItem, User } = initSchema(schema);
 
 export {
-  Cart,
-  CartItem,
+  WishlistItem,
   Product,
   Review,
+  Cart,
+  CartItem,
   Address,
   Order,
   OrderItem,

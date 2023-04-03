@@ -1,3 +1,9 @@
+type WishlistItem @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  Product: Product @hasOne
+  userID: ID! @index(name: "byUser")
+}
+
 type Cart @model @auth(rules: [{allow: public}]) {
   id: ID!
   CartItems: [CartItem] @hasMany(indexName: "byCart", fields: ["id"])
@@ -99,5 +105,5 @@ type User @model @auth(rules: [{allow: public}]) {
   phoneNumber: String
   Carts: [Cart] @hasMany(indexName: "byUser", fields: ["id"])
   Orders: [Order] @hasMany(indexName: "byUser", fields: ["id"])
+  WishlistItems: [WishlistItem] @hasMany(indexName: "byUser", fields: ["id"])
 }
- 

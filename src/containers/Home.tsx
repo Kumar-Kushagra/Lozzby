@@ -17,7 +17,7 @@ import { CustomHeader, CustomStatusBar, FullScreenLoader } from '../components';
 import CartCount from '../components/CartCount';
 import ProductItem from '../components/ProductItem';
 import { Product, Productcategories } from '../models';
-import { cartDataManager } from '../redux/cart';
+import { cartDataManager, getWishlistItemsManager } from '../redux/cart';
 import { navigate } from '../services/Routerservices';
 import { getScreenHeight, getScreenWidth, showToast } from '../utils/domUtils';
 
@@ -25,16 +25,19 @@ const Home = () => {
   const theme = useSelector((state: any) => state.theme.theme);
   const styles = useMemo(() => createStyles(theme), [theme]);
   const userData = useSelector((state: any) => state.auth.userData);
-
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState([]);
   const [filter, setFilter]: any = useState(null);
   const dispatch = useDispatch();
   const subRef: any = useRef();
   const [search, setSearch] = useState('');
-
-
   
+  useEffect(() => {
+    if (userData?.id) {
+      dispatch<any>(getWishlistItemsManager(userData.id));
+    }
+  }, [userData?.id]);
+
   const filterManager = useCallback((text: any) => {
     if (text?.sort) {
       setFilter(text);

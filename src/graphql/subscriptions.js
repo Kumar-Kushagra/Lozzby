@@ -1,6 +1,105 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const onCreateWishlistItem = /* GraphQL */ `
+  subscription OnCreateWishlistItem(
+    $filter: ModelSubscriptionWishlistItemFilterInput
+  ) {
+    onCreateWishlistItem(filter: $filter) {
+      id
+      Product {
+        id
+        name
+        description
+        rating
+        price
+        image
+        userID
+        quantity
+        color
+        category
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      userID
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      wishlistItemProductId
+    }
+  }
+`;
+export const onUpdateWishlistItem = /* GraphQL */ `
+  subscription OnUpdateWishlistItem(
+    $filter: ModelSubscriptionWishlistItemFilterInput
+  ) {
+    onUpdateWishlistItem(filter: $filter) {
+      id
+      Product {
+        id
+        name
+        description
+        rating
+        price
+        image
+        userID
+        quantity
+        color
+        category
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      userID
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      wishlistItemProductId
+    }
+  }
+`;
+export const onDeleteWishlistItem = /* GraphQL */ `
+  subscription OnDeleteWishlistItem(
+    $filter: ModelSubscriptionWishlistItemFilterInput
+  ) {
+    onDeleteWishlistItem(filter: $filter) {
+      id
+      Product {
+        id
+        name
+        description
+        rating
+        price
+        image
+        userID
+        quantity
+        color
+        category
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      userID
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      wishlistItemProductId
+    }
+  }
+`;
 export const onCreateCart = /* GraphQL */ `
   subscription OnCreateCart($filter: ModelSubscriptionCartFilterInput) {
     onCreateCart(filter: $filter) {
@@ -579,6 +678,10 @@ export const onCreateUser = /* GraphQL */ `
         nextToken
         startedAt
       }
+      WishlistItems {
+        nextToken
+        startedAt
+      }
       createdAt
       updatedAt
       _version
@@ -616,6 +719,10 @@ export const onUpdateUser = /* GraphQL */ `
         nextToken
         startedAt
       }
+      WishlistItems {
+        nextToken
+        startedAt
+      }
       createdAt
       updatedAt
       _version
@@ -650,6 +757,10 @@ export const onDeleteUser = /* GraphQL */ `
         startedAt
       }
       Orders {
+        nextToken
+        startedAt
+      }
+      WishlistItems {
         nextToken
         startedAt
       }

@@ -1,6 +1,108 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const createWishlistItem = /* GraphQL */ `
+  mutation CreateWishlistItem(
+    $input: CreateWishlistItemInput!
+    $condition: ModelWishlistItemConditionInput
+  ) {
+    createWishlistItem(input: $input, condition: $condition) {
+      id
+      Product {
+        id
+        name
+        description
+        rating
+        price
+        image
+        userID
+        quantity
+        color
+        category
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      userID
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      wishlistItemProductId
+    }
+  }
+`;
+export const updateWishlistItem = /* GraphQL */ `
+  mutation UpdateWishlistItem(
+    $input: UpdateWishlistItemInput!
+    $condition: ModelWishlistItemConditionInput
+  ) {
+    updateWishlistItem(input: $input, condition: $condition) {
+      id
+      Product {
+        id
+        name
+        description
+        rating
+        price
+        image
+        userID
+        quantity
+        color
+        category
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      userID
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      wishlistItemProductId
+    }
+  }
+`;
+export const deleteWishlistItem = /* GraphQL */ `
+  mutation DeleteWishlistItem(
+    $input: DeleteWishlistItemInput!
+    $condition: ModelWishlistItemConditionInput
+  ) {
+    deleteWishlistItem(input: $input, condition: $condition) {
+      id
+      Product {
+        id
+        name
+        description
+        rating
+        price
+        image
+        userID
+        quantity
+        color
+        category
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      userID
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      wishlistItemProductId
+    }
+  }
+`;
 export const createCart = /* GraphQL */ `
   mutation CreateCart(
     $input: CreateCartInput!
@@ -639,6 +741,10 @@ export const createUser = /* GraphQL */ `
         nextToken
         startedAt
       }
+      WishlistItems {
+        nextToken
+        startedAt
+      }
       createdAt
       updatedAt
       _version
@@ -679,6 +785,10 @@ export const updateUser = /* GraphQL */ `
         nextToken
         startedAt
       }
+      WishlistItems {
+        nextToken
+        startedAt
+      }
       createdAt
       updatedAt
       _version
@@ -716,6 +826,10 @@ export const deleteUser = /* GraphQL */ `
         startedAt
       }
       Orders {
+        nextToken
+        startedAt
+      }
+      WishlistItems {
         nextToken
         startedAt
       }

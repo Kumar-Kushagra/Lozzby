@@ -1,6 +1,87 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const getWishlistItem = /* GraphQL */ `
+  query GetWishlistItem($id: ID!) {
+    getWishlistItem(id: $id) {
+      id
+      Product {
+        id
+        name
+        description
+        rating
+        price
+        image
+        userID
+        quantity
+        color
+        category
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      userID
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      wishlistItemProductId
+    }
+  }
+`;
+export const listWishlistItems = /* GraphQL */ `
+  query ListWishlistItems(
+    $filter: ModelWishlistItemFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listWishlistItems(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        userID
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        wishlistItemProductId
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const syncWishlistItems = /* GraphQL */ `
+  query SyncWishlistItems(
+    $filter: ModelWishlistItemFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncWishlistItems(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
+      items {
+        id
+        userID
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        wishlistItemProductId
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
 export const getCart = /* GraphQL */ `
   query GetCart($id: ID!) {
     getCart(id: $id) {
@@ -51,35 +132,6 @@ export const syncCarts = /* GraphQL */ `
       limit: $limit
       nextToken: $nextToken
       lastSync: $lastSync
-    ) {
-      items {
-        id
-        userID
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
-      nextToken
-      startedAt
-    }
-  }
-`;
-export const cartsByUserID = /* GraphQL */ `
-  query CartsByUserID(
-    $userID: ID!
-    $sortDirection: ModelSortDirection
-    $filter: ModelCartFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    cartsByUserID(
-      userID: $userID
-      sortDirection: $sortDirection
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
     ) {
       items {
         id
@@ -179,37 +231,6 @@ export const syncCartItems = /* GraphQL */ `
     }
   }
 `;
-export const cartItemsByCartID = /* GraphQL */ `
-  query CartItemsByCartID(
-    $cartID: ID!
-    $sortDirection: ModelSortDirection
-    $filter: ModelCartItemFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    cartItemsByCartID(
-      cartID: $cartID
-      sortDirection: $sortDirection
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-    ) {
-      items {
-        id
-        quantity
-        cartID
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-        cartItemProductId
-      }
-      nextToken
-      startedAt
-    }
-  }
-`;
 export const getAddress = /* GraphQL */ `
   query GetAddress($id: ID!) {
     getAddress(id: $id) {
@@ -268,41 +289,6 @@ export const syncAddresses = /* GraphQL */ `
       limit: $limit
       nextToken: $nextToken
       lastSync: $lastSync
-    ) {
-      items {
-        id
-        province
-        userID
-        pincode
-        country
-        phoneNumber
-        city
-        streetAddress
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
-      nextToken
-      startedAt
-    }
-  }
-`;
-export const addressesByUserID = /* GraphQL */ `
-  query AddressesByUserID(
-    $userID: ID!
-    $sortDirection: ModelSortDirection
-    $filter: ModelAddressFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    addressesByUserID(
-      userID: $userID
-      sortDirection: $sortDirection
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
     ) {
       items {
         id
@@ -416,39 +402,6 @@ export const syncOrders = /* GraphQL */ `
     }
   }
 `;
-export const ordersByUserID = /* GraphQL */ `
-  query OrdersByUserID(
-    $userID: ID!
-    $sortDirection: ModelSortDirection
-    $filter: ModelOrderFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    ordersByUserID(
-      userID: $userID
-      sortDirection: $sortDirection
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-    ) {
-      items {
-        id
-        total
-        status
-        sellerID
-        userID
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-        orderAddressId
-      }
-      nextToken
-      startedAt
-    }
-  }
-`;
 export const getOrderItem = /* GraphQL */ `
   query GetOrderItem($id: ID!) {
     getOrderItem(id: $id) {
@@ -539,39 +492,6 @@ export const syncOrderItems = /* GraphQL */ `
     }
   }
 `;
-export const orderItemsByOrderID = /* GraphQL */ `
-  query OrderItemsByOrderID(
-    $orderID: ID!
-    $sortDirection: ModelSortDirection
-    $filter: ModelOrderItemFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    orderItemsByOrderID(
-      orderID: $orderID
-      sortDirection: $sortDirection
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-    ) {
-      items {
-        id
-        orderID
-        quantity
-        productName
-        productPrice
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-        orderItemProductId
-      }
-      nextToken
-      startedAt
-    }
-  }
-`;
 export const getReview = /* GraphQL */ `
   query GetReview($id: ID!) {
     getReview(id: $id) {
@@ -628,74 +548,6 @@ export const syncReviews = /* GraphQL */ `
       limit: $limit
       nextToken: $nextToken
       lastSync: $lastSync
-    ) {
-      items {
-        id
-        message
-        rating
-        name
-        userPhoto
-        userID
-        productID
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
-      nextToken
-      startedAt
-    }
-  }
-`;
-export const reviewsByUserID = /* GraphQL */ `
-  query ReviewsByUserID(
-    $userID: ID!
-    $sortDirection: ModelSortDirection
-    $filter: ModelReviewFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    reviewsByUserID(
-      userID: $userID
-      sortDirection: $sortDirection
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-    ) {
-      items {
-        id
-        message
-        rating
-        name
-        userPhoto
-        userID
-        productID
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
-      nextToken
-      startedAt
-    }
-  }
-`;
-export const reviewsByProductID = /* GraphQL */ `
-  query ReviewsByProductID(
-    $productID: ID!
-    $sortDirection: ModelSortDirection
-    $filter: ModelReviewFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    reviewsByProductID(
-      productID: $productID
-      sortDirection: $sortDirection
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
     ) {
       items {
         id
@@ -805,43 +657,6 @@ export const syncProducts = /* GraphQL */ `
     }
   }
 `;
-export const productsByUserID = /* GraphQL */ `
-  query ProductsByUserID(
-    $userID: ID!
-    $sortDirection: ModelSortDirection
-    $filter: ModelProductFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    productsByUserID(
-      userID: $userID
-      sortDirection: $sortDirection
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-    ) {
-      items {
-        id
-        name
-        description
-        rating
-        price
-        image
-        userID
-        quantity
-        color
-        category
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
-      nextToken
-      startedAt
-    }
-  }
-`;
 export const getUser = /* GraphQL */ `
   query GetUser($id: ID!) {
     getUser(id: $id) {
@@ -868,6 +683,10 @@ export const getUser = /* GraphQL */ `
         startedAt
       }
       Orders {
+        nextToken
+        startedAt
+      }
+      WishlistItems {
         nextToken
         startedAt
       }
@@ -924,6 +743,302 @@ export const syncUsers = /* GraphQL */ `
         profile
         email
         phoneNumber
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const wishlistItemsByUserID = /* GraphQL */ `
+  query WishlistItemsByUserID(
+    $userID: ID!
+    $sortDirection: ModelSortDirection
+    $filter: ModelWishlistItemFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    wishlistItemsByUserID(
+      userID: $userID
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        userID
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        wishlistItemProductId
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const cartsByUserID = /* GraphQL */ `
+  query CartsByUserID(
+    $userID: ID!
+    $sortDirection: ModelSortDirection
+    $filter: ModelCartFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    cartsByUserID(
+      userID: $userID
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        userID
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const cartItemsByCartID = /* GraphQL */ `
+  query CartItemsByCartID(
+    $cartID: ID!
+    $sortDirection: ModelSortDirection
+    $filter: ModelCartItemFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    cartItemsByCartID(
+      cartID: $cartID
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        quantity
+        cartID
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        cartItemProductId
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const addressesByUserID = /* GraphQL */ `
+  query AddressesByUserID(
+    $userID: ID!
+    $sortDirection: ModelSortDirection
+    $filter: ModelAddressFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    addressesByUserID(
+      userID: $userID
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        province
+        userID
+        pincode
+        country
+        phoneNumber
+        city
+        streetAddress
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const ordersByUserID = /* GraphQL */ `
+  query OrdersByUserID(
+    $userID: ID!
+    $sortDirection: ModelSortDirection
+    $filter: ModelOrderFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    ordersByUserID(
+      userID: $userID
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        total
+        status
+        sellerID
+        userID
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        orderAddressId
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const orderItemsByOrderID = /* GraphQL */ `
+  query OrderItemsByOrderID(
+    $orderID: ID!
+    $sortDirection: ModelSortDirection
+    $filter: ModelOrderItemFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    orderItemsByOrderID(
+      orderID: $orderID
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        orderID
+        quantity
+        productName
+        productPrice
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        orderItemProductId
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const reviewsByUserID = /* GraphQL */ `
+  query ReviewsByUserID(
+    $userID: ID!
+    $sortDirection: ModelSortDirection
+    $filter: ModelReviewFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    reviewsByUserID(
+      userID: $userID
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        message
+        rating
+        name
+        userPhoto
+        userID
+        productID
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const reviewsByProductID = /* GraphQL */ `
+  query ReviewsByProductID(
+    $productID: ID!
+    $sortDirection: ModelSortDirection
+    $filter: ModelReviewFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    reviewsByProductID(
+      productID: $productID
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        message
+        rating
+        name
+        userPhoto
+        userID
+        productID
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const productsByUserID = /* GraphQL */ `
+  query ProductsByUserID(
+    $userID: ID!
+    $sortDirection: ModelSortDirection
+    $filter: ModelProductFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    productsByUserID(
+      userID: $userID
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        name
+        description
+        rating
+        price
+        image
+        userID
+        quantity
+        color
+        category
         createdAt
         updatedAt
         _version

@@ -1,0 +1,15 @@
+{
+  "resourceName": "s3capstonestorage80a520ea",
+  "bucketName": "capstone-storage-80a520ea",
+  "policyUUID": "918e7d5c",
+  "storageAccess": "authAndGuest",
+  "guestAccess": [
+    "READ",
+    "CREATE_AND_UPDATE"
+  ],
+  "authAccess": [
+    "CREATE_AND_UPDATE",
+    "READ",
+    "DELETE"
+  ]
+}
