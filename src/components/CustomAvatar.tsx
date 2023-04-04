@@ -58,7 +58,7 @@ const CustomAvatar = forwardRef((props: any, ref: any) => {
           source={{uri: image.uri, priority: FastImage.priority.normal}}
         />
       ) : (
-        <FastImage style={styles.icon} resizeMode="contain" source={gallery} />
+        <FastImage style={styles.icon} tintColor={theme.textcolor} resizeMode="contain" source={gallery} />
       )}
     </TouchableOpacity>
   );
@@ -72,7 +72,7 @@ const createStyles = (theme: any) =>
       width: getScreenHeight(12),
       justifyContent: 'center',
       alignItems: 'center',
-      borderColor: theme.primary,
+      borderColor: theme.productTitle,
       borderWidth: getScreenHeight(0.2),
       alignSelf: 'center',
     },

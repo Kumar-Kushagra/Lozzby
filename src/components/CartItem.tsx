@@ -81,7 +81,7 @@ const CartItem = (props: any) => {
       <View style={styles.contanier}>
         <Text style={styles.title}>{props?.item?.Product?.name}</Text>
         <Text
-          style={{ ...styles.price, color: theme.primary, fontWeight: '900' }}>
+          style={{ ...styles.price, color: theme.productTitle, fontWeight: '900' }}>
           Price{' '}
           <Text style={{ fontWeight: '500', ...styles.price }}>
             {'$' + props.item?.Product?.price}
@@ -89,7 +89,7 @@ const CartItem = (props: any) => {
         </Text>
         <View style={styles.row}>
           <Text
-            style={{ ...styles.price, color: theme.primary, fontWeight: '900' }}>
+            style={{ ...styles.price, color: theme.productTitle, fontWeight: '900' }}>
             Quantity</Text>
           <View style={{ flexDirection: "row", justifyContent: 'space-between', width: getScreenWidth(15), marginRight: getScreenHeight(0.1) }}>
             <TouchableOpacity
@@ -109,6 +109,7 @@ const CartItem = (props: any) => {
               <Image
                 style={styles.inc}
                 source={require('../assets/images/minus.png')}
+                tintColor = {theme.productSubTitle}
               />
             </TouchableOpacity>
             <Text style={{ fontWeight: '500', ...styles.title2 }}>
@@ -127,13 +128,14 @@ const CartItem = (props: any) => {
               <Image
                 style={styles.inc}
                 source={require('../assets/images/plus.png')}
+                tintColor = {theme.productSubTitle}
               />
             </TouchableOpacity>
           </View>
         </View>
         <TouchableOpacity style={styles.iconContanier} onPress={handler}>
           <FastImage
-            tintColor={theme.primary}
+            tintColor={theme.productTitle}
             resizeMode="contain"
             source={require('../assets/images/delete.png')}
             style={styles.smallIcon}
@@ -147,10 +149,12 @@ const CartItem = (props: any) => {
 const createStyles = (theme: any) =>
   StyleSheet.create({
     screen: {
-      backgroundColor: 'lavender',
+      backgroundColor: theme.titlecolor,
       borderRadius: getScreenHeight(2),
       flexDirection: 'row',
       justifyContent: 'space-between',
+      borderColor: "white",
+      borderWidth:1
     },
     icon: {
       height: getScreenHeight(6),
@@ -177,7 +181,7 @@ const createStyles = (theme: any) =>
       width: '55%',
     },
     title: {
-      color: theme.black,
+      color: theme.textcolor,
       fontSize: getScreenHeight(2.5),
       textTransform: 'capitalize',
       fontWeight: 'bold',
@@ -188,10 +192,9 @@ const createStyles = (theme: any) =>
       marginVertical: getScreenHeight(1),
     },
     price: {
-      color: theme.black,
+      color: theme.productSubTitle,
       fontSize: getScreenHeight(2),
       marginTop: getScreenHeight(0.5),
-      // alignSelf: 'center',
     },
     row: {
       flexDirection: 'row',
@@ -219,7 +222,7 @@ const createStyles = (theme: any) =>
     },
     title2: {
       fontSize: getScreenHeight(2),
-      color: theme.black,
+      color: theme.productSubTitle,
       marginTop : getScreenHeight(1)
     },
   });

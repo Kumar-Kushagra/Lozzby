@@ -7,8 +7,8 @@ const FullScreenLoader = (props: any) => {
   const theme = useSelector((state: any) => state.theme.theme);
 
   return (
-    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-      <BarIndicator size={30} count={5} color={theme.primary} />
+    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center',backgroundColor: theme.background}}>
+      <BarIndicator size={30} count={5} color={theme.productTitle} />
     </View>
   );
 };

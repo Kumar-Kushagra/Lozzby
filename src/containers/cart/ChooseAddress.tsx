@@ -97,7 +97,7 @@ const ChooseAddress = () => {
                 resizeMode={"contain"}
                 source={require("../../assets/images/noaddress.png")}
               />
-            <Text style={{ marginTop : getScreenHeight(2),...styles.title,textAlign : "center", fontSize : getScreenHeight(2.5),color : theme.primary, fontWeight:'bold'}}>No Addresses Saved Yet!</Text>
+            <Text style={{ marginTop : getScreenHeight(2),...styles.title,textAlign : "center", fontSize : getScreenHeight(2.5),color : theme.productTitle, fontWeight:'bold'}}>No Addresses Saved Yet!</Text>
             </View>
           )}
           keyExtractor={(_, index) => index.toString()}
@@ -106,10 +106,10 @@ const ChooseAddress = () => {
         />
 
         <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-          <Text style={[styles.title, {margin: getScreenHeight(2),color:theme.primary,fontSize:getScreenHeight(2.3)}]}>
+          <Text style={[styles.title, {margin: getScreenHeight(2),color:theme.productTitle,fontSize:getScreenHeight(2.3)}]}>
             Total Amount:{' '}
           </Text>
-          <Text style={[styles.title, {margin: getScreenHeight(2),color:"#8560B7",fontSize:getScreenHeight(2.3),fontWeight:'bold'}]}>
+          <Text style={[styles.title,   {color: theme.productTitle,margin: getScreenHeight(2),fontSize:getScreenHeight(2.3),fontWeight:'bold'}]}>
             {' '}
             {'$' + totalAmount.toFixed(2)}
           </Text>
@@ -140,7 +140,7 @@ const ChooseAddress = () => {
 const createStyles = (theme: any) =>
   StyleSheet.create({
     screen: {
-      backgroundColor: theme.white,
+      backgroundColor: theme.background,
       flex: 1,
     },
     safe: {

@@ -83,8 +83,8 @@ const ProductItem = (props: any, ref: any) => {
             style={styles.likeButton}>
             <FastImage
               style={{
-                height: 20,
-                width: 20,
+                height: 30,
+                width: 30,
               }}
               resizeMode="contain"
               tintColor={'red'}
@@ -100,8 +100,8 @@ const ProductItem = (props: any, ref: any) => {
             style={styles.likeButton}>
             <FastImage
               style={{
-                height: 20,
-                width: 20,
+                height: 30,
+                width: 30,
               }}
               resizeMode="contain"
               tintColor={theme.black}
@@ -181,7 +181,7 @@ const createStyles = (theme: any) =>
       width: 20,
       position: 'absolute',
       top: 10,
-      right: 10,
+      right: 16,
     },
   });
 

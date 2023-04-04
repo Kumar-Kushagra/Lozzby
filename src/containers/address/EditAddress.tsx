@@ -143,7 +143,7 @@ const EditAddress = (props: any) => {
             <Text
               style={{
                 fontSize: getScreenHeight(1.8),
-                color: theme.black,
+                color: theme.textcolor,
                 fontWeight: 'bold',
                 marginBottom: getScreenHeight(1.5),
               }}>
@@ -157,7 +157,15 @@ const EditAddress = (props: any) => {
               data={provinces}
               save="value"
               placeholder={selected?.value}
-              inputStyles={{color: theme.black, right: getScreenHeight(2)}}
+              searchicon={<></>}
+              searchPlaceholder="Search Provinces"
+              inputStyles={{
+                right: getScreenHeight(1.6),
+                marginRight: getScreenHeight(1.7),
+                fontSize: getScreenHeight(1.8),
+                color: theme.textcolor,
+              }}
+              
             />
           </View>
 
@@ -190,7 +198,7 @@ const EditAddress = (props: any) => {
 const createStyles = (theme: any) =>
   StyleSheet.create({
     screen: {
-      backgroundColor: theme.white,
+      backgroundColor: theme.background,
       flex: 1,
     },
     safe: {

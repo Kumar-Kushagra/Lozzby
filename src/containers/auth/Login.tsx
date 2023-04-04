@@ -89,7 +89,7 @@ const Login = () => {
 const createStyles = (theme: any) =>
   StyleSheet.create({
     screen: {
-      backgroundColor: theme.white,
+      backgroundColor: theme.background,
       flex: 1,
     },
     safe: {
@@ -109,21 +109,21 @@ const createStyles = (theme: any) =>
     },
     subtitle: {
       marginTop: getScreenHeight(2),
-      color: theme.black,
+      color: theme.productSubTitle,
       textAlign: 'right',
     },
     loginText: {
-      color: theme.black,
+      color: theme.textcolor,
       fontSize: getScreenWidth(7),
       fontWeight: 'bold',
     },
     loginSubText: {
-      color: theme.gray,
+      color: theme.productSubTitle,
       fontSize: getScreenWidth(4),
       fontWeight: 'bold',
     },
     signup: {
-      color: theme.primary,
+      color: theme.productTitle,
       fontSize: getScreenWidth(4),
       fontWeight: 'bold',
     },

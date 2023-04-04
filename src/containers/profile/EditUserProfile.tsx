@@ -89,7 +89,7 @@ const EditUserProfile = () => {
 const createStyles = (theme: any) =>
   StyleSheet.create({
     screen: {
-      backgroundColor: theme.white,
+      backgroundColor: theme.background,
       flex: 1,
     },
     safe: {

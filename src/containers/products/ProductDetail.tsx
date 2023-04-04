@@ -93,6 +93,8 @@ const ProductDetail = (props: any) => {
                     <Image
                       style={styles.inc}
                       source={require('../../assets/images/minus.png')}
+                      tintColor = {theme.productSubTitle}
+                      
                     />
                   </TouchableOpacity>
                   <Text
@@ -118,6 +120,7 @@ const ProductDetail = (props: any) => {
                     <Image
                       style={styles.inc}
                       source={require('../../assets/images/plus.png')}
+                      tintColor = {theme.productSubTitle}
                     />
                   </TouchableOpacity>
                 </View>
@@ -151,7 +154,7 @@ const ProductDetail = (props: any) => {
 const createStyles = (theme: any) =>
   StyleSheet.create({
     screen: {
-      backgroundColor: theme.white,
+      backgroundColor: theme.background,
       flex: 1,
     },
     safe: {
@@ -167,18 +170,17 @@ const createStyles = (theme: any) =>
     image: {
       height: getScreenHeight(60),
       width: '100%',
-      backgroundColor: 'white',
+      backgroundColor: theme.background,
     },
     subtitle: {
       fontSize: getScreenHeight(1.8),
-      color: theme.black,
+      color: theme.productSubTitle,
       marginBottom: getScreenHeight(1.5),
     },
     title: {
       fontSize: getScreenHeight(2.2),
-      color: 'black',
       fontWeight: '700',
-      color : theme.primary,
+      color : theme.productTitle,
     },
     row: {
       flexDirection: 'row',

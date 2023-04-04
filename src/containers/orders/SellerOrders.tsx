@@ -236,7 +236,7 @@ const SellerOrders = () => {
                   ...styles.title,
                   textAlign: 'center',
                   fontSize: getScreenHeight(2.5),
-                  color: theme.primary,
+                  color: theme.productTitle,
                   fontWeight: 'bold',
                 }}>
                 No {orderStatus.toLocaleLowerCase()} orders yet!
@@ -254,7 +254,7 @@ const SellerOrders = () => {
 const createStyles = (theme: any) =>
   StyleSheet.create({
     screen: {
-      backgroundColor: theme.white,
+      backgroundColor: theme.background,
       flex: 1,
     },
     safe: {

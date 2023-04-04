@@ -104,7 +104,7 @@ const ChangeForgotPassword = (props: any) => {
 const createStyles = (theme: any) =>
   StyleSheet.create({
     screen: {
-      backgroundColor: theme.white,
+      backgroundColor: theme.background,
       flex: 1,
     },
     safe: {
@@ -112,27 +112,28 @@ const createStyles = (theme: any) =>
       flex: 1,
     },
     container: {
-      paddingHorizontal: getScreenHeight(1),
-      justifyContent: 'center',
       flex: 1,
+      paddingHorizontal: getScreenHeight(2),
+      justifyContent: 'center',
+    },
+    subContainer: {
+      marginBottom: getScreenHeight(6),
     },
     customButton: {
       marginTop: getScreenHeight(3),
     },
     subtitle: {
       marginTop: getScreenHeight(2),
-      color: theme.black,
-    },
-    subContainer: {
-      marginBottom: getScreenHeight(6),
+      color: theme.productSubTitle,
+      textAlign: 'right',
     },
     loginText: {
-      color: theme.black,
+      color: theme.textcolor,
       fontSize: getScreenWidth(7),
       fontWeight: 'bold',
     },
     loginSubText: {
-      color: theme.gray,
+      color: theme.productSubTitle,
       fontSize: getScreenWidth(4),
       fontWeight: 'bold',
     },

@@ -41,6 +41,8 @@ export const getOrderDetail = /* GraphQL */ `
     listOrders(filter: {id: {eq: $id}}) {
       items {
         Address {
+          streetAddress
+          city
           phoneNumber
           pincode
           province

@@ -56,7 +56,7 @@ const OrderDetail = (props: any) => {
           style={{
             marginTop: getScreenHeight(0.5),
             ...styles.title,
-            color: theme.primary,
+            color: theme.productTitle,
             fontSize: getScreenHeight(2.3),
           }}>
           {index + 1 + '.'}
@@ -185,12 +185,11 @@ const OrderDetail = (props: any) => {
                     ...styles.title,
                     fontWeight: 'bold',
                     fontSize: getScreenHeight(2.5),
-                    color: theme.primary,
+                    color: theme.productTitle,
                     textDecorationLine: 'underline',
                   }}>
                   Address
                 </Text>
-                {console.log(orderData)}
                 <Text
                   style={{
                     ...styles.title,
@@ -404,7 +403,7 @@ const OrderDetail = (props: any) => {
 const createStyles = (theme: any) =>
   StyleSheet.create({
     screen: {
-      backgroundColor: theme.white,
+      backgroundColor: theme.background,
       flex: 1,
     },
     safe: {
@@ -413,7 +412,7 @@ const createStyles = (theme: any) =>
     },
     title: {
       fontSize: getScreenHeight(2),
-      color: 'black',
+      color: theme.productSubTitle,
     },
     item: {
       marginBottom: getScreenHeight(2),

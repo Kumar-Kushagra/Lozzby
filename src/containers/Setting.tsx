@@ -1,20 +1,25 @@
-import { useFocusEffect } from '@react-navigation/native';
-import { DataStore, Predicates, SortDirection } from 'aws-amplify';
-import React, { useEffect, useMemo, useRef, useState } from 'react';
-import { View, StyleSheet, Alert } from 'react-native';
+import React, { useMemo, useState } from 'react';
+import { View, StyleSheet, Alert, Text, Switch } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useDispatch, useSelector } from 'react-redux';
-import { CustomHeader, CustomStatusBar, FullScreenLoader } from '../components';
+import { CustomHeader, CustomStatusBar } from '../components';
 import CartCount from '../components/CartCount';
 import SettingItem from '../components/SettingItem';
 import { becomeSellerManager, logoutManager } from '../redux/auth';
 import { navigate } from '../services/Routerservices';
+import { getScreenHeight } from '../utils/domUtils';
+import {useColorScheme } from 'react-native';
+import { setTheme } from '../redux/theme';
 
 const Setting = () => {
   const theme = useSelector((state: any) => state.theme.theme);
   const styles = useMemo(() => createStyles(theme), [theme]);
   const userData = useSelector((state: any) => state.auth.userData);
+  const [mode, setMode] = useState("")
   const dispatch = useDispatch();
+  const [isEnabled, setIsEnabled] = useState(false);
+  const color = useColorScheme();
+  const toggleSwitch = () => setIsEnabled(previousState => !previousState);
 
   const becomeSeller = () => {
     Alert.alert(
@@ -78,7 +83,7 @@ const Setting = () => {
 const createStyles = (theme: any) =>
   StyleSheet.create({
     screen: {
-      backgroundColor: theme.white,
+      backgroundColor: theme.background,
       flex: 1,
     },
     safe: {

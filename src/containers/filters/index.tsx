@@ -176,7 +176,7 @@ const Filters = (props: any) => {
 const createStyles = (theme: any) =>
   StyleSheet.create({
     screen: {
-      backgroundColor: theme.white,
+      backgroundColor: theme.background,
       flex: 1,
 
     },
@@ -191,13 +191,13 @@ const createStyles = (theme: any) =>
       padding: getScreenHeight(2),
     },
     title: {
-      color: theme.black,
+      color: theme.textcolor,
       fontSize: getScreenHeight(2.5),
       alignSelf: 'center',
       fontWeight: "bold"
     },
     subtitle: {
-      color: theme.black,
+      color: theme.textcolor,
       fontSize: getScreenHeight(2),
 
     },
@@ -210,7 +210,7 @@ const createStyles = (theme: any) =>
     },
     outerCircle: {
       borderWidth: getScreenHeight(0.1),
-      borderColor: theme.black,
+      borderColor: theme.textcolor,
       width: getScreenHeight(2),
       height: getScreenHeight(2),
       borderRadius: getScreenHeight(2),

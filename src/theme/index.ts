@@ -1,5 +1,5 @@
 export const dark_theme = {
-  background: '#121212',
+  background: '#000000',
   textcolor: '#ffffff',
   primary: '#6739A6',
   primary_light: '#FB4040',
@@ -12,7 +12,7 @@ export const dark_theme = {
   successcolor: '#00C853',
   infocolor: '#63c0df',
   white: '#ffffff',
-  titlecolor: '#202426',
+  titlecolor: '#000000',
   black: '#000000',
   light_green: '#6CD872',
   subtitle: '#A9A8A8',
@@ -22,11 +22,13 @@ export const dark_theme = {
   buttonbackground: '#6739A6',
   lightGrey: '#f2f5f5',
   light_grey: '#F0F0F0',
+  productTitle : "#ffffff",
+  productSubTitle : "grey"
 };
 
 export const light_theme = {
-  background: '#121212',
-  textcolor: '#ffffff',
+  background: '#FFFFFF',
+  textcolor: '#000000',
   primary: '#6739A6',
   primary_light: '#FB4040',
   accent: '#343434',
@@ -38,7 +40,7 @@ export const light_theme = {
   successcolor: '#00C853',
   infocolor: '#63c0df',
   white: '#ffffff',
-  titlecolor: '#202426',
+  titlecolor: 'lavender',
   black: '#000000',
   light_green: '#6CD872',
   subtitle: '#A9A8A8',
@@ -46,6 +48,8 @@ export const light_theme = {
   yellow: '#F4C343',
   backgroundcolor: '#333333',
   buttonbackground: '#6739A6',
+  productTitle : "#6739A6",
+  productSubTitle : "#000000"
 };
 
 const themeStore = {

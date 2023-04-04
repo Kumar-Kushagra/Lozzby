@@ -113,7 +113,7 @@ const Signup = () => {
 const createStyles = (theme: any) =>
   StyleSheet.create({
     screen: {
-      backgroundColor: theme.white,
+      backgroundColor: theme.background,
       flex: 1,
     },
     safe: {
@@ -125,32 +125,29 @@ const createStyles = (theme: any) =>
       paddingHorizontal: getScreenHeight(2),
       justifyContent: 'center',
     },
+    subContainer: {
+      marginBottom: getScreenHeight(6),
+    },
     customButton: {
       marginTop: getScreenHeight(3),
     },
-    avtar: {
-      marginTop: getScreenHeight(3),
+    subtitle: {
+      marginTop: getScreenHeight(2),
+      color: theme.productSubTitle,
+      textAlign: 'right',
     },
     loginText: {
-      color: theme.black,
+      color: theme.textcolor,
       fontSize: getScreenWidth(7),
       fontWeight: 'bold',
     },
     loginSubText: {
-      color: theme.gray,
+      color: theme.productSubTitle,
       fontSize: getScreenWidth(4),
       fontWeight: 'bold',
     },
-    subContainer: {
-      marginBottom: getScreenHeight(6),
-    },
-    subtitle: {
-      marginTop: getScreenHeight(2),
-      color: theme.black,
-      textAlign: 'right',
-    },
     signup: {
-      color: theme.primary,
+      color: theme.productTitle,
       fontSize: getScreenWidth(4),
       fontWeight: 'bold',
     },

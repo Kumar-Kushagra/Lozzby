@@ -82,7 +82,7 @@ const Cart = () => {
                   marginTop: getScreenHeight(2),
                   ...styles.title,
                   fontSize: getScreenHeight(2.5),
-                  color: theme.primary,
+                  color: theme.productTitle,
                   fontWeight: 'bold',
                   textAlign: 'center',
                 }}>
@@ -113,7 +113,7 @@ const Cart = () => {
 const createStyles = (theme: any) =>
   StyleSheet.create({
     screen: {
-      backgroundColor: theme.white,
+      backgroundColor: theme.background,
       flex: 1,
     },
     safe: {

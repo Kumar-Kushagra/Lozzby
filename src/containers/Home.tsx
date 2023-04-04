@@ -174,6 +174,7 @@ const Home = () => {
               resizeMode="contain"
               style={styles.image}
               source={require('../assets/images/filter.png')}
+              tintColor = {theme.textcolor}
             />
           </TouchableOpacity>
         </View>
@@ -217,7 +218,7 @@ const Home = () => {
 const createStyles = (theme: any) =>
   StyleSheet.create({
     screen: {
-      backgroundColor: theme.white,
+      backgroundColor: theme.background,
       flex: 1,
     },
     safe: {

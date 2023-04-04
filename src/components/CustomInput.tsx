@@ -51,7 +51,7 @@ const CustomInput = forwardRef((props: any, ref: any) => {
               styles.textinput,
               {
                 width: props.icon || props.frontIcon ? '90%' : '100%',
-                color: theme.black,
+                color: theme.textcolor,
                 textAlignVertical : props.multiline ?  "top" : "center" ,
                 minHeight : getScreenHeight(5),
                 paddingHorizontal : Platform.OS == "ios" ? getScreenHeight(1) : getScreenHeight(0.5)
@@ -59,7 +59,7 @@ const CustomInput = forwardRef((props: any, ref: any) => {
             ]}
             keyboardType={props.keyboardType}
             placeholder={props.placeholder}
-            placeholderTextColor={theme.black}
+            placeholderTextColor={theme.textcolor}
             secureTextEntry={props.secure}
             onChangeText={setText}
             value={text}
@@ -72,6 +72,7 @@ const CustomInput = forwardRef((props: any, ref: any) => {
               style={styles.iconcontanier}>
               <Image
                 style={styles.image}
+                tintColor = {theme.productTitle}
                 source={
                   props.secure
                     ? require('../assets/images/hide.png')
@@ -90,7 +91,7 @@ const createStyles = (theme: any) =>
   StyleSheet.create({
     screen: {
       borderWidth: getScreenHeight(0.1),
-      borderBottomColor: theme.black,
+      borderColor: theme.textcolor,
       marginTop: 10,
       borderRadius: 10,
     },
@@ -99,7 +100,7 @@ const createStyles = (theme: any) =>
       flexDirection: 'row',
       alignItems: 'center',
       justifyContent: 'space-between',
-      color: theme.textinput,
+      color: theme.textcolor,
     },
     textinput: {
       flex: 1,
@@ -108,7 +109,7 @@ const createStyles = (theme: any) =>
     },
     label: {
       fontSize: getScreenHeight(1.8),
-      color: theme.white,
+      color: theme.textcolor,
       marginBottom: getScreenHeight(0.5),
     },
     iconcontanier: {
@@ -120,7 +121,7 @@ const createStyles = (theme: any) =>
     },
     text: {
       fontSize: getScreenHeight(1.8),
-      color: theme.black,
+      color: theme.textcolor,
       fontWeight: 'bold',
     },
     image: {

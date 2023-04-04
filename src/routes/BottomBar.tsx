@@ -22,12 +22,12 @@ const TabButton = (props: any) => {
       onPress={onPress}
       style={styles.contanier}>
       <FastImage
-        tintColor={focused ? theme.primary : theme.black}
+        tintColor={focused ? theme.primary : theme.textcolor}
         resizeMode="contain"
         style={styles.icon}
         source={item.icon}
       />
-      <Text style={{...styles.title,color : focused ? theme.primary : theme.black}}>{item.name}</Text>
+      <Text style={{...styles.title,color : focused ? theme.primary : theme.textcolor}}>{item.name}</Text>
     </TouchableOpacity>
   );
 };
@@ -111,12 +111,12 @@ const createStyles = (theme: any) =>
     },
     title: {
       fontSize: getScreenHeight(1.6),
-      color: 'black',
+      color: theme.textcolor,
       marginTop: getScreenHeight(0.5),
     },
     tabbar: {
       height: Platform.OS === 'ios' ? getScreenHeight(8) : getScreenHeight(8),
-      backgroundColor: 'white',
+      backgroundColor: theme.background,
     },
     icon: {
       width: getScreenHeight(3),

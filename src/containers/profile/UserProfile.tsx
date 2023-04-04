@@ -74,32 +74,6 @@ const UserProfile = () => {
             />
           </View>
 
-          {/* <View style={styles.item}>
-            {userData.type === 'seller' ? (
-              <CustomButton
-                action={() => {
-                  navigate('ManageProducts', {});
-                }}
-                title="Manage Products"
-              />
-            ) : (
-              <CustomButton
-                action={() => {
-                  dispatch<any>(becomeSellerManager());
-                }}
-                title="Become Seller"
-              />
-            )}
-          </View>
-
-          <View style={styles.item}>
-            <CustomButton
-              action={() => {
-                dispatch<any>(logoutManager());
-              }}
-              title="Logout"
-            />
-          </View> */}
         </ScrollView>
       </View>
     </SafeAreaView>
@@ -109,7 +83,7 @@ const UserProfile = () => {
 const createStyles = (theme: any) =>
   StyleSheet.create({
     screen: {
-      backgroundColor: theme.white,
+      backgroundColor: theme.background,
       flex: 1,
     },
     safe: {

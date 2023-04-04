@@ -157,7 +157,7 @@ const AddProduct = () => {
 const createStyles = (theme: any) =>
   StyleSheet.create({
     screen: {
-      backgroundColor: theme.white,
+      backgroundColor: theme.background,
       flex: 1,
     },
     safe: {
@@ -179,17 +179,17 @@ const createStyles = (theme: any) =>
     },
     title: {
       fontSize: getScreenHeight(2),
-      color: theme.black,
+      color: theme.textcolor,
       fontWeight: 'bold',
     },
     subtitle: {
       fontSize: getScreenHeight(1.8),
-      color: theme.black,
+      color: theme.textcolor,
       fontWeight: 'bold',
     },
     outerCircle: {
       borderWidth: getScreenHeight(0.1),
-      borderColor: theme.black,
+      borderColor: theme.textcolor,
       width: getScreenHeight(2),
       height: getScreenHeight(2),
       borderRadius: getScreenHeight(2),
@@ -197,7 +197,7 @@ const createStyles = (theme: any) =>
       alignItems: 'center',
     },
     innerCircle: {
-      backgroundColor: theme.black,
+      backgroundColor: theme.productTitle,
       width: getScreenHeight(1),
       height: getScreenHeight(1),
       borderRadius: getScreenHeight(2),

@@ -112,7 +112,7 @@ const AddAddress = () => {
             <Text
               style={{
                 fontSize: getScreenHeight(1.8),
-                color: theme.black,
+                color: theme.textcolor,
                 fontWeight: 'bold',
                 marginBottom: getScreenHeight(1.5),
               }}>
@@ -129,7 +129,7 @@ const AddAddress = () => {
                 right: getScreenHeight(1.6),
                 marginRight: getScreenHeight(1.7),
                 fontSize: getScreenHeight(1.8),
-                color: theme.black,
+                color: theme.textcolor,
               }}
             />
           </View>
@@ -164,7 +164,7 @@ const AddAddress = () => {
 const createStyles = (theme: any) =>
   StyleSheet.create({
     screen: {
-      backgroundColor: theme.white,
+      backgroundColor: theme.background,
       flex: 1,
     },
     safe: {

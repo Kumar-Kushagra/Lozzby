@@ -26,7 +26,7 @@ const NoInternet = () => {
               ...styles.title,
               textAlign: 'center',
               fontSize: getScreenHeight(2.5),
-              color: theme.primary,
+              color: theme.productTitle,
               fontWeight: 'bold',
             }}>
             No Internet Connection!
@@ -40,7 +40,7 @@ const NoInternet = () => {
 const createStyles = (theme: any) =>
   StyleSheet.create({
     screen: {
-      backgroundColor: theme.white,
+      backgroundColor: theme.background,
       flex: 1,
     },
     safe: {
@@ -48,7 +48,7 @@ const createStyles = (theme: any) =>
       flex: 1,
     },
     title: {
-      color: theme.black,
+      color: theme.productTitle,
       fontSize: getScreenHeight(1.8),
     },
     image: {
