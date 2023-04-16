@@ -7,9 +7,9 @@ import {useDispatch, useSelector} from 'react-redux';
 import {CustomStatusBar, FullScreenLoader} from '../components';
 import {retrieveCurrentSessionManager} from '../redux/auth';
 import NoInternet from '../containers/NoInternet';
-import { setInternet } from '../redux/common';
-import {useColorScheme } from 'react-native';
-import { setTheme } from '../redux/theme';
+import {setInternet} from '../redux/common';
+import {useColorScheme} from 'react-native';
+import {setTheme} from '../redux/theme';
 const Stack = createNativeStackNavigator();
 
 const MainStack = () => {
@@ -22,25 +22,23 @@ const MainStack = () => {
   const color = useColorScheme();
 
   useEffect(() => {
-    console.log(color,theme.textcolor)
-   dispatch(setTheme(color))
-  },[color,dispatch])
+    dispatch(setTheme(color));
+  }, [color]);
 
   useEffect(() => {
     dispatch<any>(retrieveCurrentSessionManager());
   }, [dispatch, refetch]);
 
-  
   useEffect(() => {
     const unsubscribe = NetInfo.addEventListener(state => {
       setConnected(state.isConnected);
-      dispatch(setInternet(state.isConnected))
+      dispatch(setInternet(state.isConnected));
     });
     return () => {
       unsubscribe();
     };
   }, []);
-  
+
   if (mainLoading) {
     return <FullScreenLoader />;
   }

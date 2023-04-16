@@ -32,9 +32,8 @@ const Signup = () => {
     let email = emailValueRef.current.getValue();
     let password = passwordValueRef.current.getValue();
     let name = nameValueRef.current.getValue();
-    let image = imageValueRef.current.getValue();
     Keyboard.dismiss()
-    dispatch<any>(signupManager({email, password, name, image}));
+    dispatch<any>(signupManager({email, password, name}));
   };
 
   return (
@@ -54,9 +53,9 @@ const Signup = () => {
                 Please sign up to start!
               </Text>
             </View>
-            <View style={styles.avtar}>
+            {/* <View style={styles.avtar}>
               <CustomAvatar ref={imageValueRef} />
-            </View>
+            </View> */}
             <CustomInput
               ref={nameValueRef}
               placeholder={'Full Name'}
