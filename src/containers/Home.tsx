@@ -150,8 +150,9 @@ const Home = () => {
                 paddingLeft: getScreenHeight(3),
                 fontWeight: 'bold',
                 fontSize: getScreenWidth(4),
+                color : theme.productSubTitle
               }}
-              placeholderTextColor={theme.light_grey}
+              placeholderTextColor={theme.productSubTitle}
             />
             <View
               style={{
@@ -178,7 +179,10 @@ const Home = () => {
             />
           </TouchableOpacity>
         </View>
+        <View style = {{height:getScreenHeight(1)}}></View>
         <FlatList
+          showsHorizontalScrollIndicator = {false}
+          showsVerticalScrollIndicator = {false}
           style={{ alignSelf: "center", width: '97%' }}
           numColumns={2}
           data={data.filter(item => {
@@ -201,7 +205,7 @@ const Home = () => {
                   ...styles.title,
                   textAlign: 'center',
                   fontSize: getScreenHeight(2.5),
-                  color: theme.primary,
+                  color: theme.productTitle,
                   fontWeight: 'bold',
                 }}>
                 No Product Added Yet!

@@ -1,11 +1,18 @@
-import React, { useEffect, useMemo, useState } from 'react';
-import { StyleSheet, View, Text, TouchableOpacity, Alert, Image } from 'react-native';
-import { useDispatch, useSelector } from 'react-redux';
-import { getScreenHeight, getScreenWidth } from '../utils/domUtils';
+import React, {useEffect, useMemo, useState} from 'react';
+import {
+  StyleSheet,
+  View,
+  Text,
+  TouchableOpacity,
+  Alert,
+  Image,
+} from 'react-native';
+import {useDispatch, useSelector} from 'react-redux';
+import {getScreenHeight, getScreenWidth, showToast} from '../utils/domUtils';
 import FastImage from 'react-native-fast-image';
-import { gallery } from '../constants/images';
-import { Storage } from 'aws-amplify';
-import { deleteCartManager, updateCartItemQuantityManager } from '../redux/cart';
+import {gallery} from '../constants/images';
+import {Storage} from 'aws-amplify';
+import {deleteCartManager, updateCartItemQuantityManager} from '../redux/cart';
 
 const CartItem = (props: any) => {
   const theme = useSelector((state: any) => state.theme.theme);
@@ -22,7 +29,6 @@ const CartItem = (props: any) => {
     }
   }, [props?.item?.Product?.image]);
 
-
   useEffect(() => {
     setQuantity(parseInt(props?.item?.quantity));
   }, [props?.item?.quantity]);
@@ -34,32 +40,31 @@ const CartItem = (props: any) => {
 
   const handler = () => {
     Alert.alert(
-      "Are you sure?",
-      "you wanted to remove this item from cart?",
+      'Are you sure?',
+      'you wanted to remove this item from cart?',
       [
         {
-          text: "Cancel",
-          onPress: () => console.log("Cancel Pressed"),
-          style: "cancel",
+          text: 'Cancel',
+          onPress: () => console.log('Cancel Pressed'),
+          style: 'cancel',
         },
         {
-          text: "OK",
+          text: 'OK',
           onPress: () =>
             dispatch<any>(
               deleteCartManager({
                 _version: props.item._version,
                 id: props.item.id,
-              })
+              }),
             ),
         },
       ],
-      { cancelable: false }
+      {cancelable: false},
     );
   };
 
-
   return (
-    <View style={{ ...styles.screen }}>
+    <View style={{...styles.screen}}>
       <View style={styles.imagecontanier}>
         {image ? (
           <FastImage
@@ -81,17 +86,32 @@ const CartItem = (props: any) => {
       <View style={styles.contanier}>
         <Text style={styles.title}>{props?.item?.Product?.name}</Text>
         <Text
-          style={{ ...styles.price, color: theme.productTitle, fontWeight: '900' }}>
+          style={{
+            ...styles.price,
+            color: theme.productTitle,
+            fontWeight: '900',
+          }}>
           Price{' '}
-          <Text style={{ fontWeight: '500', ...styles.price }}>
+          <Text style={{fontWeight: '500', ...styles.price}}>
             {'$' + props.item?.Product?.price}
           </Text>
         </Text>
         <View style={styles.row}>
           <Text
-            style={{ ...styles.price, color: theme.productTitle, fontWeight: '900' }}>
-            Quantity</Text>
-          <View style={{ flexDirection: "row", justifyContent: 'space-between', width: getScreenWidth(15), marginRight: getScreenHeight(0.1) }}>
+            style={{
+              ...styles.price,
+              color: theme.productTitle,
+              fontWeight: '900',
+            }}>
+            Quantity
+          </Text>
+          <View
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              width: getScreenWidth(15),
+              marginRight: getScreenHeight(0.1),
+            }}>
             <TouchableOpacity
               onPress={() => {
                 if (quantity === 1) {
@@ -109,26 +129,30 @@ const CartItem = (props: any) => {
               <Image
                 style={styles.inc}
                 source={require('../assets/images/minus.png')}
-                tintColor = {theme.productSubTitle}
+                tintColor={theme.productSubTitle}
               />
             </TouchableOpacity>
-            <Text style={{ fontWeight: '500', ...styles.title2 }}>
+            <Text style={{fontWeight: '500', ...styles.title2}}>
               {props?.item?.quantity}
             </Text>
             <TouchableOpacity
               onPress={() => {
-                dispatch<any>(
-                  updateCartItemQuantityManager({
-                    quantity: quantity + 1,
-                    id: props.item.id,
-                    _version: props.item._version,
-                  }),
-                );
+                if (quantity < parseInt(props?.item?.Product?.quantity)) {
+                  dispatch<any>(
+                    updateCartItemQuantityManager({
+                      quantity: quantity + 1,
+                      id: props.item.id,
+                      _version: props.item._version,
+                    }),
+                  );
+                } else {
+                  showToast("You can't select product above maximum quantity!");
+                }
               }}>
               <Image
                 style={styles.inc}
                 source={require('../assets/images/plus.png')}
-                tintColor = {theme.productSubTitle}
+                tintColor={theme.productSubTitle}
               />
             </TouchableOpacity>
           </View>
@@ -153,8 +177,8 @@ const createStyles = (theme: any) =>
       borderRadius: getScreenHeight(2),
       flexDirection: 'row',
       justifyContent: 'space-between',
-      borderColor: "white",
-      borderWidth:1
+      borderColor: 'white',
+      borderWidth: 1,
     },
     icon: {
       height: getScreenHeight(6),
@@ -206,7 +230,7 @@ const createStyles = (theme: any) =>
       width: getScreenHeight(2.5),
     },
     iconContanier: {
-      position: "absolute",
+      position: 'absolute',
       zIndex: 100,
       right: getScreenHeight(1),
       top: getScreenHeight(1),
@@ -223,7 +247,7 @@ const createStyles = (theme: any) =>
     title2: {
       fontSize: getScreenHeight(2),
       color: theme.productSubTitle,
-      marginTop : getScreenHeight(1)
+      marginTop: getScreenHeight(1),
     },
   });
 

@@ -68,7 +68,7 @@ const ManageAddress = () => {
                   ...styles.title,
                   textAlign: 'center',
                   fontSize: getScreenHeight(2.5),
-                  color: theme.primary,
+                  color: theme.productTitle,
                   fontWeight: 'bold',
                 }}>
                 No Addresses Saved Yet!
