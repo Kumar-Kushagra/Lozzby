@@ -282,7 +282,7 @@ export const verifyOtpManager = (data: any) => {
       try {
         const res = await Auth.confirmSignUp(data.email, data.otp);
         if (res) {
-          navigate('Login');
+          navigate('Login','Login');
           showToast('Verify successfully, please login!');
         }
       } catch (error: any) {
@@ -306,7 +306,7 @@ export const verifyFrogotOtpManager = (data: any) => {
           result.password,
         );
         if (res) {
-          navigate('Login');
+          navigate('Login','Login');
           showToast('Password has been changed successfully!');
         }
       } catch (error: any) {

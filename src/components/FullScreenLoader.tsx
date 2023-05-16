@@ -1,7 +1,13 @@
-// import React from 'react';
-// import {ActivityIndicator, StatusBar, View} from 'react-native';
-// import {useSelector} from 'react-redux';
-// import {BarIndicator} from 'react-native-indicators';
+import React from 'react';
+import {
+  Modal,
+  ActivityIndicator,
+  StatusBar,
+  StyleSheet,
+  View,
+} from 'react-native';
+import {BarIndicator} from 'react-native-indicators';
+import {useSelector} from 'react-redux';
 
 // const FullScreenLoader = (props: any) => {
 //   const theme = useSelector((state: any) => state.theme.theme);
@@ -13,28 +19,16 @@
 //   );
 // };
 
-// export default FullScreenLoader;
-
-
-import React from 'react';
-import {Modal, StyleSheet, View} from 'react-native';
-import {BarIndicator} from 'react-native-indicators';
-import { useSelector } from 'react-redux';
-
 const FullScreenLoader = () => {
   const theme = useSelector((state: any) => state.theme.theme);
   return (
-    <Modal
-      visible={true}
-      animationType="slide"
-      transparent={true}
-      >
-      <View style={styles.modalScreen}>
-        <BarIndicator size={30} count={5} color={theme.white} />
-      </View>
-    </Modal>
+    <View style={styles.modalScreen}>
+      <ActivityIndicator size={30} count={5} color={theme.white} />
+    </View>
   );
 };
+
+export default FullScreenLoader;
 
 const styles = StyleSheet.create({
   modalScreen: {
@@ -47,5 +41,3 @@ const styles = StyleSheet.create({
     marginVertical: 10,
   },
 });
-
-export default FullScreenLoader;

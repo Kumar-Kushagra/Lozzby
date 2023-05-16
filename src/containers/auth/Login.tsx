@@ -68,13 +68,13 @@ const Login = () => {
                 Keyboard.dismiss();
               }}
             />
-            <TouchableOpacity onPress={() => navigate('ForgotPassword')}>
+            <TouchableOpacity onPress={() => navigate('ForgotPassword','ForgotPassword')}>
               <Text style={styles.subtitle}>Forgot Password?</Text>
             </TouchableOpacity>
             <View style={styles.customButton}>
               <CustomButton action={loginActionHandler} title="Login" />
             </View>
-            <TouchableOpacity onPress={() => navigate('Signup')}>
+            <TouchableOpacity onPress={() => navigate('Signup','Signup')}>
               <Text style={{...styles.subtitle, textAlign: 'center'}}>
                 Don't have an account? <Text style={styles.signup}>Signup</Text>
               </Text>

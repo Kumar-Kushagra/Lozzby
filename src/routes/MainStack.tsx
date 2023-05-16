@@ -31,8 +31,10 @@ const MainStack = () => {
 
   useEffect(() => {
     const unsubscribe = NetInfo.addEventListener(state => {
-      setConnected(state.isConnected);
-      dispatch(setInternet(state.isConnected));
+      if (state.isConnected) {
+        setConnected(state.isConnected);
+        dispatch(setInternet(state.isConnected));
+      }
     });
     return () => {
       unsubscribe();

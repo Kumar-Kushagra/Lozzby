@@ -10,7 +10,7 @@ import {Storage} from 'aws-amplify';
 const CustomAvatar = forwardRef((props: any, ref: any) => {
   const theme = useSelector((state: any) => state.theme.theme);
   const styles = useMemo(() => createStyles(theme), [theme]);
-  const [image, setImage] = useState('');
+  const [image, setImage] = useState({uri : ""});
   const [loading, setLoading] = useState(false);
 
   useImperativeHandle(ref, () => ({
@@ -46,7 +46,7 @@ const CustomAvatar = forwardRef((props: any, ref: any) => {
       style={{...styles.screen}}
       onPress={action}>
       {loading ? <ActivityIndicator style={styles.loading} /> : null}
-      {image.uri ? (
+      {image?.uri ? (
         <FastImage
           onLoadStart={() => {
             setLoading(true);
@@ -55,7 +55,7 @@ const CustomAvatar = forwardRef((props: any, ref: any) => {
             setLoading(false);
           }}
           style={styles.image}
-          source={{uri: image.uri, priority: FastImage.priority.normal}}
+          source={{uri: image?.uri, priority: FastImage.priority.normal}}
         />
       ) : (
         <FastImage style={styles.icon} tintColor={theme.textcolor} resizeMode="contain" source={gallery} />

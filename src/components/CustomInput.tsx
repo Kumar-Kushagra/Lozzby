@@ -14,7 +14,6 @@ import {getScreenHeight} from '../utils/domUtils';
 const CustomInput = forwardRef((props: any, ref: any) => {
   const theme = useSelector((state: any) => state.theme.theme);
   const styles = useMemo(() => createStyles(theme), [theme]);
-
   const [text, setText] = useState('');
 
   useImperativeHandle(ref, () => ({
@@ -68,11 +67,9 @@ const CustomInput = forwardRef((props: any, ref: any) => {
           {props.icon ? (
             <TouchableOpacity
               onPress={props.rightAction}
-              // disabled={props.rightAction ? false : true}
               style={styles.iconcontanier}>
               <Image
                 style={styles.image}
-                tintColor = {theme.productTitle}
                 source={
                   props.secure
                     ? require('../assets/images/hide.png')
@@ -128,7 +125,7 @@ const createStyles = (theme: any) =>
       width: getScreenHeight(3.5),
       height: getScreenHeight(2.5),
       resizeMode: 'contain',
-      tintColor: theme.primary,
+      tintColor: theme.productTitle,
     },
   });
 

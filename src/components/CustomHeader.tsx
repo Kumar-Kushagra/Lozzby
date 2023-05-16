@@ -25,18 +25,6 @@ const CustomHeader = (props: any) => {
         </TouchableOpacity>
       )}
       <Text style={styles.title}>{props.title}</Text>
-      {/* {props.cart ? (
-        <View style={styles.imageContanier} />
-      ) : (
-        <TouchableOpacity onPress={props.onCartPress} style={styles.imageContanier}>
-          <FastImage
-            tintColor={theme.white}
-            source={require("../assets/images/cart.png")}
-            style={styles.image}
-          />
-        </TouchableOpacity>
-      )} */}
-
       {props.cart ? props.cart : <View style={styles.imageContanier} />}
     </View>
   );

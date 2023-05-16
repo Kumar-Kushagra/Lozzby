@@ -129,7 +129,6 @@ const CartItem = (props: any) => {
               <Image
                 style={styles.inc}
                 source={require('../assets/images/minus.png')}
-                tintColor={theme.productSubTitle}
               />
             </TouchableOpacity>
             <Text style={{fontWeight: '500', ...styles.title2}}>
@@ -152,7 +151,6 @@ const CartItem = (props: any) => {
               <Image
                 style={styles.inc}
                 source={require('../assets/images/plus.png')}
-                tintColor={theme.productSubTitle}
               />
             </TouchableOpacity>
           </View>
@@ -243,6 +241,7 @@ const createStyles = (theme: any) =>
       height: getScreenHeight(5),
       width: getScreenWidth(5),
       resizeMode: 'contain',
+      tintColor: theme.productSubTitle
     },
     title2: {
       fontSize: getScreenHeight(2),

@@ -140,7 +140,6 @@ const createStyles = (theme: any) =>
       height: getScreenHeight(5),
       width: getScreenWidth(34),
       alignSelf: 'flex-end',
-      backgroundColor: "red",
       marginRight: getScreenHeight(2),
       marginTop: getScreenHeight(1),
       borderRadius: getScreenHeight(1),

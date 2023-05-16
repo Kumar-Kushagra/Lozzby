@@ -96,7 +96,7 @@ const Signup = () => {
               <CustomButton action={signupActionHandler} title="Signup" />
             </View>
 
-            <TouchableOpacity onPress={() => navigate('Login')}>
+            <TouchableOpacity onPress={() => navigate('Login','Login')}>
               <Text style={{...styles.subtitle, textAlign: 'center'}}>
                 Already have an account? <Text style={styles.signup}>Login</Text>
               </Text>

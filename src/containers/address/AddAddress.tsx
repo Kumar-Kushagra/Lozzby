@@ -119,7 +119,7 @@ const AddAddress = () => {
               Province
             </Text>
             <SelectList
-              setSelected={val => setSelectedProvince(val)}
+              setSelected={(val: any) => setSelectedProvince(val)}
               data={provinces}
               save="value"
               placeholder={'Select a Province'}

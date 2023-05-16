@@ -228,13 +228,10 @@ const createStyles = (theme: any) =>
       alignItems: 'center',
       height: getScreenHeight(6),
       width: "90%",
-      backgroundColor: "red",
-      // marginRight: getScreenHeight(2),
-      // marginTop: getScreenHeight(1),
       borderRadius: getScreenHeight(1),
       backgroundColor: theme.primary,
       position: "absolute",
-      bottom: 10,
+      bottom: getScreenHeight(5),
       alignSelf: "center"
     },
     clearText: {

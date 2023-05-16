@@ -40,7 +40,7 @@ const EditAddress = (props: any) => {
     {key: '13', value: 'Yukon Territory', abbreviation: 'YT'},
   ];
 
-  let selected = {};
+  let selected = {value : ""};
   function getDefault() {
     provinces.forEach(element => {
       if (element?.value === data?.province) {
@@ -112,7 +112,7 @@ const EditAddress = (props: any) => {
     }
     let mainData = {
       country: 'Canada',
-      province: selectedProvince ? selectedProvince : selected.value,
+      province: selectedProvince ? selectedProvince : selected?.value,
       city: cityRef.current.getValue(),
       streetAddress: streetAddressRef.current.getValue(),
       pincode: pincodeRef.current.getValue(),
@@ -151,7 +151,7 @@ const EditAddress = (props: any) => {
             </Text>
             <SelectList
              // defaultOption={selected}
-              setSelected={val => {
+              setSelected={(val : any) => {
                 setSelectedProvince(val)
               }}
               data={provinces}
